@@ -1,8 +1,8 @@
 # banner
 
 Original: `registry/default/banner.tsx`, demo in `app/docs/banner/page.tsx` and `lib/docs/playgrounds/banner.tsx` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/banner.tsx`,
-demo in `src/demos/banner.tsx`. Screenshots: `screenshots/banner/` (`scrolled-*.png` are the lower cards, captured with a taller scroll).
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/banner.tsx`,
+demo in `apps/demo/src/demos/banner.tsx`. Screenshots: `apps/demo/screenshots/banner/` (`scrolled-*.png` are the lower cards, captured with a taller scroll).
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps
 (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of
@@ -12,7 +12,7 @@ repeating it.
 
 - **Cause:** `gpuix gap`.
 - **Original:** one `row` motion value (0 to 1) drives the row's height, the fixed bar's `y: (row - 1) * 100%` and opacity, and on dismiss the inline banner's `scale` (`banner.tsx:236-238`, `:257`, `:290-296`, `:323-332`). Inline, the banner appears from `scale` 0.4 and shrinks toward 0.6 from its top edge (`transformOrigin: "top"`, `:177-189`, `:245`, `:298`, `:356`).
-- **Port:** the row's `height` animates between 0 and `auto` on its own track, and the fixed bar's `y` (`'-100%'` of its own height) and opacity run the same spring and tween beside it (`src/components/banner.tsx:372-405`); a fixed bar fades in place under reduced motion. The inline banner is a `motion.div` with `scale` bound to `barScale` and `transformOrigin: "top"` (`:408`): it grows from `FROM_SCALE` on `appearBanner` (the slow spring, delayed 80 ms) and, on dismiss, follows `rowProgress`, a motion value that runs the row's `dismissRow` tween beside the height, as `min(scale at dismiss, max(rowProgress, SHRINK_TO))` (`:176-184`, `:208-221`). The row is not bottom-aligned in the bar, because with `justifyContent: "flex-end"` the row's `auto` target follows the bar's offset and the row overshoots (measured on the demo: about 15px).
+- **Port:** the row's `height` animates between 0 and `auto` on its own track, and the fixed bar's `y` (`'-100%'` of its own height) and opacity run the same spring and tween beside it (`packages/fluid-functionalism/src/components/banner.tsx:372-405`); a fixed bar fades in place under reduced motion. The inline banner is a `motion.div` with `scale` bound to `barScale` and `transformOrigin: "top"` (`:408`): it grows from `FROM_SCALE` on `appearBanner` (the slow spring, delayed 80 ms) and, on dismiss, follows `rowProgress`, a motion value that runs the row's `dismissRow` tween beside the height, as `min(scale at dismiss, max(rowProgress, SHRINK_TO))` (`:176-184`, `:208-221`). The row is not bottom-aligned in the bar, because with `justifyContent: "flex-end"` the row's `auto` target follows the bar's offset and the row overshoots (measured on the demo: about 15px).
 - **gpuix lacks:** a value to read from a `height` animation to `auto`: gpuix runs that tween itself, so nothing can derive the bar's `y`, the scale or the opacity from it.
 - **Workaround:** the same transition on each track, and `rowProgress` as a copy of the row's tween for the scale. A dismiss mid-appear starts `rowProgress` at the row's current share of the bar's height.
 - **Fidelity:** exact for the visible result (`check-banner` reads the scales 0.4 to 1 and 1 to 0.6, the top edge fixed, and the fixed bar's travel of its own height); the tracks can drift by a frame under load.
@@ -41,7 +41,7 @@ repeating it.
 
 - **Cause:** `not ported yet`. `marginBottom` is animatable in `motion` (`packages/native/js/host.ts:143`).
 - **Original:** in a flex column with a gap, the row also takes back one gap (`marginBottom: (row - 1) * gap`), measured at mount, so nothing jumps when the banner mounts or unmounts (`banner.tsx:148-152`, `:246-256`, `:270-279`, `:344`). The playground's inline page is a `gap-3` column (`lib/docs/playgrounds/banner.tsx:359-363`).
-- **Port:** no margin. A closed banner renders nothing and an open or closing one is a row that starts at height 0, so the parent's gap appears when an appear starts and disappears when a dismiss ends: content below jumps by one gap: the playground's inline page is the same `gap: 12` column, so its lower skeleton lines step up 12px as a dismiss ends (visible between `screenshots/banner/playground-warning.png` and `playground-dismissed.png`). The "Dismissible" card's banner sits in a column without a gap.
+- **Port:** no margin. A closed banner renders nothing and an open or closing one is a row that starts at height 0, so the parent's gap appears when an appear starts and disappears when a dismiss ends: content below jumps by one gap: the playground's inline page is the same `gap: 12` column, so its lower skeleton lines step up 12px as a dismiss ends (visible between `apps/demo/screenshots/banner/playground-warning.png` and `playground-dismissed.png`). The "Dismissible" card's banner sits in a column without a gap.
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** just this one.
@@ -84,9 +84,9 @@ repeating it.
 
 ## Ghost action colour
 
-- **Cause:** `not ported yet`. The port's `Button` has no colour override (`labelColor` is internal, `src/components/button.tsx:191-200`); a `Button` prop for it would close this.
+- **Cause:** `not ported yet`. The port's `Button` has no colour override (`labelColor` is internal, `packages/fluid-functionalism/src/components/button.tsx:191-200`); a `Button` prop for it would close this.
 - **Original:** a ghost `BannerAction` adds `text-foreground`, which overrides the ghost button's muted rest colour, so it reads foreground at rest and on hover, with no colour change to ease (`banner.tsx:648-652`; its comment at `:618-619` describes "70% foreground", the code does not).
-- **Port:** the plain ghost `Button`: muted at rest, foreground on hover, eased over 80 ms like the source's other ghost buttons (`banner.tsx:563-578`; `src/components/button.tsx:195-196`, `:231`).
+- **Port:** the plain ghost `Button`: muted at rest, foreground on hover, eased over 80 ms like the source's other ghost buttons (`banner.tsx:563-578`; `packages/fluid-functionalism/src/components/button.tsx:195-196`, `:231`).
 - **Workaround:** none.
 - **Fidelity:** approximated (the rest colour, and the hover fade the source does not have here).
 - **Components it hits:** just this one.
@@ -104,7 +104,7 @@ repeating it.
 
 - **Cause:** `port choice`.
 - **Original:** the playground has a code tab with the matching JSX and sits in `ComponentPreview` with a "Replay" in its toolbar (`app/docs/banner/page.tsx:110-126`, `lib/docs/playgrounds/banner.tsx:32-375`).
-- **Port:** every control, default, the shuffle, the per-status copy, the "Show banner" button, the held page height (a `ResizeObserver`, as in the source) and the inline page and fixed `MockPage` previews are ported; no control is left out (`src/demos/banner.tsx`, `Playground`). No code tab (the site has no code snippets). The preview is a `DemoCard`, with no Replay (the "Show banner" button is the way back). The preview is the page column's width up to 560px (the source's 420px variant is for its `/demo` card). The skeleton lines are `color.hover` instead of `muted`, which equals the card's `surface2` in dark and would vanish. The hold re-measures on the first resize after a control changes, where the source re-measures in an effect after the commit.
+- **Port:** every control, default, the shuffle, the per-status copy, the "Show banner" button, the held page height (a `ResizeObserver`, as in the source) and the inline page and fixed `MockPage` previews are ported; no control is left out (`apps/demo/src/demos/banner.tsx`, `Playground`). No code tab (the site has no code snippets). The preview is a `DemoCard`, with no Replay (the "Show banner" button is the way back). The preview is the page column's width up to 560px (the source's 420px variant is for its `/demo` card). The skeleton lines are `color.hover` instead of `muted`, which equals the card's `surface2` in dark and would vanish. The hold re-measures on the first resize after a control changes, where the source re-measures in an effect after the commit.
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** every component whose source page has a playground.
@@ -122,7 +122,7 @@ repeating it.
 
 - **Cause:** `port choice` (to exercise the controlled `open` prop and compact in the harness).
 - **Original:** no "Dismissible" card (a success, high-contrast "Changes saved" with ✕) and no compact banner.
-- **Port:** both: "Dismissible" (`src/demos/banner.tsx:481-507`) and a compact error banner with a description and two actions in "Custom icon and compact" (`:624-634`).
+- **Port:** both: "Dismissible" (`apps/demo/src/demos/banner.tsx:481-507`) and a compact error banner with a description and two actions in "Custom icon and compact" (`:624-634`).
 - **Workaround:** none.
-- **Fidelity:** exact (the compact metrics follow the source's `compact` branches, `banner.tsx:433`, `:479`, `:500` against `src/components/banner.tsx:38-59`).
+- **Fidelity:** exact (the compact metrics follow the source's `compact` branches, `banner.tsx:433`, `:479`, `:500` against `packages/fluid-functionalism/src/components/banner.tsx:38-59`).
 - **Components it hits:** just this one.

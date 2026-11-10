@@ -1,7 +1,7 @@
 # introduction
 
 Original: `app/docs/page.tsx` of the source (fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`).
-Ported in `src/pages/introduction.tsx`, routed by the page registry (`src/lib/demo.ts` `loadPages`, `src/app.tsx` `PageBody`).
+Ported in `apps/demo/src/pages/introduction.tsx`, routed by the page registry (`apps/demo/src/lib/demo.ts` `loadPages`, `apps/demo/src/app.tsx` `PageBody`).
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps
 (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of
@@ -19,14 +19,14 @@ repeating it.
 
 - **Cause:** `not ported yet` (Radius, Size and Icons rows); the Primitive row is not ported at all (Base UI only), so the Radix / Base UI sentence stays wrong.
 - **Original:** "Customize using the right panel" lists light and dark, the corner radius, icon libraries, the Radix / Base UI install flavor, and "Press T, R, or I to flip the first three from the keyboard" (`app/docs/page.tsx:125-135`).
-- **Port:** the text is verbatim (`src/pages/introduction.tsx:42`). The right column has only the Theme select, and no T / R / I shortcuts exist.
+- **Port:** the text is verbatim (`apps/demo/src/pages/introduction.tsx:47`). The right column has only the Theme select, and no T / R / I shortcuts exist.
 - **Fidelity:** exact text, describes more than the port offers.
 
 ## The heading sits 8px above the subtitle only by a negative margin
 
 - **Cause:** `port choice`.
 - **Original:** `h1` `text-site-display leading-none mb-2` at `fontWeights.bold` (`app/docs/page.tsx:23-30`): a 28px line, 8px above the subtitle.
-- **Port:** `App`'s shared `Heading` (`src/app.tsx:80-93`) is bold with a 34px line and sits a 24px column gap above the page, which the subtitle cancels with `marginTop: -16` (`src/pages/introduction.tsx:212`), so the gap reads 8px past the taller line box.
+- **Port:** `App`'s shared `Heading` (`apps/demo/src/app.tsx:83-96`) is bold with a 34px line and sits a 24px column gap above the page, which the subtitle cancels with `marginTop: -16` (`apps/demo/src/pages/introduction.tsx:217`), so the gap reads 8px past the taller line box.
 - **Workaround:** the negative margin.
 - **Fidelity:** approximated.
 - **Components it hits:** every page and demo heading (34px line).
@@ -35,21 +35,21 @@ repeating it.
 
 - **Cause:** `port choice` (to match `leading-none`).
 - **Original:** `h2` / `h3` `text-site-title leading-none`, semibold 550 (`app/docs/page.tsx:60,139-145`): a 16px line.
-- **Port:** `scale.title` with `lineHeight: 16` and `weight.semibold` (`src/pages/introduction.tsx:55-68`).
+- **Port:** `scale.title` with `lineHeight: 16` and `weight.semibold` (`apps/demo/src/pages/introduction.tsx:60-73`).
 - **Fidelity:** exact.
 
 ## The code block overflows the 600px column and scrolls
 
-- **Cause:** `port choice` (the page column width, `src/app.tsx:77`).
+- **Cause:** `port choice` (the page column width, `apps/demo/src/app.tsx:80`).
 - **Original:** `<pre class="text-site-caption bg-muted/60 rounded-lg px-4 py-3 overflow-x-auto w-fit max-w-full">` (`app/docs/page.tsx:186`), in the source's own column. Its width was not measured.
-- **Port:** the same box with `overflowX: "scroll"` (`src/pages/introduction.tsx:165-205`). The longest line is 80 characters of 12px Menlo, about 578px, plus 32px of padding, so it overflows the 600px column by about 10px: the last characters of the `IconProvider` line need a scroll, and gpuix draws the scrollbar. No syntax highlighting, as in the source.
+- **Port:** the same box with `overflowX: "scroll"` (`apps/demo/src/pages/introduction.tsx:170-210`). The longest line is 80 characters of 12px Menlo, about 578px, plus 32px of padding, so it overflows the 600px column by about 10px: the last characters of the `IconProvider` line need a scroll, and gpuix draws the scrollbar. No syntax highlighting, as in the source.
 - **Fidelity:** approximated.
 
 ## Smaller differences
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** `hr` `border-border/60` (`app/docs/page.tsx:138,160,171`), the numbered badges `bg-muted` (`:148,155`), `font-mono` for the code (`:187`).
-- **Port:** the rules use `color.borderFaint` (`rgba(…,0.072)`, exactly 60% of `border`, `src/lib/theme.ts:107,155`) and the code block `withAlpha(muted, 0.6)`. The code face is Menlo like `InputCopy`'s (`src/pages/introduction.tsx:14`), where the browser resolves `font-mono` to `ui-monospace`.
+- **Port:** the rules use `color.borderFaint` (`rgba(…,0.072)`, exactly 60% of `border`, `packages/fluid-functionalism/src/lib/theme.ts:107,155`) and the code block `withAlpha(muted, 0.6)`. The code face is Menlo like `InputCopy`'s (`apps/demo/src/pages/introduction.tsx:19`), where the browser resolves `font-mono` to `ui-monospace`.
 - **Fidelity:** exact except the monospace face (same in Chrome on macOS, not in Safari).
 
 ## The page-level `px-6`

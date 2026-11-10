@@ -1,8 +1,8 @@
 # input-copy
 
 Original: `registry/default/input-copy.tsx`, demo in `app/docs/input-copy/page.tsx` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/input-copy.tsx`,
-demo in `src/demos/input-copy.tsx`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/input-copy.tsx`,
+demo in `apps/demo/src/demos/input-copy.tsx`.
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps
 (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of
@@ -49,5 +49,5 @@ repeating it.
 
 - **Cause:** `port choice` (the demo is a showcase card, not a docs page; reason not stated beyond that).
 - **Original:** `app/docs/input-copy/page.tsx`: Basic, With Label, Button Variant, Left Aligned (icon and button, `gap-4`), Disabled, Copy Callback (`gap-2` to a caption with `px-1`), each in a `ComponentPreview` with its code, then a props table.
-- **Port:** all six variants exist (`src/demos/input-copy.tsx:31-86`), stacked in one card at `gap: 8` (`:31`), the callback caption at `gap: 4` (`:72`). Extra: "Compact". The code snippets and props table are not ported.
+- **Port:** all six variants exist (`apps/demo/src/demos/input-copy.tsx:31-86`), stacked in one card at `gap: 8` (`:31`), the callback caption at `gap: 4` (`:72`). Extra: "Compact". The code snippets and props table are not ported.
 - **Fidelity:** all source variants present; one extra.

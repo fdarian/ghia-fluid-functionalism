@@ -1,6 +1,6 @@
 # nav-menu
 
-Original: `registry/default/nav-menu.tsx` and `registry/default/nav-item.tsx` (the source's own concept screens import them from `components/ui/`), in fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`. Ported in `src/components/nav-menu.tsx` and `src/components/nav-item.tsx`. There is no demo and no docs page in the source either: only the `/concepts` screens use them (`src/pages/concepts.tsx`, `src/pages/concepts/frame.tsx`), so the port has no `src/demos/` entry.
+Original: `registry/default/nav-menu.tsx` and `registry/default/nav-item.tsx` (the source's own concept screens import them from `components/ui/`), in fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`. Ported in `packages/fluid-functionalism/src/components/nav-menu.tsx` and `packages/fluid-functionalism/src/components/nav-item.tsx`. There is no demo and no docs page in the source either: only the `/concepts` screens use them (`apps/demo/src/pages/concepts.tsx`, `apps/demo/src/pages/concepts/frame.tsx`), so the port has no `apps/demo/src/demos/` entry.
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of repeating it.
 
@@ -8,7 +8,7 @@ Checked and equal: row height 32 / 28 (compact), `px` 12, icon 16 / 14 with an 8
 
 ## `slug` and `onClick` replace `href` and Next's `Link`
 
-- **Cause:** `port choice` (the app has no URLs; a page is a slug, `src/lib/page-nav.ts`).
+- **Cause:** `port choice` (the app has no URLs; a page is a slug, `apps/demo/src/lib/page-nav.ts`).
 - **Original:** `NavItem` is a `Link` with `href`; `NavMenu activeSlug` is compared with each item's `href` (`nav-item.tsx:15`, `:41`, `nav-menu.tsx:42`).
 - **Port:** `NavItem` takes `slug` for the comparison and `onClick` for the navigating (`nav-item.tsx:29-41`); the row is a `div` with `role="link"` and a tab stop. Enter and Space click it, as on a link and a button (`buttonProps`).
 - **Workaround:** none.
@@ -28,7 +28,7 @@ Checked and equal: row height 32 / 28 (compact), `px` 12, icon 16 / 14 with an 8
 
 - **Cause:** `not ported yet` (`FluidHighlight` always starts at opacity 0).
 - **Original:** the active-route background has `initial={false}`, so it is on the first frame at its row, and only later route changes glide it (`nav-menu.tsx:159-171`).
-- **Port:** `FluidHighlight` mounts at opacity 0 and the spring brings it to 1 (`src/lib/fluid-highlight.tsx:52-68`), so a frame mounted on a concept page shows the active row's fill coming in over about 160 ms.
+- **Port:** `FluidHighlight` mounts at opacity 0 and the spring brings it to 1 (`packages/fluid-functionalism/src/lib/fluid-highlight.tsx:52-68`), so a frame mounted on a concept page shows the active row's fill coming in over about 160 ms.
 - **Workaround:** none.
 - **Fidelity:** approximated (a 160 ms fade on mount only).
 - **Components it hits:** sidebar, dropdown (any `FluidHighlight` that is mounted already on).

@@ -18,7 +18,7 @@ Settled on 2026-10-16 after the first full drift audit. Do not reopen without ne
 ## What is not shipped, and why
 
 - The Untitled UI icon set. Its licence forbids distributing the icons even though the package declares MIT; the Icons row offers four other libraries and the default is Lucide (the source defaults to Untitled UI). Recorded in `drift/site.md`.
-- The source's sample photo (`micka.png`): MIT covers the file, not a likeness. The pages that show a sample avatar use `assets/chat-ai/avatar.jpg`, whose origin [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md) records, and each carries a "Sample photo" drift entry.
+- The source's sample photo (`micka.png`): MIT covers the file, not a likeness. The pages that show a sample avatar use `apps/demo/assets/chat-ai/avatar.jpg`, whose origin [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md) records, and each carries a "Sample photo" drift entry.
 - Image assets ship at twice their largest displayed size (`avatar.jpg` 192 px, `og.png` 400x200). Source resolution costs memory once decoded, not just disk; do not swap in the originals.
 
 ## Reference clone

@@ -1,8 +1,8 @@
 # <component>
 
 Original: `registry/base/<component>.tsx` (or `registry/default/`), demo in `app/docs/...` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/<component>.tsx`,
-demo in `src/demos/<component>.tsx`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/<component>.tsx`,
+demo in `apps/demo/src/demos/<component>.tsx`.
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps
 (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of

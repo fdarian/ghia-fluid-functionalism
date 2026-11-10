@@ -1,15 +1,15 @@
 # button
 
 Original: `registry/base/button.tsx` (Base UI `Button`; the docs page imports the Radix twin, which looks the same), demo in `app/docs/button/page.tsx` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/button.tsx` (with `src/lib/press.tsx`), demo in `src/demos/button.tsx`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/button.tsx` (with `packages/fluid-functionalism/src/lib/press.tsx`), demo in `apps/demo/src/demos/button.tsx`.
 
-Checked with no drift: sizes (36 / 28 / icon squares), paddings (16 / 12, 12 / 8 with an icon), gaps (6 / 4), type (13/20, 12/18), icon sizes (16 / 14) and stroke (1.5, 2 on hover), colours in both schemes (the `color-mix()` hovers resolve to `#292929` / `#3d3d3d` light and `#dcdcdc` / `#c3c3c3` dark, checked), the focus ring (offset 1 from the inset surface lands on the source's 1px ring outside the button), disabled (0.5 opacity, no pointer, not tabbable), loading as disabled, the loading spinner (36 / 28 px infinity path, stroke 1.125, `spinner-move` 2s and `spinner-dash` 4s on the source's `pathLength` 100 dashes, running whether or not the button is on screen (culling lets gpuix put it to sleep, Round 18 #97), reduced motion not honoured as in the source; `src/components/button.tsx:118-157`, `scripts/check-button.tsx`), Enter and Space activation, and the label hover colour of ghost.
+Checked with no drift: sizes (36 / 28 / icon squares), paddings (16 / 12, 12 / 8 with an icon), gaps (6 / 4), type (13/20, 12/18), icon sizes (16 / 14) and stroke (1.5, 2 on hover), colours in both schemes (the `color-mix()` hovers resolve to `#292929` / `#3d3d3d` light and `#dcdcdc` / `#c3c3c3` dark, checked), the focus ring (offset 1 from the inset surface lands on the source's 1px ring outside the button), disabled (0.5 opacity, no pointer, not tabbable), loading as disabled, the loading spinner (36 / 28 px infinity path, stroke 1.125, `spinner-move` 2s and `spinner-dash` 4s on the source's `pathLength` 100 dashes, running whether or not the button is on screen (culling lets gpuix put it to sleep, Round 18 #97), reduced motion not honoured as in the source; `packages/fluid-functionalism/src/components/button.tsx:118-157`, `apps/demo/scripts/check-button.tsx`), Enter and Space activation, and the label hover colour of ghost.
 
 ## A held Space does not press the button
 
 - **Cause:** `gpuix gap`.
 - **Original:** a native `<button>` matches `:active` while Space is held, so the press-shrink (`group-active:`, `registry/base/button.tsx:115-127`) plays for a keyboard activation too.
-- **Port:** the pressed look is `pressSurface` and the tertiary `ringSurface` (`src/components/button.tsx:307-308`); Space still activates on key-up through `buttonProps` (`:269-275`).
+- **Port:** the pressed look is `pressSurface` and the tertiary `ringSurface` (`packages/fluid-functionalism/src/components/button.tsx:307-308`); Space still activates on key-up through `buttonProps` (`:269-275`).
 - **gpuix lacks:** a keyboard `:active` state. `active` styles come from the pointer's press chain only (`ghia:docs/fork/events-and-input.md:140`). Rechecked on the test renderer: with a focused `buttonProps` element carrying `active: { backgroundColor }`, the capture while `nativeSimulateKeyDown(id, "Space")` is held is byte-identical to the resting one.
 - **Workaround:** none.
 - **Fidelity:** approximated: the activation is exact, the pressed look is missing for the keyboard.
@@ -19,10 +19,10 @@ Checked with no drift: sizes (36 / 28 / icon squares), paddings (16 / 12, 12 / 8
 
 - **Cause:** `gpuix gap`.
 - **Original:** surface layer inset 1px (`:211`) with `bg-[var(--btn-bg)]` plus a same-colour `shadow-[0_0_0_1px_...]` that collapses on press (`:113-128`). Secondary's `--tint` and ghost's `--hover` are translucent; an outer CSS shadow paints only outside the box, so fill and ring never double up (comment `:105-112`). The shadow's spread eases, so the edge moves through sub-pixel positions.
-- **Port:** the element is the inset surface (`margin: 1`, height and padding give 1px back, `src/components/button.tsx` `padLeft`) and holds a `PressFill` (`src/lib/press.tsx`): one absolutely positioned quad (no `zIndex`), 1px outside the surface at rest (the button's own edge) and one radius larger. `groupHover` swaps its colour and `groupActive` pulls its four edges to the surface's own and its radius back, with the source's eases (180ms on `cubic-bezier(0.23,1,0.32,1)` for the geometry, 80ms `ease` for the colour, 80ms for both while pressed; label colour and icons over 80ms). The element sets `pressSurface` (the `press` group and `position: relative`) and its label is a `position: relative` box after the fill, so the label paints over the fill as in the source's `relative` label span (`registry/base/button.tsx:216`). Tertiary's ring is an outline, 0 offset at rest and -1 pressed.
-- **Why not a `backgroundColor` plus a spread shadow:** gpuix paints an outer `box-shadow` only outside the border box (gpuix `box-shadow-outside-border-box` changeset), so the fill had to be a background and the ring a spread: two primitives. They antialias separately at rounded edges and leave a thin grey ring on every corner and pill end (`screenshots/button/pill.png`). The single quad is seamless and a translucent fill still does not double up.
+- **Port:** the element is the inset surface (`margin: 1`, height and padding give 1px back, `packages/fluid-functionalism/src/components/button.tsx` `padLeft`) and holds a `PressFill` (`packages/fluid-functionalism/src/lib/press.tsx`): one absolutely positioned quad (no `zIndex`), 1px outside the surface at rest (the button's own edge) and one radius larger. `groupHover` swaps its colour and `groupActive` pulls its four edges to the surface's own and its radius back, with the source's eases (180ms on `cubic-bezier(0.23,1,0.32,1)` for the geometry, 80ms `ease` for the colour, 80ms for both while pressed; label colour and icons over 80ms). The element sets `pressSurface` (the `press` group and `position: relative`) and its label is a `position: relative` box after the fill, so the label paints over the fill as in the source's `relative` label span (`registry/base/button.tsx:216`). Tertiary's ring is an outline, 0 offset at rest and -1 pressed.
+- **Why not a `backgroundColor` plus a spread shadow:** gpuix paints an outer `box-shadow` only outside the border box (gpuix `box-shadow-outside-border-box` changeset), so the fill had to be a background and the ring a spread: two primitives. They antialias separately at rounded edges and leave a thin grey ring on every corner and pill end (`apps/demo/screenshots/button/pill.png`). The single quad is seamless and a translucent fill still does not double up.
 - **gpuix lacks:** sub-pixel quad edges. A quad's edges land on whole device pixels (an inset of 0.4 and 0.5 paints as 0, 0.6 as 1), so the 1px pull-in is one step, taken a few milliseconds into the ease, where the shadow spread passed through partial coverage. Checked on the test renderer (1x), so at 2x it has one half-pixel step in between. gpuix has transforms now (667084d0) and draws a transformed box antialiased (#109), so a `scale` of the fill could ease the pull-in; not tried, since it would scale the radius with the box.
-- **Workaround:** none; `scripts/check-button.tsx` asserts the edge pixel is still the fill on the press frame and gone once the 80ms is over.
+- **Workaround:** none; `apps/demo/scripts/check-button.tsx` asserts the edge pixel is still the fill on the press frame and gone once the 80ms is over.
 - **Fidelity:** exact in colour and geometry at rest and pressed; the shrink steps instead of easing. The tertiary ring's press move is instant (a transition on `outline-offset` would also ease the focus ring's offset when the button gains keyboard focus, which the source does not).
 - **Components it hits:** every filled `Button`, the composer's send button and the Skill page's "Button press" example (`CardButton` fills with plain `backgroundColor`, no ring).
 
@@ -39,7 +39,7 @@ Checked with no drift: sizes (36 / 28 / icon squares), paddings (16 / 12, 12 / 8
 
 - **Cause:** `port choice` (out of scope per the lead's decision, `base-ui:BASE-UI-AUDIT.md:176`).
 - **Original:** `active` forces the pressed look while a menu the button opened is showing (`:99-102`, `:130-141`); `asChild` / `render` make another element the root (`:86-95`, `:163-186`, `:290-302`); `sm` / `md` / `lg` / `icon-sm` / `icon-lg` resolve onto the ladder (`:61-78`).
-- **Port:** none of them (`src/components/button.tsx:159-182`). A dropdown trigger does not look engaged while its menu is open.
+- **Port:** none of them (`packages/fluid-functionalism/src/components/button.tsx:159-182`). A dropdown trigger does not look engaged while its menu is open.
 - **Workaround:** none.
 - **Fidelity:** dropped.
 - **Components it hits:** every popup trigger that is a `Button` (dropdown, select).
@@ -57,7 +57,7 @@ Checked with no drift: sizes (36 / 28 / icon squares), paddings (16 / 12, 12 / 8
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** `size="icon"` renders `children` (any element, usually an icon) inside the label wrapper (`:248-251`).
-- **Port:** the glyph is the `icon` prop and `children` is ignored for icon sizes (`src/components/button.tsx:224-250`); `trailingContent` is a port-only slot for a keycap (`:178`).
+- **Port:** the glyph is the `icon` prop and `children` is ignored for icon sizes (`packages/fluid-functionalism/src/components/button.tsx:224-250`); `trailingContent` is a port-only slot for a keycap (`:178`).
 - **Workaround:** n/a.
 - **Fidelity:** exact in look.
 - **Components it hits:** just this one.
@@ -66,7 +66,7 @@ Checked with no drift: sizes (36 / 28 / icon squares), paddings (16 / 12, 12 / 8
 
 - **Cause:** `port choice` (no prop to drive it).
 - **Original:** `app/docs/button/page.tsx:95-148`: Variants (four inline plus four `w-full`), With Icons (`Create` leading `plus`, secondary `Next` trailing `arrow-right`, tertiary `Search` leading `search` and trailing `arrow-right`), Loading & Disabled (a `Click me` button that loads for 2s, secondary `Saving` loading with a leading `loader`, `Disabled`).
-- **Port:** `src/demos/button.tsx`: Default and Compact rows of the four variants, a Leading icon row (`plus` on all four), a Trailing icon row (secondary `Next`, tertiary `Search` on both sides), Icon only (both sizes), Disabled and Loading rows of the four variants, and a Click to load row (the 2s button and the loading secondary `Saving` with a leading `loader`). Missing: the four `w-full` buttons (`Button` has no width prop). Added: the Compact, Icon only and per-variant Disabled / Loading rows. The icon-only buttons have no `aria-label` (the source playground sets one, `playgrounds/button.tsx:56`, `:224`). Copy matches.
+- **Port:** `apps/demo/src/demos/button.tsx`: Default and Compact rows of the four variants, a Leading icon row (`plus` on all four), a Trailing icon row (secondary `Next`, tertiary `Search` on both sides), Icon only (both sizes), Disabled and Loading rows of the four variants, and a Click to load row (the 2s button and the loading secondary `Saving` with a leading `loader`). Missing: the four `w-full` buttons (`Button` has no width prop). Added: the Compact, Icon only and per-variant Disabled / Loading rows. The icon-only buttons have no `aria-label` (the source playground sets one, `playgrounds/button.tsx:56`, `:224`). Copy matches.
 - **Workaround:** n/a.
 - **Fidelity:** n/a.
 - **Components it hits:** just this one.
@@ -75,7 +75,7 @@ Checked with no drift: sizes (36 / 28 / icon squares), paddings (16 / 12, 12 / 8
 
 - **Cause:** `port choice` (no `active` prop) for Active; `gpuix gap` for the field alignment; `not ported yet` for Size.
 - **Original:** `lib/docs/playgrounds/button.tsx`: an `Active` switch forces the pressed look (`active` prop, `registry/base/button.tsx:115-127`); the Label input is `text-right` (`:75`); the Size select follows the site-wide size step until a value is picked (`useSizeVariant`, `:98-100`); the Code tab shows the matching snippet.
-- **Port:** `src/demos/button.tsx` `Playground`: every other control and the shuffle are ported with the source's defaults and odds. `Button` has no `active` prop, so the Active switch is left out (the shuffle drops its roll too). The Label field (`PlayText`) is left-aligned: the `<input>` takes `textAlign: "right"` without effect in the capture. Size starts at Default and is only set by its own select. No Code tab (see `site.md`).
+- **Port:** `apps/demo/src/demos/button.tsx` `Playground`: every other control and the shuffle are ported with the source's defaults and odds. `Button` has no `active` prop, so the Active switch is left out (the shuffle drops its roll too). The Label field (`PlayText`) is left-aligned: the `<input>` takes `textAlign: "right"` without effect in the capture. Size starts at Default and is only set by its own select. No Code tab (see `site.md`).
 - **gpuix lacks:** right-aligned text in `<input>` (unverified at the source; the style is accepted and does nothing in the test renderer).
 - **Workaround:** none.
 - **Fidelity:** approximated (left-aligned label text), dropped (Active).
