@@ -1,4 +1,4 @@
-Solid workspace that draws the [Fluid Functionalism](https://fluidfunctionalism.com) component library on [gpuix](https://github.com/remorses/gpuix), a GPUI-backed renderer with no DOM and no CSS engine: every component, demo and page of the source site, with its fluid hover, springs and keyboard behaviour. It is a port, so most work is closing or recording a difference from the source. [README.md](README.md) is the overview (run it, add a component, the gpuix gaps and bugs, the drift table); [UPSTREAM.md](UPSTREAM.md) says which upstream commit each file tracks and how to sync. pnpm workspace, Biome, turbo for checks only.
+Solid workspace that draws the [Fluid Functionalism](https://fluidfunctionalism.com) component library on [Ghia](https://github.com/fdarian/ghia) (a fork of [gpuix](https://github.com/remorses/gpuix); README and drift files still say gpuix), a GPUI-backed renderer with no DOM and no CSS engine: every component, demo and page of the source site, with its fluid hover, springs and keyboard behaviour. It is a port, so most work is closing or recording a difference from the source. [README.md](README.md) is the overview (run it, add a component, the gpuix gaps and bugs, the drift table); [UPSTREAM.md](UPSTREAM.md) says which upstream commit each file tracks and how to sync. pnpm workspace, Biome, turbo for checks only.
 
 ## Layout
 
@@ -9,7 +9,7 @@ Solid workspace that draws the [Fluid Functionalism](https://fluidfunctionalism.
 
 ## Stack
 
-- Solid JSX on `@ghia/solid` and `@ghia/native` from npm (source and docs: [fdarian/ghia](https://github.com/fdarian/ghia); `docs/reference.md` is the API, `docs/fork/` says where it differs from the DOM; refs into them read `ghia:docs/<path>:lines`, read at `730f77f1`). Elements are gpuix's (`<div>`, `<text>`, `<anchored>`, `motion.*`) with style objects, not HTML and CSS classes.
+- Solid JSX on `@ghia/solid` and `@ghia/native` from npm (source and docs: [fdarian/ghia](https://github.com/fdarian/ghia); `docs/reference.md` is the API, `docs/fork/` says where it differs from the DOM; refs into them read `ghia:docs/<path>:lines`, read at `730f77f1`). Elements are Ghia's (`<div>`, `<text>`, `<anchored>`, `motion.*`) with style objects, not HTML and CSS classes.
 - Bun runs everything, with the Solid transform and the demo/page/changelog registry as preloads (`apps/demo/bunfig.toml`): no build step to develop. pnpm 12 installs, TypeScript 7 (`tsc`), Biome (tabs, single quotes). Each package has its own `#src/*` import alias, with the file extension (`#src/lib/theme.ts`).
 - Behaviour primitives (keys, selection, open state, focus, ARIA) come from `ghia-base-ui` on npm (source: [fdarian/ghia-base-ui](https://github.com/fdarian/ghia-base-ui); `base-ui:` paths are in that repo). This repo keeps styling, springs and fluid hover.
 
@@ -28,7 +28,7 @@ All from the repo root; the demo scripts are forwarded to `apps/demo`, so `bun` 
 - `@ghia/solid`, `@ghia/native` and `ghia-base-ui` are pinned to exact versions, the same in each `package.json` that lists them (the library lists `ghia-base-ui` as a dependency and `@ghia/solid`, `solid-js` as peers, which consumers install once). `ghia-base-ui` peer-depends on `@ghia/solid` and `solid-js`; a second copy of either gives two renderers or reactive graphs and silent breakage. `apps/demo/scripts/check-single-instance.ts` catches it for the demo and for the library.
 - A behaviour change (keys, selection, ARIA, open state, typeahead, presence) goes into the primitive in `ghia-base-ui`, not into a component here (release it, then bump the pins). A look change (tokens, motion, fluid hover) stays here. Its `BASE-UI-AUDIT.md` (in the repo, not the npm package) records where the primitives differ from Base UI.
 - A component adds `packages/fluid-functionalism/src/components/<name>.tsx`, `apps/demo/src/demos/<name>.tsx` and `drift/<name>.md` and edits no shared file: the library's `./*` export covers the new component, and the demo finds its demo file by itself. Whenever code the drift file cites moves, its `file:line` refs move with it. Refs are repo-root-relative (`packages/fluid-functionalism/src/components/button.tsx:307-308`); refs into the primitives read `base-ui:src/<path>:lines`.
-- gpuix cannot do some things the source does (selector `:has(.x)` and group-has, `var()` in a Motion key, a `layoutId` crossfade). Record the approximation in the drift file and link the README gap row; do not paper over it.
+- Ghia cannot do some things the source does (selector `:has(.x)` and group-has, `var()` in a Motion key, a `layoutId` crossfade). Record the approximation in the drift file and link the README gap row; do not paper over it.
 - Source filenames are kebab-case.
 
 ## Notes

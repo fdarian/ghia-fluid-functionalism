@@ -9,7 +9,7 @@ One entry per place the port looks or behaves differently from the source, whate
 
 - **Cause:** `port choice` (a desktop window has no browser to supply the chrome; reason not stated in code).
 - **Original:** none; the browser draws the window. The page is the body on `--background` (`app/globals.css:331-338`).
-- **Port:** a chrome-coloured window, a 40px drag bar with the title "Fluid Functionalism on gpuix" centred, and the page in a 10px-radius bordered panel with an 8px margin (`apps/demo/src/lib/app-frame.tsx:8-14, 17-82`). Transparent titlebar and traffic lights at 14/13 (`apps/demo/src/main.tsx:16-18`). The `chrome` token (`#EFEFEF` / `#0E0E0E`) is the port's own (`packages/fluid-functionalism/src/lib/theme.ts:18, 87, 135`).
+- **Port:** a chrome-coloured window, a 40px drag bar with the title "Fluid Functionalism on Ghia" centred, and the page in a 10px-radius bordered panel with an 8px margin (`apps/demo/src/lib/app-frame.tsx:8-14, 17-82`). Transparent titlebar and traffic lights at 14/13 (`apps/demo/src/main.tsx:16-18`). The `chrome` token (`#EFEFEF` / `#0E0E0E`) is the port's own (`packages/fluid-functionalism/src/lib/theme.ts:18, 87, 135`).
 - **Workaround:** n/a.
 - **Fidelity:** dropped (extra chrome around every page).
 - **Components it hits:** every page.

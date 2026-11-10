@@ -78,7 +78,7 @@ import { changeTheme, ThemeFade } from '#src/lib/theme-fade.tsx';
 
 const SHOWCASE = SHOWCASE_SLUG;
 const PAGE_WIDTH = 600;
-export const WINDOW_TITLE = 'Fluid Functionalism on gpuix';
+export const WINDOW_TITLE = 'Fluid Functionalism on Ghia';
 
 function Heading(props: { children: string }) {
 	return (
