@@ -21,13 +21,13 @@ const importers = [
 	['ghia-base-ui', baseUi],
 	['@ghia/solid', gpuixSolid],
 ] as const;
-// ghia-base-ui and @ghia/solid do not import ghia-base-ui.
+// ghia-base-ui exports subpaths only, and nothing but the two workspace packages imports it.
 const notImportedBy: Record<string, string[]> = {
-	'ghia-base-ui': ['ghia-base-ui', '@ghia/solid'],
+	'ghia-base-ui/utils': ['ghia-base-ui', '@ghia/solid'],
 };
 
 let failed = false;
-for (const specifier of ['solid-js', '@ghia/solid', 'ghia-base-ui']) {
+for (const specifier of ['solid-js', '@ghia/solid', 'ghia-base-ui/utils']) {
 	const resolved = new Map<string, string[]>();
 	for (const importer of importers) {
 		const name = importer[0];
