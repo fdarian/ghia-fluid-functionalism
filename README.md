@@ -29,8 +29,10 @@ Apple Silicon macOS only. The first run downloads the app (about 56 MB) from the
 caches it under `~/Library/Caches/ghia-fluid-functionalism/`; later runs start from the cache.
 `GHIA_FLUID_FUNCTIONALISM_BINARY_PATH` runs a binary you built yourself instead.
 
-To work on the code, you need Bun and pnpm. The renderer and the primitives come from npm (`@ghia/solid`, `@ghia/native`, `ghia-base-ui`); no
-other checkout is needed.
+To work on the code, you need Bun and pnpm. The repository is a pnpm workspace: the components are the library
+`packages/fluid-functionalism` (published as `ghia-fluid-functionalism`), the app that shows them is `apps/demo`, and the
+root scripts forward to the demo. The renderer and the primitives come from npm (`@ghia/solid`, `@ghia/native`,
+`ghia-base-ui`); no other checkout is needed.
 
 ```bash
 pnpm install
@@ -49,18 +51,21 @@ the traffic lights, a title across the top bar, and the page in a rounded panel.
 `apps/demo/assets/fonts/`.
 
 ```bash
-pnpm check                  # check:type (tsc), then check:scenarios
-pnpm check:type             # tsc over src/ and apps/demo/scripts/
+pnpm check                  # turbo: check:type (tsc in both packages, the demo's over src/ and scripts/), then check:scenarios
+pnpm check:type             # tsc in both packages
 pnpm check:scenarios        # every apps/demo/scripts/check-*, about 30 minutes; runs every check and lists the failures at the end
 pnpm screenshots [slug]     # headless captures of every demo and page into apps/demo/screenshots/<slug>/, about 25 minutes for all; or one slug
-bun apps/demo/scripts/live-check.tsx  # the same flow against the real window, via gpuix's automation client
-bun apps/demo/scripts/perf.tsx [slug...] --label name   # live frame times per page, idle and a sidebar sweep, into apps/demo/perf/<name>.json
+cd apps/demo
+bun scripts/live-check.tsx  # the same flow against the real window, via gpuix's automation client
+bun scripts/perf.tsx [slug...] --label name   # live frame times per page, idle and a sidebar sweep, into perf/<name>.json
 ```
+
+Scripts that run with `bun` start from `apps/demo`, which holds the `bunfig.toml` with the Solid transform and the registry preload.
 
 <details>
 <summary>Pinned packages</summary>
 
-- **`@ghia/solid` 0.11.1 and `@ghia/native` 0.11.1** (ghia `730f77f1`), exact versions in `package.json`. `@ghia/solid` ships compiled `dist/` with the `preload` and
+- **`@ghia/solid` 0.11.1 and `@ghia/native` 0.11.1** (ghia `730f77f1`), exact versions in `apps/demo/package.json` (the library lists `@ghia/solid`, `solid-js` and `ghia-base-ui` as devDependencies at the same versions). `@ghia/solid` ships compiled `dist/` with the `preload` and
   `bun-plugin` entries; `@ghia/native` ships the darwin-arm64 `.node` addon and both its ESM and CJS entries. The
   highlights and popups use `@ghia/solid`'s native `motion` springs, and the table, `inline-*`, container query, `has*`
   and `fit-content` layouts, and the variable-font weights, `outlineStyle`, `textWrap`, `textBox` trim and `calc()`
@@ -68,11 +73,12 @@ bun apps/demo/scripts/perf.tsx [slug...] --label name   # live frame times per p
   `ghia:<path>` refs in these docs are paths in the `fdarian/ghia` repository at `730f77f1`.
 - **`ghia-base-ui` 0.1.0** (source `fdarian/ghia-base-ui` at `77a5eb0`, which the `base-ui:` refs in `drift/` and
   `UPSTREAM.md` cite). It publishes `exports` `./*` -> `dist/*/index.js`, so `ghia-base-ui/<folder>` is a primitive.
-  Peer dependencies are `@ghia/solid` and `solid-js` at the exact versions this app pins.
+  Peer dependencies are `@ghia/solid` and `solid-js` at the exact versions the demo and the library pin.
 - **One runtime instance.** Two copies of `solid-js` give two reactive systems and nothing updates; two of `@ghia/solid`
-  give two renderer registries. `ghia-base-ui` peer-depends on both, so pinning the same versions here keeps one copy of
+  give two renderer registries. `ghia-base-ui` peer-depends on both, so pinning the same versions in both workspace packages keeps one copy of
   each, and always install from this repository's root.
-  `apps/demo/scripts/check-single-instance.ts` (one of the `check:scenarios` scripts) fails when either package resolves to more than one file.
+  `apps/demo/scripts/check-single-instance.ts` (one of the `check:scenarios` scripts, also run by `ci.yml`) fails when `solid-js`, `@ghia/solid` or `ghia-base-ui`
+  resolves to more than one file from the demo or from the library.
 </details>
 
 `apps/demo/scripts/screenshots.tsx <slug>` takes a file name from `apps/demo/src/demos/` or `apps/demo/src/pages/` (or `showcase`) and writes `initial.png`,
@@ -87,13 +93,13 @@ through the automation client and writes to `apps/demo/screenshots/live/`.
 Needs `cargo install cargo-packager --locked` once, on top of what "Run it" needs.
 
 ```bash
-pnpm build    # apps/demo/scripts/build.ts
+pnpm build    # runs apps/demo/scripts/build.ts; outputs land in apps/demo/
 ```
 
 | Output | Size | What |
 |---|---|---|
-| `dist/fluid-functionalism` | 99 MB | The whole app as one binary (`Bun.build` compile, minified) |
-| `bundle/Fluid Functionalism.app` | 99 MB | That binary wrapped by `cargo packager` (`apps/demo/packager.json`), with `dist/AppIcon.icns` made from `apps/demo/assets/icon/icon-1024.png`, the site's FF favicon |
+| `apps/demo/dist/fluid-functionalism` | 99 MB | The whole app as one binary (`Bun.build` compile, minified) |
+| `apps/demo/bundle/Fluid Functionalism.app` | 99 MB | That binary wrapped by `cargo packager` (`apps/demo/packager.json`), with `apps/demo/dist/AppIcon.icns` made from `apps/demo/assets/icon/icon-1024.png`, the site's FF favicon |
 
 About 30 MB of the binary is the `@ghia/native` addon. Launch to first window, measured: 3.2 s the first time, about
 1.4 s after.
@@ -105,7 +111,7 @@ The binary reads nothing from the repository, so each kind of runtime input has 
 
 - **Demos, pages and the changelog** are the virtual modules `virtual:demos`, `virtual:pages` and `virtual:changelog`
   from `apps/demo/scripts/registry-plugin.ts`, which generate static imports of every file in `apps/demo/src/demos/`, `apps/demo/src/pages/` and
-  `apps/demo/content/changelog/`. `bun apps/demo/src/main.tsx` uses the same generator, through `apps/demo/scripts/registry-preload.ts` in `apps/demo/bunfig.toml`.
+  `apps/demo/content/changelog/`. `bun src/main.tsx` (run from `apps/demo`) uses the same generator, through `apps/demo/scripts/registry-preload.ts` in `apps/demo/bunfig.toml`.
   The build passes `scenarios: false`, so the `scenarios` exports are tree-shaken out; a `process.env.FF_PERF` define
   does the same for `apps/demo/src/lib/perf.ts`.
 - **Fonts** are `import ... with { type: 'file' }` (`apps/demo/src/lib/fonts.ts`) and are read from `$bunfs`, Bun's embedded filesystem.
@@ -118,13 +124,15 @@ The binary reads nothing from the repository, so each kind of runtime input has 
 ## Releasing
 
 `pnpm changeset` describes a change; merge the "Version Packages" PR it produces. `.github/workflows/release.yml` then
-builds the signed binary (`apps/demo/scripts/release-binary.ts`), publishes the `packages/fluid-functionalism/src/cli.ts` shim to npm and uploads the tarball
+runs `ci:release` from the root: the library's `build` (tsdown compiles the `packages/fluid-functionalism/src/cli.ts` shim into `packages/fluid-functionalism/dist/cli.js`), the demo's
+`release:binary` (`apps/demo/scripts/release-binary.ts` compiles and signs the binary, writes `apps/demo/dist/releases/*.tar.gz` and the sha256 in
+`packages/fluid-functionalism/dist/checksums.json`), then `changeset publish` puts the shim on npm. The workflow uploads the tarball
 to the `ghia-fluid-functionalism@<version>` GitHub Release.
 
 ## Adding a component
 
-A component adds `packages/fluid-functionalism/src/components/<name>.tsx`, `apps/demo/src/demos/<name>.tsx` and `drift/<name>.md`, and edits no shared
-file. `apps/demo/src/lib/demo.ts` reads every `apps/demo/src/demos/*.tsx` through the `virtual:demos` module (restart
+A component adds `packages/fluid-functionalism/src/components/<name>.tsx` (the library), `apps/demo/src/demos/<name>.tsx` (the demo) and `drift/<name>.md`, and edits no shared
+file: the library's `exports` map `./*` to `src/components/*.tsx`, so the demo imports it as `ghia-fluid-functionalism/<name>` with no export to add. Library files import each other as `#src/<path>.ts`, with the extension. `apps/demo/src/lib/demo.ts` reads every `apps/demo/src/demos/*.tsx` through the `virtual:demos` module (restart
 `--hot` to pick up a new file), and the sidebar lists the demos by title. A demo file exports:
 
 ```ts
@@ -149,7 +157,7 @@ focus ring and fluid hover.
 - **Fluid hover owns the highlighted row.** Pass `hover.activeIndex` as the primitive's `highlightedIndex` and
   `onHighlightChange(index, reason)` back into the hover; on a keyboard `reason`, call `hover.releasePointer()`. Picking
   the row nearest the pointer in the gap between rows (`pickNearest`) stays in `packages/fluid-functionalism/src/lib/fluid-hover.ts`.
-- **A missing primitive goes into ghia-base-ui**, not into `src/` (release it, then bump the pin): its `UPSTREAM.md` says how to port one from
+- **A missing primitive goes into ghia-base-ui**, not into this repository (release it, then bump the pin): its `UPSTREAM.md` says how to port one from
   Base UI, and its [BASE-UI-AUDIT.md](https://github.com/fdarian/ghia-base-ui/blob/main/BASE-UI-AUDIT.md) records where it differs.
 - **Components of this site's own** (command-menu, sidebar, nav-item, input-message, ask-user-questions, queued-stack)
   take shared helpers from base-ui where their behaviour matches: `moveIndex` and `edgeIndex` from
@@ -164,6 +172,8 @@ column's card in place of "Make them yours"), `scenarios`, `menuIcon` and `menuK
 
 <details>
 <summary>Shared code in <code>src/lib/</code></summary>
+
+The library (`packages/fluid-functionalism/src/lib/`) holds `theme.ts`, `icon.tsx`, `icons.ts` and `icons/`, `fluid-hover.ts`, `fluid-highlight.tsx`, `focus-ring.tsx`, `measured-height.ts`, `offset.ts`, `popup.tsx`, `popup-timing.ts`, `press.tsx`, `preview-pill.ts`, `stable-label.tsx`, `surface-context.ts`, `cull.ts` and `platform.ts`; the demo (`apps/demo/src/lib/`) holds the rest. The demo imports the public ones as `ghia-fluid-functionalism/<name>` (`theme`, `icon`, `icons`, `icons/*`, `fluid-hover`, `fluid-highlight`, `stable-label`, `measured-height`, `cull`, `platform`).
 
 | File | What it holds |
 |---|---|
@@ -195,7 +205,7 @@ a copy is kept at `~/.claude/notes/ff-source/`. Each file in [`drift/`](drift) l
 behaves differently from it, whatever the cause. A cause is one of: **gpuix gap**, gpuix lacks it or gets it wrong;
 **port choice**, the port differs on purpose; **not ported yet**, nothing stops the port doing it. An entry is a `## `
 section with a Cause line, counted once; one that names two causes counts as mixed; one with no cause tag (an exact
-or additive note) is not counted. `bun apps/demo/scripts/drift-counts.ts` prints the table below from the drift files. Base UI
+or additive note) is not counted. `bun scripts/drift-counts.ts` (from `apps/demo`) prints the table below from the drift files. Base UI
 behaviour, row by row, is in [`BASE-UI-AUDIT.md`](https://github.com/fdarian/ghia-base-ui/blob/main/BASE-UI-AUDIT.md) in the ghia-base-ui repository. Files named after a component are that
 component's drift; `site` is the shell, and `home`, `introduction`, `compare`, `concepts`, `audio-mixer`,
 `nav-menu`, `fluid-hover`, `motion-page`, `scrollbars-page`, `sizes-page`, `skill-page`, `surfaces` and
@@ -313,9 +323,9 @@ offer it. A count is given only where the code shows it.
 
 Quirks of this repo's own code, kept apart from the gpuix gaps above.
 
-- **Frame-time harness** (`apps/demo/scripts/perf.tsx`, `apps/demo/src/lib/perf.ts`, on the real window; `FF_PERF=1 bun apps/demo/src/main.tsx` is its app half). Per page it mounts the app on that page (a fresh `render()`, not an in-app navigation), settles 1.5 s, then records 3 s idle and 3 s of 120 pointer moves per second sweeping the sidebar column. Columns: `draws/s` is the native draw count; `draw` is gpui's per-window-draw CPU time (build + layout + paint, not split) read from the overlay stats after each tick or injected move, so draws that share one tick are missed (`missedDraws` in the JSON; the overlay's own p90/p99/max cover all); `present/s` and `enc` are Metal frames and their encode ms from `GPUIX_RENDER_STATS`; `tick` is time inside `renderer.tick()` (the draw plus any event handler it runs); `apply` is time in `applyBatch` (the Solid mutations), `clock` time in `setInterval` callbacks (the `onFrame` subscribers); `cpu%` is whole-process CPU over wall time (above 100 means more than one thread); `nodes` is created minus destroyed elements counted from the mutation batches, since the real renderer has no element count. The numbers are only valid while the window is not occluded (a covered window gets no display link): the script retries a page that drew without presenting, and `--foreground` (focus-stealing) re-activates the window then; `--wait-visible s` sets how long it keeps trying. The addon must be a release build, which the script checks by size against cargo's artifacts. The frame loop is paced by the display (75 Hz here, 13.3 ms), so compare runs on the same machine and load.
+- **Frame-time harness** (`apps/demo/scripts/perf.tsx`, `apps/demo/src/lib/perf.ts`, on the real window; `FF_PERF=1 bun src/main.tsx` from `apps/demo` is its app half). Per page it mounts the app on that page (a fresh `render()`, not an in-app navigation), settles 1.5 s, then records 3 s idle and 3 s of 120 pointer moves per second sweeping the sidebar column. Columns: `draws/s` is the native draw count; `draw` is gpui's per-window-draw CPU time (build + layout + paint, not split) read from the overlay stats after each tick or injected move, so draws that share one tick are missed (`missedDraws` in the JSON; the overlay's own p90/p99/max cover all); `present/s` and `enc` are Metal frames and their encode ms from `GPUIX_RENDER_STATS`; `tick` is time inside `renderer.tick()` (the draw plus any event handler it runs); `apply` is time in `applyBatch` (the Solid mutations), `clock` time in `setInterval` callbacks (the `onFrame` subscribers); `cpu%` is whole-process CPU over wall time (above 100 means more than one thread); `nodes` is created minus destroyed elements counted from the mutation batches, since the real renderer has no element count. The numbers are only valid while the window is not occluded (a covered window gets no display link): the script retries a page that drew without presenting, and `--foreground` (focus-stealing) re-activates the window then; `--wait-visible s` sets how long it keeps trying. The addon must be a release build, which the script checks by size against cargo's artifacts. The frame loop is paced by the display (75 Hz here, 13.3 ms), so compare runs on the same machine and load.
 - **Footprint harness** (`pnpm footprint [slug...] --label x`, `apps/demo/scripts/footprint.tsx` and `apps/demo/scripts/footprint-child.tsx`; flags in the header). Idle CPU and memory per page, one fresh compiled child per page (`--source` runs it from source instead, so Bun's transpile cost lands in the numbers). Headless by default: the test renderer with an emulated 75 Hz display link, printing `cpu%`, `draws/s`, `patched/s` and `full/s` (draws gpuix made by patching the frame before them against frames built whole, from `getPatchCounters()`), `layouts/s`, `built/s`, `draw ms` (mean/p90 of the whole-frame draws) and `all draw ms` (the same over every draw, patched ones included), `js%` (CPU outside the native calls, approximate), `phys_footprint`, RSS, threads and JS heap, and `why` (the top two reasons for the whole frames, `Reason:count` from the `declines` and `unpatchable` maps the JSON keeps in full; the counters name no element, so `Outside` does not say which). `--window` opens a real 1280x780 window with the Electron comparison's protocol (footprint after a 10 s settle, CPU over a 30 s idle, footprint again). It reads occlusion from `GPUIX_PRESENT_LOG` and flags an occluded page, since a covered window gets no display link. `--tour` measures what a session leaves behind: one child visits every page through the app's `navigate` (`--tour-rounds n` times) and the footprint, with the retained element count, is read at every stop and after. Results go to `apps/demo/perf/footprint-<label>.json` (gitignored).
-- **Page-switch harness** (`bun apps/demo/scripts/perf-page-switch.tsx <slug[,slug...]> --away badge --visits 4`, headless; flags in its header). Mounts the app on the away page, clicks a sidebar row through the kit and splits the click into mount JS, first draw and later draws, then runs a 16 ms loop over the rest of the window. Prints one row per visit and the first visit against the repeats. One process per slug gives a cold first visit; compare only at a similar load average.
+- **Page-switch harness** (`bun scripts/perf-page-switch.tsx <slug[,slug...]> --away badge --visits 4` from `apps/demo`, headless; flags in its header). Mounts the app on the away page, clicks a sidebar row through the kit and splits the click into mount JS, first draw and later draws, then runs a 16 ms loop over the rest of the window. Prints one row per visit and the first visit against the repeats. One process per slug gives a cold first visit; compare only at a similar load average.
 
 - **Focus dimming.** gpuix dims every other focusable control while one has keyboard focus, so buttons, inputs and
   the tab and card wrappers set `keyboardFocusDim: false`.

@@ -17,7 +17,7 @@ the release-driven New dots):
 
 | Port file | Upstream |
 | --- | --- |
-| `apps/demo/content/changelog/2026-07.md`, `2026-08.md`, `2026-09.md` (verbatim copies) | `apps/demo/content/changelog/*` |
+| `apps/demo/content/changelog/2026-07.md`, `2026-08.md`, `2026-09.md` (verbatim copies) | `content/changelog/*` |
 | `apps/demo/src/lib/changelog/` (`parse`, `load`, `install`, `kind-style`, `migration-prompt`, `upgrade-prompt`) | `lib/changelog/*` (no `markdown.ts`: the port has no Markdown route) |
 | `apps/demo/src/lib/changelog/releases.ts` | `lib/changelog/marks.tsx` (the New / Updated marks, as the nav's New dots) |
 | `apps/demo/src/pages/changelog.tsx`, `apps/demo/src/pages/changelog/` | `app/changelog/page.tsx`, `changelog-view.tsx`, `previews.tsx` |
@@ -59,7 +59,7 @@ git clone https://github.com/mickadesign/fluid-functionalism ~/.claude/notes/ff-
 3. **Port each change** to the file the [map](#file-map) names, and update the `file:line` refs in its drift file.
    When the change touches a `registry/base/*` file, decide first where it lands: keys, selection, open state, focus
    and ARIA belong to the primitive in [`ghia-base-ui`](https://github.com/fdarian/ghia-base-ui) (port it there, with its own `UPSTREAM.md` procedure,
-   release it, bump the pin in `package.json`, and re-audit its rows in [BASE-UI-AUDIT.md](https://github.com/fdarian/ghia-base-ui/blob/main/BASE-UI-AUDIT.md)); styling, tokens, springs and fluid hover stay in `src/`.
+   release it, bump the pin in `apps/demo/package.json` and `packages/fluid-functionalism/package.json`, and re-audit its rows in [BASE-UI-AUDIT.md](https://github.com/fdarian/ghia-base-ui/blob/main/BASE-UI-AUDIT.md)); styling, tokens, springs and fluid hover stay in `packages/fluid-functionalism/src/`.
 4. **Move the pin.** Change the commit in the drift file's header (and the table above when the whole group moves).
    When no `0a0377e` is left, collapse this file to one pin.
 5. **Changelog.** `apps/demo/content/changelog/*.md` is copied verbatim: copy new months in as they land. The parser is a line
@@ -84,8 +84,8 @@ lands in the matching file on the right"; the drift file's `Original:` header na
 | `app/concepts/` | `apps/demo/src/pages/concepts*.tsx`, `apps/demo/src/pages/concepts/frame.tsx` |
 | `app/slider/page.tsx` | `apps/demo/src/pages/audio-mixer.tsx` |
 | `app/page.tsx`, `app/components/{bento-grid,bento-card,bento-previews}.tsx` | `apps/demo/src/home/`, and `Showcase` in `apps/demo/src/app.tsx` |
-| `app/changelog/`, `lib/changelog/`, `apps/demo/content/changelog/` | `apps/demo/src/pages/changelog*`, `apps/demo/src/lib/changelog/`, `apps/demo/content/changelog/` |
-| `app/layout.tsx`, `app/components/{sidebar-layout,right-panel,site-command-menu,playground-menu}.tsx`, `lib/docs/{DocPage,ComponentPreview,PropsTable,playground}.tsx` | `apps/demo/src/main.tsx`, `apps/demo/src/app.tsx`, `src/lib/{app-frame,doc-page,demo-kit,playground,site-command-menu,page-nav}.ts*` |
+| `app/changelog/`, `lib/changelog/`, `content/changelog/` | `apps/demo/src/pages/changelog*`, `apps/demo/src/lib/changelog/`, `apps/demo/content/changelog/` |
+| `app/layout.tsx`, `app/components/{sidebar-layout,right-panel,site-command-menu,playground-menu}.tsx`, `lib/docs/{DocPage,ComponentPreview,PropsTable,playground}.tsx` | `apps/demo/src/main.tsx`, `apps/demo/src/app.tsx`, `apps/demo/src/lib/{app-frame,doc-page,demo-kit,playground,site-command-menu,page-nav}.ts*` |
 | `app/globals.css`, `registry/default/lib/{springs,surface-classes,type-scale,font-weight}.ts`, `shape-context.tsx`, `size-context.tsx` | `packages/fluid-functionalism/src/lib/theme.ts` (tokens, springs, shadows) |
 | `registry/default/hooks/use-fluid-hover.ts`, `registry/default/fluid-hover-highlight.tsx` | `packages/fluid-functionalism/src/lib/fluid-hover.ts`, `packages/fluid-functionalism/src/lib/fluid-highlight.tsx` |
 | `registry/default/lib/{popup.ts,surface-context.tsx,elevated.tsx}` | `packages/fluid-functionalism/src/lib/{popup,surface-context}.ts*` (the chrome; placement is `base-ui:src/internals/use-anchor-positioning.ts`) |
@@ -103,7 +103,7 @@ Install is a copy prompt (`apps/demo/src/lib/install-url.ts`, `apps/demo/src/lib
 
 ## Base UI primitives
 
-Upstream's `registry/base/*` builds on `@base-ui/react` 1.9.0. Here the same components consume `ghia-base-ui` (npm, pinned in `package.json`),
+Upstream's `registry/base/*` builds on `@base-ui/react` 1.9.0. Here the same components consume `ghia-base-ui` (npm, pinned in `apps/demo/package.json` and `packages/fluid-functionalism/package.json`),
 headless Solid primitives from [fdarian/ghia-base-ui](https://github.com/fdarian/ghia-base-ui), whose own `UPSTREAM.md` pins and syncs Base UI. A Base UI behaviour change is ported there, not here; this repository
 tracks how FF uses a primitive and what it styles on top, which
 [BASE-UI-AUDIT.md](https://github.com/fdarian/ghia-base-ui/blob/main/BASE-UI-AUDIT.md) records row by row. In the file map above, a `base-ui:src/...`

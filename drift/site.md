@@ -168,7 +168,7 @@ One entry per place the port looks or behaves differently from the source, whate
 
 - **Cause:** `not ported yet`.
 - **Original:** bare `T` cycles System -> Light -> Dark (not in inputs, no modifier); `R`, `S`, `I` do the same for Radius, Size, Icons. Each row has a tooltip "Press T to cycle" etc. (`registry/default/lib/theme-context.tsx:71-83`, `app/components/right-panel.tsx:169-242`). A sonner toast with the key as an inverted chip announces each shortcut change, and the menu's picks toast "Theme set to Dark" (`lib/docs/settings-toast.tsx`).
-- **Port:** the four selects only (`apps/demo/src/app.tsx:432-520`); there is no toast component in `src/`.
+- **Port:** the four selects only (`apps/demo/src/app.tsx:432-520`); there is no toast component in the port.
 - **Workaround:** none.
 - **Fidelity:** dropped.
 - **Components it hits:** just the shell.
