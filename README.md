@@ -29,6 +29,10 @@ Apple Silicon macOS only. The first run downloads the app (about 56 MB) from the
 caches it under `~/Library/Caches/ghia-fluid-functionalism/`; later runs start from the cache.
 `GHIA_FLUID_FUNCTIONALISM_BINARY_PATH` runs a binary you built yourself instead.
 
+The same package ships the styled Solid components as a library (`ghia-fluid-functionalism/button`, `/theme`, ...), compiled
+to `@ghia/solid` universal output with type declarations; [packages/fluid-functionalism/README.md](packages/fluid-functionalism/README.md)
+has the install line and an import example.
+
 To work on the code, you need Bun and pnpm. The repository is a pnpm workspace: the components are the library
 `packages/fluid-functionalism` (published as `ghia-fluid-functionalism`), the app that shows them is `apps/demo`, and the
 root scripts forward to the demo. The renderer and the primitives come from npm (`@ghia/solid`, `@ghia/native`,
@@ -65,7 +69,7 @@ Scripts that run with `bun` start from `apps/demo`, which holds the `bunfig.toml
 <details>
 <summary>Pinned packages</summary>
 
-- **`@ghia/solid` 0.11.1 and `@ghia/native` 0.11.1** (ghia `730f77f1`), exact versions in `apps/demo/package.json` (the library lists `@ghia/solid`, `solid-js` and `ghia-base-ui` as devDependencies at the same versions). `@ghia/solid` ships compiled `dist/` with the `preload` and
+- **`@ghia/solid` 0.11.1 and `@ghia/native` 0.11.1** (ghia `730f77f1`), exact versions in `apps/demo/package.json` (the library lists `@ghia/solid` and `solid-js` as peer and dev dependencies and `ghia-base-ui` as a dependency, at the same versions). `@ghia/solid` ships compiled `dist/` with the `preload` and
   `bun-plugin` entries; `@ghia/native` ships the darwin-arm64 `.node` addon and both its ESM and CJS entries. The
   highlights and popups use `@ghia/solid`'s native `motion` springs, and the table, `inline-*`, container query, `has*`
   and `fit-content` layouts, and the variable-font weights, `outlineStyle`, `textWrap`, `textBox` trim and `calc()`
@@ -124,10 +128,12 @@ The binary reads nothing from the repository, so each kind of runtime input has 
 ## Releasing
 
 `pnpm changeset` describes a change; merge the "Version Packages" PR it produces. `.github/workflows/release.yml` then
-runs `ci:release` from the root: the library's `build` (tsdown compiles the `packages/fluid-functionalism/src/cli.ts` shim into `packages/fluid-functionalism/dist/cli.js`), the demo's
+runs `ci:release` from the root: the library's `build` (tsdown, `packages/fluid-functionalism/tsdown.config.ts`, compiles one entry per library `exports` key into `packages/fluid-functionalism/dist/components/` and `dist/lib/` with `.d.ts`, and the `src/cli.ts` shim into `dist/cli.js`), the demo's
 `release:binary` (`apps/demo/scripts/release-binary.ts` compiles and signs the binary, writes `apps/demo/dist/releases/*.tar.gz` and the sha256 in
-`packages/fluid-functionalism/dist/checksums.json`), then `changeset publish` puts the shim on npm. The workflow uploads the tarball
-to the `ghia-fluid-functionalism@<version>` GitHub Release.
+`packages/fluid-functionalism/dist/checksums.json`), then `changeset publish` puts `dist/` (the library and the shim) on npm. The workflow uploads the tarball
+to the `ghia-fluid-functionalism@<version>` GitHub Release. npm authenticates the workflow by OIDC trusted publishing
+(`id-token: write`, no token secret), so the package's trusted publisher on npmjs.com must name
+`fdarian/ghia-fluid-functionalism` and `release.yml`. `prepublishOnly` refuses a publish outside CI.
 
 ## Adding a component
 

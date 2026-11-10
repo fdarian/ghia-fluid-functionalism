@@ -185,8 +185,8 @@ importers:
         specifier: 0.11.1
         version: 0.11.1(solid-js@1.9.15)
       ghia-base-ui:
-        specifier: 0.1.0
-        version: 0.1.0(@ghia/solid@0.11.1(solid-js@1.9.15))(solid-js@1.9.15)
+        specifier: 0.1.1
+        version: 0.1.1(@ghia/solid@0.11.1(solid-js@1.9.15))(solid-js@1.9.15)
       ghia-fluid-functionalism:
         specifier: workspace:*
         version: link:../../packages/fluid-functionalism
@@ -205,6 +205,10 @@ importers:
         version: 7.0.2
 
   packages/fluid-functionalism:
+    dependencies:
+      ghia-base-ui:
+        specifier: 0.1.1
+        version: 0.1.1(@ghia/solid@0.11.1(solid-js@1.9.15))(solid-js@1.9.15)
     devDependencies:
       '@ghia/solid':
         specifier: 0.11.1
@@ -215,9 +219,9 @@ importers:
       '@types/bun':
         specifier: 1.4.4
         version: 1.4.4
-      ghia-base-ui:
-        specifier: 0.1.0
-        version: 0.1.0(@ghia/solid@0.11.1(solid-js@1.9.15))(solid-js@1.9.15)
+      rolldown-plugin-solid:
+        specifier: 0.2.1
+        version: 0.2.1(rolldown@1.2.16)(solid-js@1.9.15)
       solid-js:
         specifier: 1.9.15
         version: 1.9.15
@@ -941,8 +945,8 @@ packages:
     resolution: {integrity: sha512-X6fBC0pmImC70gvX2zm56go9hx0MyoGVdG0tUCkg/D+Xnh5TJsOZ7iDbOdI3PvmtrDxnu1YdDufpK2QJX1Meqw==}
     engines: {node: '>=20.20.0'}
 
-  ghia-base-ui@0.1.0:
-    resolution: {integrity: sha512-NkABgNrFd9M3KgGm0DIVyU42KlYqCkfVRtv4la/ZgY1IV7/N5RJU06NpnRcj9m3bA3gprTqtj8txsMuExjnO/A==}
+  ghia-base-ui@0.1.1:
+    resolution: {integrity: sha512-CrgIv7pTIsSGY2/w+sU6kiXXIQkXY2HuFDowMRAfp2lETGGIFXszc5MP7/7n9DVH6VusjNNACH68cgKPqwpx8A==}
     peerDependencies:
       '@ghia/solid': '*'
       solid-js: 1.9.15
@@ -1040,6 +1044,13 @@ packages:
         optional: true
       vue-tsc:
         optional: true
+
+  rolldown-plugin-solid@0.2.1:
+    resolution: {integrity: sha512-vRMsRf4psuWEXZbx+pwp1UYg0YrC9PWPrjGXwFLkVZPtH08sFSMhZpLwMUaLcKoqUvoWlvCPhbFDeSks7os6qQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      rolldown: '>=0.15.0'
+      solid-js: '>=1.8.0'
 
   rolldown@1.2.16:
     resolution: {integrity: sha512-bWvlMpFKiTfDKfnK7FC2MPgPeWCf/Kpwsq49ApdW+FQaBZb6O6dZ4MAPbPUjp7hYQrw/RobqCzn64BRrQecGHw==}
@@ -1806,7 +1817,7 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
-  ghia-base-ui@0.1.0(@ghia/solid@0.11.1(solid-js@1.9.15))(solid-js@1.9.15):
+  ghia-base-ui@0.1.1(@ghia/solid@0.11.1(solid-js@1.9.15))(solid-js@1.9.15):
     dependencies:
       '@ghia/solid': 0.11.1(solid-js@1.9.15)
       solid-js: 1.9.15
@@ -1872,6 +1883,16 @@ snapshots:
     transitivePeerDependencies:
       - '@yuku-toolchain/wasm'
       - oxc-resolver
+
+  rolldown-plugin-solid@0.2.1(rolldown@1.2.16)(solid-js@1.9.15):
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/preset-typescript': 7.29.7(@babel/core@7.29.7)
+      babel-preset-solid: 1.9.15(@babel/core@7.29.7)(solid-js@1.9.15)
+      rolldown: 1.2.16
+      solid-js: 1.9.15
+    transitivePeerDependencies:
+      - supports-color
 
   rolldown@1.2.16:
     dependencies:
