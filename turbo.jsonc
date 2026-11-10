@@ -1,0 +1,8 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"tasks": {
+		"check:type": {},
+		"check:scenarios": { "cache": false },
+		"check": { "dependsOn": ["check:type", "check:scenarios"] }
+	}
+}

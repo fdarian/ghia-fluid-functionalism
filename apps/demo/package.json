@@ -1,0 +1,32 @@
+{
+	"name": "ghia-fluid-functionalism-demo",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"imports": {
+		"#src/*": "./src/*"
+	},
+	"scripts": {
+		"start": "bun --hot src/main.tsx",
+		"build": "bun scripts/build.ts",
+		"release:binary": "bun scripts/release-binary.ts",
+		"check:type": "tsc",
+		"check:scenarios": "bun scripts/run-scenarios.ts",
+		"check:single-instance": "bun scripts/check-single-instance.ts",
+		"screenshots": "bun scripts/run-screenshots.ts",
+		"perf": "bun scripts/perf.tsx",
+		"footprint": "bun scripts/footprint.tsx"
+	},
+	"dependencies": {
+		"@ghia/native": "0.11.1",
+		"@ghia/solid": "0.11.1",
+		"ghia-base-ui": "0.1.0",
+		"ghia-fluid-functionalism": "workspace:*",
+		"solid-js": "1.9.15"
+	},
+	"devDependencies": {
+		"@total-typescript/tsconfig": "1.0.4",
+		"@types/bun": "1.4.4",
+		"typescript": "7.0.2"
+	}
+}

@@ -1,48 +1,23 @@
 {
-	"name": "ghia-fluid-functionalism",
-	"version": "0.0.0",
-	"type": "module",
-	"description": "Fluid Functionalism's components, demos and pages drawn natively on ghia (Solid on GPUI), run with npx.",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/fdarian/ghia-fluid-functionalism.git"
-	},
-	"license": "MIT",
+	"name": "ghia-fluid-functionalism-workspace",
+	"private": true,
 	"packageManager": "pnpm@12.16.1",
 	"scripts": {
-		"start": "bun --hot src/main.tsx",
-		"build": "bun scripts/build.ts",
-		"check": "pnpm check:type && pnpm check:scenarios",
-		"check:type": "tsc",
-		"check:scenarios": "bun scripts/run-scenarios.ts",
-		"screenshots": "bun scripts/run-screenshots.ts",
-		"perf": "bun scripts/perf.tsx",
-		"footprint": "bun scripts/footprint.tsx",
+		"start": "pnpm --filter ghia-fluid-functionalism-demo start",
+		"build": "pnpm --filter ghia-fluid-functionalism-demo build",
+		"check": "turbo run check",
+		"check:type": "turbo run check:type",
+		"check:scenarios": "turbo run check:scenarios",
+		"screenshots": "pnpm --filter ghia-fluid-functionalism-demo screenshots",
+		"perf": "pnpm --filter ghia-fluid-functionalism-demo perf",
+		"footprint": "pnpm --filter ghia-fluid-functionalism-demo footprint",
 		"format": "biome check --write",
 		"ci:version": "changeset version",
-		"ci:release": "bun scripts/release-build.ts && changeset publish"
-	},
-	"files": [
-		"dist/cli.js",
-		"dist/checksums.json",
-		"README.md",
-		"LICENSE",
-		"THIRD_PARTY_NOTICES.md"
-	],
-	"publishConfig": {
-		"bin": {
-			"ghia-fluid-functionalism": "./dist/cli.js"
-		}
+		"ci:release": "pnpm --filter ghia-fluid-functionalism build && pnpm --filter ghia-fluid-functionalism-demo release:binary && changeset publish"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "latest",
+		"@biomejs/biome": "2.6.4",
 		"@changesets/cli": "3.0.3",
-		"@ghia/native": "0.11.1",
-		"@ghia/solid": "0.11.1",
-		"@total-typescript/tsconfig": "latest",
-		"@types/bun": "^1.4.2",
-		"ghia-base-ui": "0.1.0",
-		"solid-js": "1.9.15",
-		"typescript": "^7.0.2"
+		"turbo": "2.11.10"
 	}
 }
