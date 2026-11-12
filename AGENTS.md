@@ -2,7 +2,7 @@ Solid workspace that draws the [Fluid Functionalism](https://fluidfunctionalism.
 
 ## Layout
 
-- [`packages/fluid-functionalism/`](packages/fluid-functionalism/AGENTS.md) — the library, `ghia-fluid-functionalism` on npm: the ported components, the styling tokens and the fluid hover. Workspace consumers import its TS source; the published package only ships the `npx` shim.
+- [`packages/fluid-functionalism/`](packages/fluid-functionalism/AGENTS.md) — the library, `ghia-fluid-functionalism` on npm: the ported components, the styling tokens and the fluid hover. Workspace consumers import its TS source; the published package ships compiled `dist/` (the same exports as Solid universal output plus `.d.ts`) and the `npx` shim.
 - [`apps/demo/`](apps/demo/AGENTS.md) — private native-window app with every demo and page of the source site, plus the check, screenshot and perf scripts. `release:binary` compiles it into the binary the shim downloads.
 - `drift/` — one markdown file per component or page listing every place the port differs from the source, with a Cause. [`drift/_TEMPLATE.md`](drift/_TEMPLATE.md) is the shape; README's table counts the entries.
 - `UPSTREAM.md`, `.changeset/`, `.github/`, `biome.jsonc`, `turbo.jsonc` — upstream pins and the sync procedure, release notes, CI, lint and task config.
@@ -21,11 +21,11 @@ All from the repo root; the demo scripts are forwarded to `apps/demo`, so `bun` 
 - `pnpm check:scenarios` takes about 30 minutes, so run `cd apps/demo && bun scripts/check-<component>.tsx` for the component you touched and `pnpm check` before merging.
 - `pnpm screenshots [slug]`, `pnpm perf [slug...] --label x`, `pnpm footprint [slug...] --label x`, `pnpm build` — forwarded to the demo.
 - `pnpm format` — Biome.
-- `pnpm changeset` — describe a change; merging the Version Packages PR runs `.github/workflows/release.yml`. `ci:release` (library `build`, demo `release:binary`, then `changeset publish`) writes `packages/fluid-functionalism/dist/cli.js` and `dist/checksums.json` and `apps/demo/dist/releases/*.tar.gz`; run it only in CI. `ci.yml` runs `check:single-instance` in the demo.
+- `pnpm changeset` — describe a change; merging the Version Packages PR runs `.github/workflows/release.yml`. `ci:release` (library `build`, demo `release:binary`, then `changeset publish`) writes `packages/fluid-functionalism/dist/` (library, `cli.js`, `checksums.json`) and `apps/demo/dist/releases/*.tar.gz`; run it only in CI, `prepublishOnly` refuses a local publish. `ci.yml` runs `check:type` and `check:single-instance` in the demo.
 
 ## Rules
 
-- `@ghia/solid`, `@ghia/native` and `ghia-base-ui` are pinned to exact versions, the same in each `package.json` that lists them. `ghia-base-ui` peer-depends on `@ghia/solid` and `solid-js`; a second copy of either gives two renderers or reactive graphs and silent breakage. `apps/demo/scripts/check-single-instance.ts` catches it for the demo and for the library.
+- `@ghia/solid`, `@ghia/native` and `ghia-base-ui` are pinned to exact versions, the same in each `package.json` that lists them (the library lists `ghia-base-ui` as a dependency and `@ghia/solid`, `solid-js` as peers, which consumers install once). `ghia-base-ui` peer-depends on `@ghia/solid` and `solid-js`; a second copy of either gives two renderers or reactive graphs and silent breakage. `apps/demo/scripts/check-single-instance.ts` catches it for the demo and for the library.
 - A behaviour change (keys, selection, ARIA, open state, typeahead, presence) goes into the primitive in `ghia-base-ui`, not into a component here (release it, then bump the pins). A look change (tokens, motion, fluid hover) stays here. Its `BASE-UI-AUDIT.md` (in the repo, not the npm package) records where the primitives differ from Base UI.
 - A component adds `packages/fluid-functionalism/src/components/<name>.tsx`, `apps/demo/src/demos/<name>.tsx` and `drift/<name>.md` and edits no shared file: the library's `./*` export covers the new component, and the demo finds its demo file by itself. Whenever code the drift file cites moves, its `file:line` refs move with it. Refs are repo-root-relative (`packages/fluid-functionalism/src/components/button.tsx:307-308`); refs into the primitives read `base-ui:src/<path>:lines`.
 - gpuix cannot do some things the source does (selector `:has(.x)` and group-has, `var()` in a Motion key, a `layoutId` crossfade). Record the approximation in the drift file and link the README gap row; do not paper over it.

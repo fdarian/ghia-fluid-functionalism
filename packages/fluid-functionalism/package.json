@@ -2,7 +2,7 @@
 	"name": "ghia-fluid-functionalism",
 	"version": "0.0.0",
 	"type": "module",
-	"description": "Fluid Functionalism's components, demos and pages drawn natively on ghia (Solid on GPUI), run with npx.",
+	"description": "Fluid Functionalism's components as a Solid library on ghia, plus an npx shim that opens the demo app natively on Apple Silicon macOS.",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/fdarian/ghia-fluid-functionalism.git",
@@ -28,11 +28,11 @@
 	},
 	"scripts": {
 		"build": "tsdown",
-		"check:type": "tsc"
+		"check:type": "tsc",
+		"prepublishOnly": "node -e \"if (!process.env.CI) { console.error('Never publish ghia-fluid-functionalism locally. CI is the only release path.'); process.exit(1) }\""
 	},
 	"files": [
-		"dist/cli.js",
-		"dist/checksums.json",
+		"dist",
 		"README.md",
 		"LICENSE",
 		"THIRD_PARTY_NOTICES.md"
@@ -40,13 +40,72 @@
 	"publishConfig": {
 		"bin": {
 			"ghia-fluid-functionalism": "./dist/cli.js"
+		},
+		"access": "public",
+		"exports": {
+			"./*": {
+				"types": "./dist/components/*.d.ts",
+				"import": "./dist/components/*.js"
+			},
+			"./color-picker-math": {
+				"types": "./dist/components/color-picker-math.d.ts",
+				"import": "./dist/components/color-picker-math.js"
+			},
+			"./theme": {
+				"types": "./dist/lib/theme.d.ts",
+				"import": "./dist/lib/theme.js"
+			},
+			"./icon": {
+				"types": "./dist/lib/icon.d.ts",
+				"import": "./dist/lib/icon.js"
+			},
+			"./icons": {
+				"types": "./dist/lib/icons.d.ts",
+				"import": "./dist/lib/icons.js"
+			},
+			"./icons/*": {
+				"types": "./dist/lib/icons/*.d.ts",
+				"import": "./dist/lib/icons/*.js"
+			},
+			"./fluid-hover": {
+				"types": "./dist/lib/fluid-hover.d.ts",
+				"import": "./dist/lib/fluid-hover.js"
+			},
+			"./fluid-highlight": {
+				"types": "./dist/lib/fluid-highlight.d.ts",
+				"import": "./dist/lib/fluid-highlight.js"
+			},
+			"./stable-label": {
+				"types": "./dist/lib/stable-label.d.ts",
+				"import": "./dist/lib/stable-label.js"
+			},
+			"./measured-height": {
+				"types": "./dist/lib/measured-height.d.ts",
+				"import": "./dist/lib/measured-height.js"
+			},
+			"./cull": {
+				"types": "./dist/lib/cull.d.ts",
+				"import": "./dist/lib/cull.js"
+			},
+			"./platform": {
+				"types": "./dist/lib/platform.d.ts",
+				"import": "./dist/lib/platform.js"
+			}
 		}
+	},
+	"dependencies": {
+		"ghia-base-ui": "0.1.1"
+	},
+	"peerDependencies": {
+		"@ghia/solid": "0.11.1",
+		"solid-js": "1.9.15"
 	},
 	"devDependencies": {
 		"@ghia/solid": "0.11.1",
 		"@total-typescript/tsconfig": "1.0.4",
 		"@types/bun": "1.4.4",
-		"ghia-base-ui": "0.1.0",
+		"ghia-base-ui": "0.1.1",
+		"rolldown-plugin-solid": "0.2.1",
 		"solid-js": "1.9.15",
 		"tsdown": "0.23.5",
 		"typescript": "7.0.2"
