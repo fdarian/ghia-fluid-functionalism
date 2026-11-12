@@ -1,0 +1,274 @@
+import { createReducedMotion, type HostElement, motion } from '@ghia/solid';
+import { createCulling, OnScreenContext } from 'ghia-fluid-functionalism/cull';
+import {
+	color,
+	linePx,
+	siteType,
+	motion as tween,
+	weight,
+} from 'ghia-fluid-functionalism/theme';
+import { type Accessor, For, type JSX, Show } from 'solid-js';
+import { monthLabel } from '#src/lib/changelog/migration-prompt.ts';
+import {
+	type ChangeGroup,
+	type Inline,
+	KIND_LABEL,
+	type Release,
+} from '#src/lib/changelog/parse.ts';
+import { Entry, InlineProse } from './entry';
+import { activeMonth } from './release-spy';
+
+/** Where a month's dot sits from the top of its block: the middle of the title line. */
+const DOT_Y = () => linePx(siteType.title.lineHeight) / 2;
+/** Below the divider: 64px + 1px + 64px, then the title line. */
+const DOT_Y_DIVIDED = () => 129 + linePx(siteType.title.lineHeight) / 2;
+const DOT_SIZE = 5;
+/** The month in view grows a step, on the same spring as the Releases fill in the rail. */
+const ACTIVE_DOT_SCALE = 1.3;
+const DOT_RING = 3;
+
+function releasedLabel(day: string): string {
+	return new Date(
+		Date.UTC(
+			Number(day.slice(0, 4)),
+			Number(day.slice(5, 7)) - 1,
+			Number(day.slice(8)),
+		),
+	).toLocaleDateString('en-US', {
+		month: 'short',
+		day: 'numeric',
+		timeZone: 'UTC',
+	});
+}
+
+/**
+ * A dot on each month's heading, joined by one line down the 24px gutter.
+ * Each month draws its own stretch of the line: the first starts at its dot,
+ * and the last runs on to the end of the page.
+ */
+function TimelineMark(props: {
+	month: string;
+	first: boolean;
+	active: boolean;
+}) {
+	const reduced = createReducedMotion();
+	const dotY = () => (props.first ? DOT_Y() : DOT_Y_DIVIDED());
+	return (
+		<>
+			<div
+				style={{
+					position: 'absolute',
+					left: 2,
+					top: props.first ? dotY() : 0,
+					bottom: 0,
+					width: 1,
+					backgroundColor: color.border,
+				}}
+			/>
+			<motion.div
+				testId={`changelog-dot-${props.month}`}
+				style={{
+					position: 'absolute',
+					left: 0,
+					top: dotY(),
+					width: DOT_SIZE,
+					height: DOT_SIZE,
+					borderRadius: DOT_SIZE / 2,
+					translate: '0 -50%',
+					backgroundColor: color.foreground,
+					boxShadow: {
+						offsetX: 0,
+						offsetY: 0,
+						blurRadius: 0,
+						spreadRadius: DOT_RING,
+						color: color.background,
+					},
+				}}
+				initial={false}
+				animate={{ scale: props.active ? ACTIVE_DOT_SCALE : 1 }}
+				transition={reduced() ? tween.snap : tween.moderate}
+			/>
+		</>
+	);
+}
+
+function MonthHeading(props: { release: Release }) {
+	return (
+		<div
+			testId={`changelog-heading-${props.release.month}`}
+			style={{
+				display: 'flex',
+				flexDirection: 'row',
+				alignItems: 'center',
+				justifyContent: 'space-between',
+			}}
+		>
+			<text
+				style={{
+					...siteType.title,
+					fontVariationSettings: weight.semibold,
+					color: color.foreground,
+				}}
+			>
+				{monthLabel(props.release.month)}
+			</text>
+			<Show when={props.release.released}>
+				{(released: Accessor<string>) => (
+					<text
+						style={{
+							...siteType.caption,
+							fontVariantNumeric: 'tabular-nums',
+							color: color.mutedForeground,
+						}}
+					>
+						{`Released ${releasedLabel(released())}`}
+					</text>
+				)}
+			</Show>
+		</div>
+	);
+}
+
+/**
+ * A hairline above every group, the first included, so it also closes the
+ * month's header: 40px on each side. The group is the unit hidden while far
+ * from the page scroller (`createCulling`), so a month costs only the groups
+ * near the viewport. It keeps its height, and the month's block, which the
+ * spy reads, keeps its top.
+ */
+function KindGroup(props: { group: ChangeGroup; month: string }): JSX.Element {
+	const culling = createCulling();
+	return (
+		<div
+			ref={culling.ref}
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				paddingTop: 40,
+				...culling.style(),
+			}}
+		>
+			<OnScreenContext.Provider value={culling.onScreen}>
+				<div
+					style={{ height: 1, flexShrink: 0, backgroundColor: color.border }}
+				/>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						alignItems: 'baseline',
+						gap: 8,
+						paddingTop: 40,
+					}}
+				>
+					<text
+						style={{
+							...siteType.subtitle,
+							fontVariationSettings: weight.semibold,
+							color: color.foreground,
+						}}
+					>
+						{KIND_LABEL[props.group.kind]}
+					</text>
+					<text
+						style={{
+							...siteType.caption,
+							fontVariationSettings: weight.normal,
+							fontVariantNumeric: 'tabular-nums',
+							color: color.mutedForeground,
+						}}
+					>
+						{String(props.group.entries.length)}
+					</text>
+				</div>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						marginTop: 8,
+					}}
+				>
+					<For each={props.group.entries}>
+						{(entry, index) => (
+							<Entry
+								id={`${props.month}-${props.group.kind}-${index()}`}
+								entry={entry}
+								month={props.month}
+								first={index() === 0}
+							/>
+						)}
+					</For>
+				</div>
+			</OnScreenContext.Provider>
+		</div>
+	);
+}
+
+/** One month of the changelog, with its stretch of the timeline in the 24px gutter to its left. */
+export function ReleaseSection(props: {
+	release: Release;
+	first: boolean;
+	/** Hands the month's block to the scroll-spy. */
+	sectionRef: (element: HostElement) => void;
+}) {
+	return (
+		<div
+			style={{
+				position: 'relative',
+				display: 'flex',
+				flexDirection: 'column',
+				paddingLeft: 24,
+			}}
+		>
+			<TimelineMark
+				month={props.release.month}
+				first={props.first}
+				active={activeMonth() === props.release.month}
+			/>
+			{/* A hairline between months, 64px on each side. -22px reaches back across the gutter to the timeline's line at 2px, so it branches off it. */}
+			<Show when={!props.first}>
+				<div style={{ paddingTop: 64 }}>
+					<div
+						style={{
+							height: 1,
+							marginLeft: -22,
+							backgroundColor: color.border,
+						}}
+					/>
+				</div>
+			</Show>
+			<div
+				ref={props.sectionRef}
+				testId={`changelog-${props.release.month}`}
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					paddingTop: props.first ? 0 : 64,
+				}}
+			>
+				<MonthHeading release={props.release} />
+				<div style={{ marginTop: 8 }}>
+					<text
+						style={{
+							...siteType.subtitle,
+							fontVariationSettings: weight.semibold,
+							color: color.foreground,
+						}}
+					>
+						{props.release.title}
+					</text>
+				</div>
+				<Show when={props.release.intro}>
+					{(intro: Accessor<Inline[]>) => (
+						<div style={{ marginTop: 8 }}>
+							<InlineProse inline={intro()} />
+						</div>
+					)}
+				</Show>
+				<For each={props.release.groups}>
+					{(group) => <KindGroup group={group} month={props.release.month} />}
+				</For>
+			</div>
+		</div>
+	);
+}

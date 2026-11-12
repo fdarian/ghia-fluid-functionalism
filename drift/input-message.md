@@ -1,8 +1,8 @@
 # input-message
 
 Original: `registry/default/input-message.tsx`, demo in `app/docs/input-message/` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/input-message.tsx`,
-demo in `src/demos/input-message.tsx`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/input-message.tsx`,
+demo in `apps/demo/src/demos/input-message.tsx`.
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps
 (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of
@@ -36,7 +36,7 @@ repeating it.
 - **Original:** `File[]`, identity `name-size-lastModified`, type from the browser (`input-message.tsx:946-967`).
 - **Workaround:** `ComposerFile { path, name, type }`, identity is the path, and the type comes from a ten-entry extension table; anything else is `application/octet-stream` and fails the default `accept` (`input-message.tsx:43-103`). `onSend`, `files` and `QueuedMessage.files` carry `ComposerFile`.
 - **Fidelity:** approximated.
-- **Components it hits:** any component taking a `File`; the demo maps `ComposerFile` to chat-message's `{ name, type, src }` by hand (`src/lib/composer-stage.tsx:39-43`).
+- **Components it hits:** any component taking a `File`; the demo maps `ComposerFile` to chat-message's `{ name, type, src }` by hand (`apps/demo/src/lib/composer-stage.tsx:42-46`).
 
 ## The file picker is not filtered by `accept`
 
@@ -69,7 +69,7 @@ repeating it.
 
 - **Cause:** `gpuix gap`, as the port's comment states (`input-message.tsx:825-826`). Unverified here: `ghia:docs/fork/events-and-input.md:113` says a text editor's `keydown` runs before its built-in action. No README row covers it.
 - **Original:** plain ArrowUp / ArrowDown drive the suggestion list and history (`input-message.tsx:788-889`).
-- **Port:** the same handler also accepts Ctrl-P / Ctrl-N (`input-message.tsx:812-836`), and the demo's scenarios use `ctrl-n` / `ctrl-p` (`src/demos/input-message.tsx:646,764`). If the arrows really are swallowed, the keyboard path in the real window is Ctrl-P / Ctrl-N only.
+- **Port:** the same handler also accepts Ctrl-P / Ctrl-N (`input-message.tsx:812-836`), and the demo's scenarios use `ctrl-n` / `ctrl-p` (`apps/demo/src/demos/input-message.tsx:646,764`). If the arrows really are swallowed, the keyboard path in the real window is Ctrl-P / Ctrl-N only.
 - **Fidelity:** approximated.
 
 ## Slot buttons are not scaled down in compact
@@ -122,7 +122,7 @@ repeating it.
 
 - **Cause:** `port choice` for the shape (the demo is a showcase card, not a docs page; reason not stated beyond that); `not ported yet` for what is missing.
 - **Original:** `app/docs/input-message/page.tsx`: Playground (toggles for placeholder suggestion, prompts, history, attachments, min rows, disabled, slots, queue status), Basic, Suggestions, Attachments (composer floating over a scrolling transcript, pre-filled, a Reset button), Queued messages (`queued-chat-demo.tsx`: a pausable streaming reply, `showQueue={false}` with the `QueuedStack` above the composer, the queued-to-sent morph, a `rich` variant with an attach dropdown and a model picker, Reset), Left Slot Only, Right Slot Only, Send Handler (no history), Disabled (text "This composer is disabled"), then a props table. Each has a `ComponentPreview` with code.
-- **Port:** Playground (every control and the shuffle; `src/demos/input-message.tsx`), Basic, Suggestions, Attachments (pre-filled, a transcript that scrolls under the composer and stays pinned to its end, Reset), Queued messages (`src/lib/queued-chat.tsx`: pausable stream, the stack over the composer with `showQueue={false}`, Reset), the same with the rich attach menu and model picker, a built-in-rows queue card, both slots in one card, Send handler (with `history` added), Disabled (empty value) with Compact. Missing: code snippets, props table. Extras: history, compact, the built-in-rows card.
+- **Port:** Playground (every control and the shuffle; `apps/demo/src/demos/input-message.tsx`), Basic, Suggestions, Attachments (pre-filled, a transcript that scrolls under the composer and stays pinned to its end, Reset), Queued messages (`apps/demo/src/lib/queued-chat.tsx`: pausable stream, the stack over the composer with `showQueue={false}`, Reset), the same with the rich attach menu and model picker, a built-in-rows queue card, both slots in one card, Send handler (with `history` added), Disabled (empty value) with Compact. Missing: code snippets, props table. Extras: history, compact, the built-in-rows card.
 - **Fidelity:** every source section has a port counterpart.
 
 ## Playground: what differs
@@ -136,14 +136,14 @@ repeating it.
 
 - **Cause:** `gpuix gap` (the morph has no crossfade and starts where a scroll shifts it, see `drift/queued-stack.md` "Shared-layout morph into the sent bubble"; queue types); `not ported yet` (menu placement, edit focus).
 - **Original:** the front card morphs into its sent bubble (`morphLayoutId` on the stack and `layoutId` on `ChatMessage`; the shared layout fades the bubble in over the card); the attach and model menus open above their buttons (`bottom-full`); the buttons are lit while their menu is open (`active`) and wrapped in tooltips; editing a card puts the caret at the end of the composer.
-- **Port:** the morph, without the crossfade and with a start that a scroll shifts (`drift/queued-stack.md`): `ComposerQueueStack` takes `morph`, the `Transcript` a `morphingId`, and `ChatMessage` a `morphId` (the source spreads `layoutId`, `layout`, `initial` and `transition` onto it).  `DropdownContent` has no side prop, so the menus open below the composer's slot buttons. `Button` has no `active` prop. Edit refills the composer but does not focus it: `InputMessage` has no ref and gpuix has no way to find its textarea from outside. The composer's `QueuedMessage` carries `ComposerFile`s and the stack's carries `FileLike`s, so `ComposerQueueStack` (`src/lib/composer-stage.tsx`) maps between them, caching one mapped object per message because the stack keys its cards by identity.
+- **Port:** the morph, without the crossfade and with a start that a scroll shifts (`drift/queued-stack.md`): `ComposerQueueStack` takes `morph`, the `Transcript` a `morphingId`, and `ChatMessage` a `morphId` (the source spreads `layoutId`, `layout`, `initial` and `transition` onto it).  `DropdownContent` has no side prop, so the menus open below the composer's slot buttons. `Button` has no `active` prop. Edit refills the composer but does not focus it: `InputMessage` has no ref and gpuix has no way to find its textarea from outside. The composer's `QueuedMessage` carries `ComposerFile`s and the stack's carries `FileLike`s, so `ComposerQueueStack` (`apps/demo/src/lib/composer-stage.tsx`) maps between them, caching one mapped object per message because the stack keys its cards by identity.
 - **Fidelity:** approximated.
 
 ## Sample photo: a different picture, named avatar.jpg
 
 - **Cause:** `port choice` (the repository owner chose not to ship the source's photo).
 - **Original:** the source's `public/micka.png` (918x928 PNG), fetched and attached as a `File` named `micka.png` with type `image/png` (`app/docs/input-message/page.tsx:70-72`, `:604-606`) or `blob.type || "image/png"` in the playground (`lib/docs/playgrounds/input-message.tsx:252-254`).
-- **Port:** `assets/chat-ai/avatar.jpg` (345x345 JPEG, `AVATAR_JPG` in `src/lib/assets.ts`), a `ComposerFile` by path with its `name` set to `avatar.jpg` and its type read from the extension, `image/jpeg` (`src/demos/input-message.tsx:40-43`, used at `:113` and `:325`; the queued chat's `PHOTO` is the same file, `src/lib/queued-chat.tsx:35`). The name only surfaces in the tile's `alt` and `aria-label` and the remove badge's label (`src/components/file-thumbnail.tsx:129`, `:153`; `src/components/input-message.tsx:330`).
+- **Port:** `apps/demo/assets/chat-ai/avatar.jpg` (345x345 JPEG, `AVATAR_JPG` in `apps/demo/src/lib/assets.ts`), a `ComposerFile` by path with its `name` set to `avatar.jpg` and its type read from the extension, `image/jpeg` (`apps/demo/src/demos/input-message.tsx:40-43`, used at `:113` and `:325`; the queued chat's `PHOTO` is the same file, `apps/demo/src/lib/queued-chat.tsx:35`). The name only surfaces in the tile's `alt` and `aria-label` and the remove badge's label (`packages/fluid-functionalism/src/components/file-thumbnail.tsx:129`, `:153`; `packages/fluid-functionalism/src/components/input-message.tsx:330`).
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** just this one.

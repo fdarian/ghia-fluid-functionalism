@@ -1,8 +1,8 @@
 # thinking-steps
 
 Original: `registry/base/thinking-steps.tsx` (Base UI `Collapsible`), demo in `app/docs/thinking-steps/page.tsx` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/thinking-steps.tsx`,
-demo in `src/demos/thinking-steps.tsx`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/thinking-steps.tsx`,
+demo in `apps/demo/src/demos/thinking-steps.tsx`.
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps
 (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of
@@ -10,7 +10,7 @@ repeating it.
 
 ## Hover background exit
 
-- **Cause:** `not ported yet`. `motion.fastExit` (0.06s) exists (`src/lib/theme.ts:483`).
+- **Cause:** `not ported yet`. `motion.fastExit` (0.06s) exists (`packages/fluid-functionalism/src/lib/theme.ts:483`).
 - **Original:** the trigger's hover background fades in over 0.08s and out with `spring.fast.exit`, 0.06s (`thinking-steps.tsx:65-75`).
 - **Port:** one `transition={{ duration: 0.08 }}` serves both (`thinking-steps.tsx:99-117`, `:105`), so the exit is 20ms slower.
 - **Workaround:** none.
@@ -21,7 +21,7 @@ repeating it.
 
 - **Cause:** `gpuix gap` for the timer (no `requestAnimationFrame`; see the README row on `requestAnimationFrame`). The panel itself arrives at full height from the first frame.
 - **Original:** a panel open at mount renders `initial={{ height: "auto" }}`, takes its measured pixel height with `duration: 0` and clears the snap one `requestAnimationFrame` after the first measure (`thinking-steps.tsx:160-163`, `:187-193`, `:221-228`).
-- **Port:** the same: `initial={false}` with an `auto` target until `onLayout` reports a height, then the measured number on `tween.snap`, cleared by a 100 ms timer after that report (`Collapse` in `src/components/thinking-steps.tsx`). A toggle within 100 ms of the first report snaps instead of springing. `scripts/check-thinking-steps.tsx` samples the panel from the first frame.
+- **Port:** the same: `initial={false}` with an `auto` target until `onLayout` reports a height, then the measured number on `tween.snap`, cleared by a 100 ms timer after that report (`Collapse` in `packages/fluid-functionalism/src/components/thinking-steps.tsx`). A toggle within 100 ms of the first report snaps instead of springing. `apps/demo/scripts/check-thinking-steps.tsx` samples the panel from the first frame.
 - **Workaround:** `setTimeout`.
 - **Fidelity:** approximated (the snap window is 100 ms, not one frame).
 - **Components it hits:** accordion (same measured-height pattern).
@@ -57,7 +57,7 @@ repeating it.
 
 - **Cause:** `port choice` (the comment says it keeps a pale screenshot's edge visible; why an overlay div and not the image's own outline is not stated).
 - **Original:** `outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10` on the `<img>` (`thinking-steps.tsx:590`).
-- **Port:** an absolutely positioned overlay div with a 1px inset outline in `color.border`, `rgba(23,23,23,.12)` light and `rgba(245,245,245,.12)` dark (`thinking-steps.tsx:570-585`; `src/lib/theme.ts:94`, `:142`).
+- **Port:** an absolutely positioned overlay div with a 1px inset outline in `color.border`, `rgba(23,23,23,.12)` light and `rgba(245,245,245,.12)` dark (`thinking-steps.tsx:570-585`; `packages/fluid-functionalism/src/lib/theme.ts:94`, `:142`).
 - **Workaround:** the overlay.
 - **Fidelity:** approximated (alpha .12 against .10, base colours slightly off black and white).
 - **Components it hits:** just this one.
@@ -84,7 +84,7 @@ repeating it.
 
 - **Cause:** `not ported yet`.
 - **Original:** the root is `className="w-full px-8"` (32px each side) and each description is a child `span` with `text-site-body leading-4.5`: 13px on an 18px line, `muted-foreground` (`app/docs/thinking-steps/page.tsx:426-435`, `:461`).
-- **Port:** `width="100%"` with no padding (`src/demos/thinking-steps.tsx:307-312`), and the typed text goes through `description`, which is `scale.body`, 13 on a 20px line (`thinking-steps.tsx:415-419`; `src/demos/thinking-steps.tsx:283-295`).
+- **Port:** `width="100%"` with no padding (`apps/demo/src/demos/thinking-steps.tsx:310-315`), and the typed text goes through `description`, which is `scale.body`, 13 on a 20px line (`thinking-steps.tsx:415-419`; `apps/demo/src/demos/thinking-steps.tsx:286-298`).
 - **Workaround:** none.
 - **Fidelity:** approximated (wider text, 2px taller lines).
 - **Components it hits:** just this one.
@@ -93,7 +93,7 @@ repeating it.
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** the control is an icon button (pause, play, rotate-ccw, 16px) with a tooltip, in the preview frame's corner (`app/docs/thinking-steps/page.tsx:642-735`, `:723`). The start rule is ported: a card waits paused, plays once at least half of it is visible, pauses below 10% visible (clearing a pause made by the button), resumes from where it stopped when half of it shows again, and a finished card stays finished until replayed (`:654-678`).
-- **Port:** the control is a ghost compact `Button` reading "Pause", "Play" or "Replay", right-aligned above the steps (`src/demos/thinking-steps.tsx:133-153`). The start rule is `createSequence` (`:41-109`) fed by `observeVisibleRatio` (`src/lib/cull.ts:129`) on the card's column (`src/demos/thinking-steps.tsx:119`, `:130`), which watches the window rather than a scroller, so a card inside a culled region reports 0 and holds. The ratio is of the column (button and steps), not of the whole preview frame with its code tab.
+- **Port:** the control is a ghost compact `Button` reading "Pause", "Play" or "Replay", right-aligned above the steps (`apps/demo/src/demos/thinking-steps.tsx:136-156`). The start rule is `createSequence` (`:44-112`) fed by `observeVisibleRatio` (`packages/fluid-functionalism/src/lib/cull.ts:129`) on the card's column (`apps/demo/src/demos/thinking-steps.tsx:122`, `:133`), which watches the window rather than a scroller, so a card inside a culled region reports 0 and holds. The ratio is of the column (button and steps), not of the whole preview frame with its code tab.
 - **Workaround:** none.
 - **Fidelity:** approximated (button chrome; the visible share is of the card's column).
 - **Components it hits:** any demo with a replay control.
@@ -102,7 +102,7 @@ repeating it.
 
 - **Cause:** `port choice` (reason not stated; the port's demo pages show cards only).
 - **Original:** six sections, "Basic", "Minimal", "Streaming", "Streaming Text", "With Images", "Full Example", the last five with a lead paragraph ("The simplest usage — two dots with no children or extras.", "Steps appear sequentially as they stream in. Active steps show a shimmer effect.", "Dots with long descriptions that stream in character by character, simulating LLM output.", "Steps can include inline images with optional captions using ThinkingStepImage.", "A 6-step research agent combining sources, details, descriptions, images, and a custom header."), a code tab and an API reference (`app/docs/thinking-steps/page.tsx:745-826`).
-- **Port:** the same six demos with the same steps, labels, delays, sources and images, titled "Basic", "Minimal", "Streaming", "Streaming text", "With images", "Full", with no lead text, code tab or API tables (`src/demos/thinking-steps.tsx:466-509`).
+- **Port:** the same six demos with the same steps, labels, delays, sources and images, titled "Basic", "Minimal", "Streaming", "Streaming text", "With images", "Full", with no lead text, code tab or API tables (`apps/demo/src/demos/thinking-steps.tsx:469-512`).
 - **Workaround:** none.
 - **Fidelity:** exact for the content of each demo; copy and chrome dropped.
 - **Components it hits:** every demo (no lead text, code tab or API table).

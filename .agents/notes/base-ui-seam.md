@@ -7,4 +7,4 @@ The split is in AGENTS.md (behaviour goes into the primitive, looks stay here). 
 - **Refs are not in the prop objects.** A `ref` inside a JSX spread applies in an effect after the element exists, too late for primitives that read the element as the popup mounts, so consumers pass `ref={...}` on the element themselves.
 - **Select rows assign props one by one.** `tabIndex` through a spread arrives after the open has already called `focus()` on the row, which is then not yet focusable.
 - The site's own components stay here (command-menu, sidebar, nav-item, nav-menu, input-message, ask-user-questions, queued-stack, carousel-dots, colour-picker internals, cards). They import the primitives' list navigation, presence and pointer capture where the behaviour matches.
-- `ghia-base-ui` and `@ghia/solid` must resolve to one copy each; `scripts/check-single-instance.ts` fails otherwise.
+- `ghia-base-ui` and `@ghia/solid` must resolve to one copy each; `apps/demo/scripts/check-single-instance.ts` fails otherwise.

@@ -17,13 +17,13 @@ the release-driven New dots):
 
 | Port file | Upstream |
 | --- | --- |
-| `content/changelog/2026-07.md`, `2026-08.md`, `2026-09.md` (verbatim copies) | `content/changelog/*` |
-| `src/lib/changelog/` (`parse`, `load`, `install`, `kind-style`, `migration-prompt`, `upgrade-prompt`) | `lib/changelog/*` (no `markdown.ts`: the port has no Markdown route) |
-| `src/lib/changelog/releases.ts` | `lib/changelog/marks.tsx` (the New / Updated marks, as the nav's New dots) |
-| `src/pages/changelog.tsx`, `src/pages/changelog/` | `app/changelog/page.tsx`, `changelog-view.tsx`, `previews.tsx` |
-| `NavGroup` and `AppSidebar` in `src/app.tsx` (headers and counts, Search row, scroller, New dots, the page `Rail`) | `app/components/sidebar.tsx`, `sidebar-layout.tsx`, `right-panel.tsx` |
-| `SidebarContent`'s edge fade, end hairline and blur-clear in `src/components/sidebar.tsx` | the same nav's scroller |
-| `src/lib/site-command-menu.tsx`, `src/lib/page-nav.ts` (Changelog's row and place in the order) | `app/components/site-command-menu.tsx`, `lib/docs/command-menu-items.ts` |
+| `apps/demo/content/changelog/2026-07.md`, `2026-08.md`, `2026-09.md` (verbatim copies) | `content/changelog/*` |
+| `apps/demo/src/lib/changelog/` (`parse`, `load`, `install`, `kind-style`, `migration-prompt`, `upgrade-prompt`) | `lib/changelog/*` (no `markdown.ts`: the port has no Markdown route) |
+| `apps/demo/src/lib/changelog/releases.ts` | `lib/changelog/marks.tsx` (the New / Updated marks, as the nav's New dots) |
+| `apps/demo/src/pages/changelog.tsx`, `apps/demo/src/pages/changelog/` | `app/changelog/page.tsx`, `changelog-view.tsx`, `previews.tsx` |
+| `NavGroup` and `AppSidebar` in `apps/demo/src/app.tsx` (headers and counts, Search row, scroller, New dots, the page `Rail`) | `app/components/sidebar.tsx`, `sidebar-layout.tsx`, `right-panel.tsx` |
+| `SidebarContent`'s edge fade, end hairline and blur-clear in `packages/fluid-functionalism/src/components/sidebar.tsx` | the same nav's scroller |
+| `apps/demo/src/lib/site-command-menu.tsx`, `apps/demo/src/lib/page-nav.ts` (Changelog's row and place in the order) | `app/components/site-command-menu.tsx`, `lib/docs/command-menu-items.ts` |
 
 The rest of the site shell entries in [drift/site.md](drift/site.md) and the site-nav section of
 [drift/sidebar.md](drift/sidebar.md) say which refs are `d5c3606`'s. Everything else keeps its `0a0377e` pin in
@@ -59,12 +59,12 @@ git clone https://github.com/mickadesign/fluid-functionalism ~/.claude/notes/ff-
 3. **Port each change** to the file the [map](#file-map) names, and update the `file:line` refs in its drift file.
    When the change touches a `registry/base/*` file, decide first where it lands: keys, selection, open state, focus
    and ARIA belong to the primitive in [`ghia-base-ui`](https://github.com/fdarian/ghia-base-ui) (port it there, with its own `UPSTREAM.md` procedure,
-   release it, bump the pin in `package.json`, and re-audit its rows in [BASE-UI-AUDIT.md](https://github.com/fdarian/ghia-base-ui/blob/main/BASE-UI-AUDIT.md)); styling, tokens, springs and fluid hover stay in `src/`.
+   release it, bump the pin in `apps/demo/package.json` and `packages/fluid-functionalism/package.json`, and re-audit its rows in [BASE-UI-AUDIT.md](https://github.com/fdarian/ghia-base-ui/blob/main/BASE-UI-AUDIT.md)); styling, tokens, springs and fluid hover stay in `packages/fluid-functionalism/src/`.
 4. **Move the pin.** Change the commit in the drift file's header (and the table above when the whole group moves).
    When no `0a0377e` is left, collapse this file to one pin.
-5. **Changelog.** `content/changelog/*.md` is copied verbatim: copy new months in as they land. The parser is a line
+5. **Changelog.** `apps/demo/content/changelog/*.md` is copied verbatim: copy new months in as they land. The parser is a line
    scanner for the strict shape `changelog-guidelines.md` upstream defines, not an mdast walk, so a change to the
-   format in `lib/changelog/parse.ts` has to be ported to `src/lib/changelog/parse.ts`; `scripts/check-changelog.ts`
+   format in `lib/changelog/parse.ts` has to be ported to `apps/demo/src/lib/changelog/parse.ts`; `apps/demo/scripts/check-changelog.ts`
    covers it.
 6. `pnpm check`, then `pnpm screenshots` for the pages touched.
 
@@ -75,35 +75,35 @@ lands in the matching file on the right"; the drift file's `Original:` header na
 
 | Upstream | Port |
 | --- | --- |
-| `registry/base/<x>.tsx`, `registry/default/<x>.tsx`, `registry/blocks/queued-stack.tsx` | `src/components/<x>.tsx` |
-| `registry/default/{menu-item,dropdown-search}.tsx` (and `dropdown-sub.tsx`) | `src/components/{menu-item,dropdown-search,dropdown}.tsx` |
-| `registry/default/{sidebar-core,sidebar-menu}.tsx` over `registry/base/sidebar.tsx`; `registry/default/{nav-menu,nav-item}.tsx` | `src/components/sidebar.tsx`; `nav-menu.tsx`, `nav-item.tsx` |
-| `app/docs/<x>/page.tsx`, `lib/docs/playgrounds/<x>.tsx` | `src/demos/<x>.tsx` (the sidebar demo's pieces in `src/demos/sidebar/`) |
-| `app/docs/{motion,scrollbars,sizes,skill,surfaces,typography,fluid-hover}/` and `app/docs/page.tsx` | `src/pages/<x>.tsx` and `src/pages/<x>/`; the docs page is `src/pages/introduction.tsx` |
-| `app/compare/`, `app/components/{shadcn,compare-fluid}-previews.tsx`, `components/shadcn/` | `src/pages/compare.tsx`, `src/pages/compare/` (`shadcn/` is the Solid redraw) |
-| `app/concepts/` | `src/pages/concepts*.tsx`, `src/pages/concepts/frame.tsx` |
-| `app/slider/page.tsx` | `src/pages/audio-mixer.tsx` |
-| `app/page.tsx`, `app/components/{bento-grid,bento-card,bento-previews}.tsx` | `src/home/`, and `Showcase` in `src/app.tsx` |
-| `app/changelog/`, `lib/changelog/`, `content/changelog/` | `src/pages/changelog*`, `src/lib/changelog/`, `content/changelog/` |
-| `app/layout.tsx`, `app/components/{sidebar-layout,right-panel,site-command-menu,playground-menu}.tsx`, `lib/docs/{DocPage,ComponentPreview,PropsTable,playground}.tsx` | `src/main.tsx`, `src/app.tsx`, `src/lib/{app-frame,doc-page,demo-kit,playground,site-command-menu,page-nav}.ts*` |
-| `app/globals.css`, `registry/default/lib/{springs,surface-classes,type-scale,font-weight}.ts`, `shape-context.tsx`, `size-context.tsx` | `src/lib/theme.ts` (tokens, springs, shadows) |
-| `registry/default/hooks/use-fluid-hover.ts`, `registry/default/fluid-hover-highlight.tsx` | `src/lib/fluid-hover.ts`, `src/lib/fluid-highlight.tsx` |
-| `registry/default/lib/{popup.ts,surface-context.tsx,elevated.tsx}` | `src/lib/{popup,surface-context}.ts*` (the chrome; placement is `base-ui:src/internals/use-anchor-positioning.ts`) |
-| `registry/default/hooks/use-keyboard-nav-gate.ts` | `base-ui:src/select/root/use-select-root.ts` (`keyboardNav`), read in `src/components/select.tsx` |
-| `registry/default/lib/icon-context.tsx`, `icons-*.tsx`, `lib/icons-*.ts` | `src/lib/icons.ts`, `src/lib/icon.tsx`, `src/lib/icons/` |
-| `public/fonts/InterVariable*.ttf` | `assets/fonts/InterVariable*.ttf` (same files) |
-| `public/og.png` | `assets/chat-ai/og.png` |
-| `public/micka.png` | not ported; replaced by `assets/chat-ai/avatar.jpg` (see the "Sample photo" entries in `drift/`) |
-| `lib/typeset/generate.ts`, `lib/docs/typeset-sample.tsx` | `src/pages/typography/` |
+| `registry/base/<x>.tsx`, `registry/default/<x>.tsx`, `registry/blocks/queued-stack.tsx` | `packages/fluid-functionalism/src/components/<x>.tsx` |
+| `registry/default/{menu-item,dropdown-search}.tsx` (and `dropdown-sub.tsx`) | `packages/fluid-functionalism/src/components/{menu-item,dropdown-search,dropdown}.tsx` |
+| `registry/default/{sidebar-core,sidebar-menu}.tsx` over `registry/base/sidebar.tsx`; `registry/default/{nav-menu,nav-item}.tsx` | `packages/fluid-functionalism/src/components/sidebar.tsx`; `nav-menu.tsx`, `nav-item.tsx` |
+| `app/docs/<x>/page.tsx`, `lib/docs/playgrounds/<x>.tsx` | `apps/demo/src/demos/<x>.tsx` (the sidebar demo's pieces in `apps/demo/src/demos/sidebar/`) |
+| `app/docs/{motion,scrollbars,sizes,skill,surfaces,typography,fluid-hover}/` and `app/docs/page.tsx` | `apps/demo/src/pages/<x>.tsx` and `apps/demo/src/pages/<x>/`; the docs page is `apps/demo/src/pages/introduction.tsx` |
+| `app/compare/`, `app/components/{shadcn,compare-fluid}-previews.tsx`, `components/shadcn/` | `apps/demo/src/pages/compare.tsx`, `apps/demo/src/pages/compare/` (`shadcn/` is the Solid redraw) |
+| `app/concepts/` | `apps/demo/src/pages/concepts*.tsx`, `apps/demo/src/pages/concepts/frame.tsx` |
+| `app/slider/page.tsx` | `apps/demo/src/pages/audio-mixer.tsx` |
+| `app/page.tsx`, `app/components/{bento-grid,bento-card,bento-previews}.tsx` | `apps/demo/src/home/`, and `Showcase` in `apps/demo/src/app.tsx` |
+| `app/changelog/`, `lib/changelog/`, `content/changelog/` | `apps/demo/src/pages/changelog*`, `apps/demo/src/lib/changelog/`, `apps/demo/content/changelog/` |
+| `app/layout.tsx`, `app/components/{sidebar-layout,right-panel,site-command-menu,playground-menu}.tsx`, `lib/docs/{DocPage,ComponentPreview,PropsTable,playground}.tsx` | `apps/demo/src/main.tsx`, `apps/demo/src/app.tsx`, `apps/demo/src/lib/{app-frame,doc-page,demo-kit,playground,site-command-menu,page-nav}.ts*` |
+| `app/globals.css`, `registry/default/lib/{springs,surface-classes,type-scale,font-weight}.ts`, `shape-context.tsx`, `size-context.tsx` | `packages/fluid-functionalism/src/lib/theme.ts` (tokens, springs, shadows) |
+| `registry/default/hooks/use-fluid-hover.ts`, `registry/default/fluid-hover-highlight.tsx` | `packages/fluid-functionalism/src/lib/fluid-hover.ts`, `packages/fluid-functionalism/src/lib/fluid-highlight.tsx` |
+| `registry/default/lib/{popup.ts,surface-context.tsx,elevated.tsx}` | `packages/fluid-functionalism/src/lib/{popup,surface-context}.ts*` (the chrome; placement is `base-ui:src/internals/use-anchor-positioning.ts`) |
+| `registry/default/hooks/use-keyboard-nav-gate.ts` | `base-ui:src/select/root/use-select-root.ts` (`keyboardNav`), read in `packages/fluid-functionalism/src/components/select.tsx` |
+| `registry/default/lib/icon-context.tsx`, `icons-*.tsx`, `lib/icons-*.ts` | `packages/fluid-functionalism/src/lib/icons.ts`, `packages/fluid-functionalism/src/lib/icon.tsx`, `packages/fluid-functionalism/src/lib/icons/` |
+| `public/fonts/InterVariable*.ttf` | `apps/demo/assets/fonts/InterVariable*.ttf` (same files) |
+| `public/og.png` | `apps/demo/assets/chat-ai/og.png` |
+| `public/micka.png` | not ported; replaced by `apps/demo/assets/chat-ai/avatar.jpg` (see the "Sample photo" entries in `drift/`) |
+| `lib/typeset/generate.ts`, `lib/docs/typeset-sample.tsx` | `apps/demo/src/pages/typography/` |
 
 Not ported, by design: the `registry/radix/` flavour (the port is Base UI only), the shadcn registry build and
 `/r/*` routes, `lib/preset/`, `skills/`, the Markdown routes, `tests/`, and `registry/blocks/{sidebar-app,
 dialog-sidebar,sidebar-*}` ([drift/sidebar.md](drift/sidebar.md#blocks-workspace-header-user-footer-app-sidebar-inset-top-bar-settings-dialog)).
-Install is a copy prompt (`src/lib/install-url.ts`, `src/lib/starter-prompt.ts`), not a CLI.
+Install is a copy prompt (`apps/demo/src/lib/install-url.ts`, `apps/demo/src/lib/starter-prompt.ts`), not a CLI.
 
 ## Base UI primitives
 
-Upstream's `registry/base/*` builds on `@base-ui/react` 1.9.0. Here the same components consume `ghia-base-ui` (npm, pinned in `package.json`),
+Upstream's `registry/base/*` builds on `@base-ui/react` 1.9.0. Here the same components consume `ghia-base-ui` (npm, pinned in `apps/demo/package.json` and `packages/fluid-functionalism/package.json`),
 headless Solid primitives from [fdarian/ghia-base-ui](https://github.com/fdarian/ghia-base-ui), whose own `UPSTREAM.md` pins and syncs Base UI. A Base UI behaviour change is ported there, not here; this repository
 tracks how FF uses a primitive and what it styles on top, which
 [BASE-UI-AUDIT.md](https://github.com/fdarian/ghia-base-ui/blob/main/BASE-UI-AUDIT.md) records row by row. In the file map above, a `base-ui:src/...`
@@ -131,7 +131,7 @@ they need list navigation, presence or pointer capture they import it from `ghia
 Each file in [`drift/`](drift) lists every place the port looks or behaves differently from upstream, with the
 source and port `file:line` and a **Cause**. The per-file counts are the table in the README's
 [Drift from the source](README.md#drift-from-the-source) (as of its last recount: 497 entries, 46 of them naming two
-causes; `bun scripts/drift-counts.ts` prints them).
+causes; `bun apps/demo/scripts/drift-counts.ts` prints them).
 
 - **`gpuix gap`** (49 entries): gpuix lacks the capability or gets it wrong, so the port approximates or drops
   it. The recurring ones (selector `:has(.x)` and group-has, a clip inside a transformed box, the `layout` glides) are collected in

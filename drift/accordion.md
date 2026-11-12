@@ -1,11 +1,11 @@
 # accordion
 
 Original: `registry/base/accordion.tsx` (the docs page imports the Radix variant), demo in `app/docs/accordion/page.tsx` and its playground `lib/docs/playgrounds/accordion.tsx` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/accordion.tsx`, demo in `src/demos/accordion.tsx`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/accordion.tsx`, demo in `apps/demo/src/demos/accordion.tsx`.
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps
 (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of
-repeating it. Includes the shared keyboard focus ring (`src/lib/focus-ring.tsx`) as an accordion group uses it.
+repeating it. Includes the shared keyboard focus ring (`packages/fluid-functionalism/src/lib/focus-ring.tsx`) as an accordion group uses it.
 
 No drift found in: sizes (trigger padding, gap, icon 16/14, content padding, 288px width), type scale, light and dark
 tokens (`accentWash`, `hover`, `focusRing`, `mutedForeground`), single and multiple value semantics, the 0.7 dim of the
@@ -15,7 +15,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `not ported yet` (a plain mismatch; nothing stops it).
 - **Original:** the hover fill enters over `duration: 0.08` and leaves on `spring.fast.exit` 0.06 (`registry/base/accordion.tsx:819-824`).
-- **Port:** one transition, `tween.fastExit` (0.06), for both directions (`src/components/accordion.tsx:547-562`).
+- **Port:** one transition, `tween.fastExit` (0.06), for both directions (`packages/fluid-functionalism/src/components/accordion.tsx:547-562`).
 - **Workaround:** none.
 - **Fidelity:** approximated (enter 60 ms for 80 ms).
 - **Components it hits:** just this one.
@@ -24,7 +24,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** every mouse move tests the pointer's y against each open item's panel band (trigger bottom to item bottom) and clears the hover when it is inside (`registry/base/accordion.tsx:358-378`).
-- **Port:** `onMouseEnter` / `onMouseLeave` on the panel call `overContent`, which clears the hover and mutes the group's mouse move until the panel is left (`src/components/accordion.tsx:267-270`, `:294-298`, `:648-653`). A panel that is closing counts as no panel at once (`item.isOpen()` guard).
+- **Port:** `onMouseEnter` / `onMouseLeave` on the panel call `overContent`, which clears the hover and mutes the group's mouse move until the panel is left (`packages/fluid-functionalism/src/components/accordion.tsx:267-270`, `:294-298`, `:648-653`). A panel that is closing counts as no panel at once (`item.isOpen()` guard).
 - **Workaround:** none.
 - **Fidelity:** approximated (the same result except while a panel animates under a still pointer).
 - **Components it hits:** just this one.
@@ -33,7 +33,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** focus leaving the group clears the hover and the ring even with the pointer inside (`registry/base/accordion.tsx:396-403`).
-- **Port:** the hover is cleared only if the blur's `relatedTarget` is not a trigger and the pointer is outside (`blurRow`, `src/components/accordion.tsx`), so Tab out with the pointer in the group leaves the last row lit until the pointer moves.
+- **Port:** the hover is cleared only if the blur's `relatedTarget` is not a trigger and the pointer is outside (`blurRow`, `packages/fluid-functionalism/src/components/accordion.tsx`), so Tab out with the pointer in the group leaves the last row lit until the pointer moves.
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** just this one.
@@ -42,7 +42,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `gpuix gap` (no `AnimatePresence`, so a `createPresence` timer stands in for the exit).
 - **Original:** a 1 px `--focus-ring` box at left/top -2, size +4, travels on `spring.fast` with opacity on a 0.08 tween, appears in place (`initial={false}`) and exits on `spring.fast.exit` 0.06 (`registry/base/accordion.tsx:455-472`). A blur followed by the next row's focus keeps the same element, so it glides.
-- **Port:** the same box, offsets and motion (`src/lib/focus-ring.tsx:9` `ENTER_FADE`, `:12`, `:84-98`). The one difference is that the exit fade starts 60 ms after the last blur, so a blur followed by the next row's focus glides instead of fading and reappearing (`:68-69`, `src/lib/popup-timing.ts:2`).
+- **Port:** the same box, offsets and motion (`packages/fluid-functionalism/src/lib/focus-ring.tsx:9` `ENTER_FADE`, `:12`, `:84-98`). The one difference is that the exit fade starts 60 ms after the last blur, so a blur followed by the next row's focus glides instead of fading and reappearing (`:68-69`, `packages/fluid-functionalism/src/lib/popup-timing.ts:2`).
 - **gpuix lacks:** an exit-presence primitive for a conditionally rendered `motion.div`; `onMotionComplete` plus a timer is the stand-in.
 - **Workaround:** the 60 ms presence delay.
 - **Fidelity:** approximated (60 ms extra before a fade).
@@ -61,7 +61,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `not ported yet`.
 - **Original:** Radix handles the arrow keys on the root, standalone or grouped.
-- **Port:** `onKeyDown` returns when there is no group (`src/components/accordion.tsx:511-517`), so a standalone `Accordion` with several items has none.
+- **Port:** `onKeyDown` returns when there is no group (`packages/fluid-functionalism/src/components/accordion.tsx:511-517`), so a standalone `Accordion` with several items has none.
 - **Workaround:** none.
 - **Fidelity:** dropped for standalone.
 - **Components it hits:** just this one.
@@ -70,7 +70,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `port choice` (the first open springs to a measured height, which a hidden box cannot report).
 - **Original:** Base UI hides a closed-at-mount panel from its first render: `keepMounted` with `hidden` (`registry/base/accordion.tsx:923-939`).
-- **Port:** the closed panel stays mounted and goes `display: none` after the exit (`createAccordionPanel(…, { keepMounted: true })`, `hidden()` and `onExitComplete`, `base-ui:src/accordion/panel/use-accordion-panel.ts:16-47`, `src/components/accordion.tsx:639`, `:647`, `:655-657`). A panel closed at mount stays a zero-height `role="region"` until its text's first `onLayout`, one frame after paint, so the first open has a height to spring to; the measured height stays cached across the hide.
+- **Port:** the closed panel stays mounted and goes `display: none` after the exit (`createAccordionPanel(…, { keepMounted: true })`, `hidden()` and `onExitComplete`, `base-ui:src/accordion/panel/use-accordion-panel.ts:16-47`, `packages/fluid-functionalism/src/components/accordion.tsx:639`, `:647`, `:655-657`). A panel closed at mount stays a zero-height `role="region"` until its text's first `onLayout`, one frame after paint, so the first open has a height to spring to; the measured height stays cached across the hide.
 - **Workaround:** `display: none` only once `contentHeight()` is known.
 - **Fidelity:** approximated (tab order identical; the accessibility tree differs only for that first frame).
 - **Components it hits:** none other (thinking-steps uses `inert`).
@@ -79,16 +79,16 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `not ported yet`.
 - **Original:** the height springs only while this panel toggles; a size change from nested content, and the hand-off from `height: auto` for an item open at mount, snap (`toggling`, `registry/base/accordion.tsx:872-876`, `:953-958`).
-- **Port:** the transition depends only on `item.isOpen()` (`src/components/accordion.tsx:645-646`). Content that changes height while open (a nested accordion, a re-wrap) springs and chases. Whether an item open at mount plays a grow on its first measure was not run.
-- **Workaround:** `height: "auto"` until the first measure (`src/components/accordion.tsx:660-663`).
+- **Port:** the transition depends only on `item.isOpen()` (`packages/fluid-functionalism/src/components/accordion.tsx:645-646`). Content that changes height while open (a nested accordion, a re-wrap) springs and chases. Whether an item open at mount plays a grow on its first measure was not run.
+- **Workaround:** `height: "auto"` until the first measure (`packages/fluid-functionalism/src/components/accordion.tsx:660-663`).
 - **Fidelity:** approximated.
 - **Components it hits:** any panel holding collapsibles (thinking-steps, sidebar).
 
 ## An explicit `size` does not scope the parts inside
 
-- **Cause:** `not ported yet` (the port has no provider; the ambient size is the Size row, `sizeChoice()` in `src/lib/theme.ts`).
+- **Cause:** `not ported yet` (the port has no provider; the ambient size is the Size row, `sizeChoice()` in `packages/fluid-functionalism/src/lib/theme.ts`).
 - **Original:** `size` wraps the group in a `SizeProvider`, so nested sized components follow it (`registry/base/accordion.tsx:484`, `:604`).
-- **Port:** An omitted `size` follows the Size row (`src/components/accordion.tsx:173`); a given one sizes the accordion only.
+- **Port:** An omitted `size` follows the Size row (`packages/fluid-functionalism/src/components/accordion.tsx:173`); a given one sizes the accordion only.
 - **Workaround:** pass `size` to each nested component.
 - **Fidelity:** approximated.
 - **Components it hits:** every component with a `size` prop.
@@ -97,7 +97,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `not ported yet` (`base-ui:BASE-UI-AUDIT.md:77`).
 - **Original:** `AccordionItem` takes an explicit `index`, required in a group (`registry/base/accordion.tsx:58`, `:616`).
-- **Port:** the trigger registers with a counter (`nextIndex++`, `src/components/accordion.tsx:193`, `:245-257`) and never reuses an index, so an item inserted mid-list or re-added gets a new index and the order of the rects no longer matches the document. The demo lists are static.
+- **Port:** the trigger registers with a counter (`nextIndex++`, `packages/fluid-functionalism/src/components/accordion.tsx:193`, `:245-257`) and never reuses an index, so an item inserted mid-list or re-added gets a new index and the order of the rects no longer matches the document. The demo lists are static.
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** tabs.
@@ -115,7 +115,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `port choice` (gpuix has no classes, refs or HTML attributes; reason for `collapsible` is the audit note that Base UI single mode is always collapsible, `base-ui:BASE-UI-AUDIT.md:83`).
 - **Original:** `className`, a forwarded `ref`, every HTML attribute, and `collapsible` on the roots (`registry/base/accordion.tsx:73-100`, `:490-503`).
-- **Port:** `testId` and `children` only (`src/components/accordion.tsx:179-184`, `:484`).
+- **Port:** `testId` and `children` only (`packages/fluid-functionalism/src/components/accordion.tsx:179-184`, `:484`).
 - **Workaround:** none.
 - **Fidelity:** dropped.
 - **Components it hits:** every component.
@@ -124,7 +124,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `port choice` (the port's single mode is always collapsible, `base-ui:BASE-UI-AUDIT.md:83`, so there is no `collapsible` prop to turn off).
 - **Original:** the Expand select maps to `type` and `collapsible`; "One at a time" is a non-collapsible single group (`lib/docs/playgrounds/accordion.tsx:28-34`, `:78-92`).
-- **Port:** the playground controls the group's value and drops the close of the open item while "One at a time" is chosen (`src/demos/accordion.tsx`, `Playground`). Switching Expand resets the open set to the first item, as the source's `key` remount does.
+- **Port:** the playground controls the group's value and drops the close of the open item while "One at a time" is chosen (`apps/demo/src/demos/accordion.tsx`, `Playground`). Switching Expand resets the open set to the first item, as the source's `key` remount does.
 - **Workaround:** the controlled value.
 - **Fidelity:** exact in what it does; the group itself still has no non-collapsible mode.
 - **Components it hits:** just this one.
@@ -133,7 +133,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `port choice` (the preview sits in the shared demo card, so it lines up with the page's other cards).
 - **Original:** `ComponentPreview` with no padding, `h-[420px]`, top-aligned, the group centred at the card's width with `px-6 py-10`, and Preview / Code tabs with the snippet kept in sync (`app/docs/accordion/page.tsx:129-150`, `lib/docs/playgrounds/accordion.tsx:36-65`, `:130-137`).
-- **Port:** the `DemoCard` frame titled "Playground" in its footer, a 420 px minimum, the group 288 px wide (its fixed width) centred with 20 px above it; no Code tab and no generated snippet (`src/lib/playground.tsx`, `src/demos/accordion.tsx`). The four items and their texts match the source.
+- **Port:** the `DemoCard` frame titled "Playground" in its footer, a 420 px minimum, the group 288 px wide (its fixed width) centred with 20 px above it; no Code tab and no generated snippet (`apps/demo/src/lib/playground.tsx`, `apps/demo/src/demos/accordion.tsx`). The four items and their texts match the source.
 - **Workaround:** none.
 - **Fidelity:** approximated (frame chrome), dropped (the code snippet).
 - **Components it hits:** every playground.
@@ -142,7 +142,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** three items, the third "Compare with the sections above" / "Those hold a block across the row and its panel while open." (`app/docs/accordion/page.tsx:264-268`).
-- **Port:** two items (`src/demos/accordion.tsx:198-222`).
+- **Port:** two items (`apps/demo/src/demos/accordion.tsx:198-222`).
 - **Workaround:** none.
 - **Fidelity:** dropped.
 - **Components it hits:** just this one.
@@ -151,7 +151,7 @@ open tints while a closed row is hovered, the height and opacity timings of the 
 
 - **Cause:** `port choice` (reason not stated; a four-block grid in one card, plus fixtures for the harness).
 - **Original:** separate doc sections, each with a heading, a paragraph (e.g. "A single collapsible item with its own hover state.", "Multiple items with fluid hover — only one can be expanded at a time."), a code snippet and the API tables (`app/docs/accordion/page.tsx:153-300`).
-- **Port:** one "Accordion" card in a two-column grid with short captions ("Standalone: its own hover state", `highlight="trigger": the tint waits for hover`, "Single expand", "Multi expand") and no snippets or API tables (`src/demos/accordion.tsx:182-322`). A port-only "Keyboard" section holds a disabled item and drives the scenarios' ARIA and Tab assertions (`:301-320`, `:346-412`). All titles and panel texts that exist in both match. Neither shows `size="compact"`.
+- **Port:** one "Accordion" card in a two-column grid with short captions ("Standalone: its own hover state", `highlight="trigger": the tint waits for hover`, "Single expand", "Multi expand") and no snippets or API tables (`apps/demo/src/demos/accordion.tsx:182-322`). A port-only "Keyboard" section holds a disabled item and drives the scenarios' ARIA and Tab assertions (`:301-320`, `:346-412`). All titles and panel texts that exist in both match. Neither shows `size="compact"`.
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** every demo (the shared card layout).

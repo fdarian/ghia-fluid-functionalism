@@ -13,4 +13,4 @@ jobs:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with: { cache: "true" }
-      - run: bun scripts/check-single-instance.ts
+      - run: pnpm --filter ghia-fluid-functionalism-demo check:single-instance

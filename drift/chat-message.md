@@ -1,6 +1,6 @@
 # chat-message
 
-Original: `registry/default/chat-message.tsx` and `app/docs/chat-message/page.tsx` in the source (fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/chat-message.tsx`, demo in `src/demos/chat-message.tsx`.
+Original: `registry/default/chat-message.tsx` and `app/docs/chat-message/page.tsx` in the source (fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/chat-message.tsx`, demo in `apps/demo/src/demos/chat-message.tsx`.
 
 ## Meta row on touch
 
@@ -61,12 +61,12 @@ Original: `registry/default/chat-message.tsx` and `app/docs/chat-message/page.ts
 
 - **Cause:** `not ported yet` (API table and code tabs, `max-w-xl`, curly quotes) + `port choice` (the "Add message" button, to exercise the entrance in a capture). Itemised under Port.
 - **Original:** `app/docs/chat-message/page.tsx`: Conversation (5 messages, `MessageActions` on each), Roles, Attachments (a `File` fetched from `/micka.png`), API Reference table; previews are `max-w-xl` with code tabs (`:120-189`).
-- **Port:** `src/demos/chat-message.tsx` has the same three sections with the same messages (`:15-35`, `:100-154`). Differences:
+- **Port:** `apps/demo/src/demos/chat-message.tsx` has the same three sections with the same messages (`:18-38`, `:103-157`). Differences:
   - `not ported yet`: the API Reference table and code tabs (docs chrome).
-  - `port choice`: an "Add message" button and a follow-up message (`:37-41`, `:108-116`), there to exercise the entrance in a capture; the source has none.
-  - `not ported yet`: the transcript is `width: 100%`, not `max-w-xl` (576px) (`:73`).
+  - `port choice`: an "Add message" button and a follow-up message (`:40-44`, `:111-119`), there to exercise the entrance in a capture; the source has none.
+  - `not ported yet`: the transcript is `width: 100%`, not `max-w-xl` (576px) (`:76`).
   - `not ported yet`: the first message uses straight quotes, `"good design"`; the source has curly ones, `&ldquo;good design&rdquo;` (`page.tsx:128-129`; port `demos/chat-message.tsx:19`).
-  - Attachments use `assets/chat-ai/avatar.jpg` by path (`:43-47`), where the source fetches `/micka.png` (see "Sample photo" below).
+  - Attachments use `apps/demo/assets/chat-ai/avatar.jpg` by path (`:46-50`), where the source fetches `/micka.png` (see "Sample photo" below).
 - **Fidelity:** approximated.
 - **Components it hits:** just this one.
 
@@ -74,7 +74,7 @@ Original: `registry/default/chat-message.tsx` and `app/docs/chat-message/page.ts
 
 - **Cause:** `port choice` (the repository owner chose not to ship the source's photo).
 - **Original:** the source's `public/micka.png` (918x928 PNG), fetched and attached as a `File` named `micka.png` with type `blob.type || "image/png"` (`app/docs/chat-message/page.tsx:100-108`).
-- **Port:** `assets/chat-ai/avatar.jpg` (345x345 JPEG, `AVATAR_JPG` in `src/lib/assets.ts`), named `avatar.jpg` and typed `image/jpeg` (`src/demos/chat-message.tsx:43-47`). The name only surfaces in the thumbnail's `alt` and `aria-label` (`src/components/file-thumbnail.tsx:129`, `:154`).
+- **Port:** `apps/demo/assets/chat-ai/avatar.jpg` (345x345 JPEG, `AVATAR_JPG` in `apps/demo/src/lib/assets.ts`), named `avatar.jpg` and typed `image/jpeg` (`apps/demo/src/demos/chat-message.tsx:46-50`). The name only surfaces in the thumbnail's `alt` and `aria-label` (`packages/fluid-functionalism/src/components/file-thumbnail.tsx:129`, `:154`).
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** just this one.

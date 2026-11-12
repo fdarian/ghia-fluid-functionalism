@@ -3,7 +3,7 @@
 Original: `registry/default/file-thumbnail.tsx`. It has no docs page of its own in the source
 (fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`): it appears inside the input-message docs
 page (`app/docs/input-message/page.tsx:449`, size 28, radius 12) and in the chat-message and queued-stack pieces.
-Ported in `src/components/file-thumbnail.tsx`, demo in `src/demos/file-thumbnail.tsx`.
+Ported in `packages/fluid-functionalism/src/components/file-thumbnail.tsx`, demo in `apps/demo/src/demos/file-thumbnail.tsx`.
 
 Ported and matching: the square with `bg-accent`, `overflow-hidden` and `shrink-0` (`file-thumbnail.tsx:75-87`), the image with `object-fit: cover` (`:100-112`), the 1px inset hairline painted over the preview at 10% black on light and 10% white on dark (`:115-129`; `color.overlay` flips per scheme), the generic document glyph (same two paths, stroke 1.5, `max(16, size * 0.35)`, muted, `:91-98`), and the spinner, the source's own box (24px, `border-2` ring, `muted-foreground` top border, `rounded-full`) turned one turn a second, linear, by a `spin` keyframe (`:19-39`).
 
@@ -31,7 +31,7 @@ Ported and matching: the square with `bg-accent`, `overflow-hidden` and `shrink-
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** `file: File`; an image is shown through `URL.createObjectURL`, one blob URL per file shared by every thumbnail and revoked with the last one (`file-thumbnail.tsx:40-74`, `:94-100`).
-- **Port:** `FileLike { name, type, src? }`, `src` a filesystem path or data URL; an image without `src` shows the glyph (`file-thumbnail.tsx:11-17`, `:71-73`). Consumers map their own file to it (`src/components/input-message.tsx:327-331`).
+- **Port:** `FileLike { name, type, src? }`, `src` a filesystem path or data URL; an image without `src` shows the glyph (`file-thumbnail.tsx:11-17`, `:71-73`). Consumers map their own file to it (`packages/fluid-functionalism/src/components/input-message.tsx:327-331`).
 - **gpuix lacks:** nothing: `<img src="blob:...">` is read in-process (`packages/native/js/host.ts:1430-1431`; `blob-images.ts`).
 - **Workaround:** pass a path.
 - **Fidelity:** approximated.
@@ -61,7 +61,7 @@ Ported and matching: the square with `bg-accent`, `overflow-hidden` and `shrink-
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** no standalone demo. The component appears inside other pages: thumbnails at size 28 and radius 12 on the queued cards (`app/docs/input-message/page.tsx:446-450`).
-- **Port:** its own page: Image, No preview, Pending and Radius rows at 28, 48, 64 and 96px (`src/demos/file-thumbnail.tsx:19-43`). The source has no counterpart; the queued-stack port passes `nestedRadius(shape.bg, 8)` to its 28px tiles (`src/components/queued-stack.tsx:444`), as the source's `attachmentRadius` is also a `nestedRadius` (`registry/blocks/queued-stack.tsx:73-76`, `:351`), so the radius 12 above is the input-message page's own tiles; that belongs to the queued-stack file.
+- **Port:** its own page: Image, No preview, Pending and Radius rows at 28, 48, 64 and 96px (`apps/demo/src/demos/file-thumbnail.tsx:22-46`). The source has no counterpart; the queued-stack port passes `nestedRadius(shape.bg, 8)` to its 28px tiles (`packages/fluid-functionalism/src/components/queued-stack.tsx:444`), as the source's `attachmentRadius` is also a `nestedRadius` (`registry/blocks/queued-stack.tsx:73-76`, `:351`), so the radius 12 above is the input-message page's own tiles; that belongs to the queued-stack file.
 - **Workaround:** n/a.
 - **Fidelity:** n/a (an addition).
 - **Components it hits:** queued-stack, chat-message, input-message.
@@ -70,7 +70,7 @@ Ported and matching: the square with `bg-accent`, `overflow-hidden` and `shrink-
 
 - **Cause:** `port choice` (the repository owner chose not to ship the source's photo).
 - **Original:** the source's `public/micka.png` (918x928 PNG). The component has no docs page; its photo is the input-message page's attachment, a `File` named `micka.png` with type `image/png` (`app/docs/input-message/page.tsx:70-72`, `:604-606`).
-- **Port:** `assets/chat-ai/avatar.jpg` (345x345 JPEG, `AVATAR_JPG` in `src/lib/assets.ts`), named `avatar.jpg` and typed `image/jpeg` in the demo's image row (`src/demos/file-thumbnail.tsx:7-11`). The name only surfaces in `alt` and `aria-label` (`src/components/file-thumbnail.tsx:77`, `:102`).
+- **Port:** `apps/demo/assets/chat-ai/avatar.jpg` (345x345 JPEG, `AVATAR_JPG` in `apps/demo/src/lib/assets.ts`), named `avatar.jpg` and typed `image/jpeg` in the demo's image row (`apps/demo/src/demos/file-thumbnail.tsx:10-14`). The name only surfaces in `alt` and `aria-label` (`packages/fluid-functionalism/src/components/file-thumbnail.tsx:77`, `:102`).
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** just this one.

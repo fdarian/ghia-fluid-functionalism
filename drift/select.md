@@ -1,14 +1,14 @@
 # select
 
 Original: `registry/base/select.tsx` (shared: `registry/default/lib/popup.ts`, `hooks/use-keyboard-nav-gate.ts`, `fluid-hover-highlight.tsx`, `lib/size-context.tsx`), demo in `app/docs/select/page.tsx` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/select.tsx`, demo in `src/demos/select.tsx`.
-Popup chrome is shared: `src/lib/popup.tsx`, `src/lib/presence.ts`, `src/lib/list-nav.ts`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/select.tsx`, demo in `apps/demo/src/demos/select.tsx`.
+Popup chrome is shared: `packages/fluid-functionalism/src/lib/popup.tsx`, `src/lib/presence.ts`, `src/lib/list-nav.ts`.
 
 ## The first open of a popup that flips starts from the wrong side
 
 - **Cause:** `gpuix gap`.
 - **Original:** the slide is `y: var(--popup-enter-y)`, set by the resolved `data-side` and read by Motion when the tween starts, after the positioner has landed (`registry/base/select.tsx:470-478`, `registry/default/lib/popup.ts:16-23`).
-- **Port:** the popup enters on `y` ±4, `scaleY` .96 and opacity on `spring.fast`, about `top` or, once flipped, `bottom` (`src/lib/popup.tsx:43-44`, `:66-70`, `:78`). `initial` is read once, at mount, when the side is still the one asked for: a popup that then flips above its trigger starts that first open with the slide of the wrong side (its origin follows at once). From the second open the reported side is already known.
+- **Port:** the popup enters on `y` ±4, `scaleY` .96 and opacity on `spring.fast`, about `top` or, once flipped, `bottom` (`packages/fluid-functionalism/src/lib/popup.tsx:43-44`, `:66-70`, `:78`). `initial` is read once, at mount, when the side is still the one asked for: a popup that then flips above its trigger starts that first open with the slide of the wrong side (its origin follows at once). From the second open the reported side is already known.
 - **gpuix lacks:** `var()` in a Motion key (only the transform style properties substitute it, `docs/fork/paint-and-transforms.md:148`), and an `initial` that follows a signal.
 - **Workaround:** none.
 - **Fidelity:** approximated (the first open of a flipped popup only, 4 px of travel at opacity 0 to 1 over 80 ms).
@@ -64,9 +64,9 @@ Popup chrome is shared: `src/lib/popup.tsx`, `src/lib/presence.ts`, `src/lib/lis
 
 ## An explicit `size` does not scope the parts inside
 
-- **Cause:** `not ported yet` (the port has no provider; the ambient size is the Size row, `sizeChoice()` in `src/lib/theme.ts`).
+- **Cause:** `not ported yet` (the port has no provider; the ambient size is the Size row, `sizeChoice()` in `packages/fluid-functionalism/src/lib/theme.ts`).
 - **Original:** `size` wraps the select in a `SizeProvider` and `SelectTrigger` takes its own `size`, so trigger and popup follow together (`registry/base/select.tsx:99-102`, `:223`, `:278-281`).
-- **Port:** `size?: "default" | "compact"` on `Select` only; omitted, it follows the Size row (`src/components/select.tsx:95`, `:113`).
+- **Port:** `size?: "default" | "compact"` on `Select` only; omitted, it follows the Size row (`packages/fluid-functionalism/src/components/select.tsx:95`, `:113`).
 - **Workaround:** pass `size` to each nested component. `CommandMenuFilters` in the source wraps its children in `SizeProvider size="compact"` and forces `w-auto min-w-0` on every `[role=combobox]` (`command-menu.tsx:996-1021`); the port has neither, so each filter select passes `size="compact"` and `hug` (the `w-auto min-w-0`) itself.
 - **Fidelity:** approximated.
 - **Components it hits:** every component that reads `useSize`.
@@ -82,7 +82,7 @@ Popup chrome is shared: `src/lib/popup.tsx`, `src/lib/presence.ts`, `src/lib/lis
 
 ## Default variant is `inline`, a port-only variant
 
-- **Cause:** `port choice` (serves the app frame's theme picker, `app.tsx:449`, and the site's "Make them yours" card; docstring at `select.tsx:54-58`).
+- **Cause:** `port choice` (serves the app frame's theme picker, `app.tsx:452`, and the site's "Make them yours" card; docstring at `select.tsx:54-58`).
 - **Original:** `variant` is `"bordered"` (default) or `"borderless"` (`select.tsx:241-249`).
 - **Port:** `variant` defaults to `"inline"` (`select.tsx:136`): borderless, compact trigger, 13px text, shows the picked item's icon, popup right-aligned and content-sized like the others (`select.tsx:137-148`, `:396`). Every demo passes `bordered` explicitly.
 - **Workaround:** none.
@@ -93,7 +93,7 @@ Popup chrome is shared: `src/lib/popup.tsx`, `src/lib/presence.ts`, `src/lib/lis
 
 - **Cause:** `port choice` (reason not stated).
 - **Original:** only `hover:bg-hover`; no pressed style (`select.tsx:243-246`).
-- **Port:** `active: { backgroundColor: color.active }` (`src/components/select.tsx:325`).
+- **Port:** `active: { backgroundColor: color.active }` (`packages/fluid-functionalism/src/components/select.tsx:325`).
 - **Workaround:** none.
 - **Fidelity:** approximated (extra state; the popup opens on mouse-down, so it shows briefly).
 - **Components it hits:** just this one.

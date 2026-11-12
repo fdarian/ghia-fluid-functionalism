@@ -1,7 +1,7 @@
 # checkbox-group
 
 Original: `registry/base/checkbox-group.tsx`, with the selected backgrounds in `registry/default/hooks/use-merge-split.tsx`, demo in `app/docs/checkbox-group/page.tsx` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/checkbox-group.tsx` (the row, group and hover machinery it shares with radio-group is in `src/components/choice-group.tsx`), demo in `src/demos/checkbox-group.tsx`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/checkbox-group.tsx` (the row, group and hover machinery it shares with radio-group is in `packages/fluid-functionalism/src/components/choice-group.tsx`), demo in `apps/demo/src/demos/checkbox-group.tsx`.
 
 Same in both (checked against the code): row height, gap and padding per size (36/8/12 and 28/4/10), box 16/14, glyph 18/16, box radius 5/4, 1.5px border, group width 288, hover and selected fills, label colour rule, tab stops (every row), Up/Down wrap, Home/End, Space/Enter on keydown, the shared focus ring (2px out, radius 10, `fast`), no ring after a click, check draw 80 ms in / 40 ms out and no draw at mount (`icon.tsx:98-170`), dark-mode tokens.
 
@@ -36,7 +36,7 @@ Same in both (checked against the code): row height, gap and padding per size (3
 
 - **Cause:** `port choice` (extras are port additions); the sizes-page variant is `not ported yet`.
 - **Original:** the docs page has one example, Basic: Apples, Bananas, Cherries, Dates, Apples checked (`app/docs/checkbox-group/page.tsx:56-77`). Other pages use it with nothing checked at 220 px (`app/components/bento-previews.tsx:288-309`) and as a two-row group inside a compact `SizeProvider` at `w-44` (`app/docs/sizes/page.tsx:498-515`).
-- **Port:** Default (Apples checked, plus a "Checked: ..." readout), Compact (Bananas and Cherries checked) and "Narrow, empty" (the bento preview's five rows, nothing checked, in a 220 px wrapper the group's `maxWidth: 100%` shrinks to) (`src/demos/checkbox-group.tsx`). Missing: the `w-44` two-row group of the sizes page (an explicit `size` scopes no children, see "`size` is read twice").
+- **Port:** Default (Apples checked, plus a "Checked: ..." readout), Compact (Bananas and Cherries checked) and "Narrow, empty" (the bento preview's five rows, nothing checked, in a 220 px wrapper the group's `maxWidth: 100%` shrinks to) (`apps/demo/src/demos/checkbox-group.tsx`). Missing: the `w-44` two-row group of the sizes page (an explicit `size` scopes no children, see "`size` is read twice").
 - **Workaround:** none.
 - **Fidelity:** approximated.
 - **Components it hits:** just this one.

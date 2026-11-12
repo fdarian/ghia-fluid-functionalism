@@ -37,4 +37,4 @@ jobs:
         run: |
           TAG="ghia-fluid-functionalism@$VERSION"
           gh release view "$TAG" || gh release create "$TAG"
-          gh release upload "$TAG" dist/releases/ghia-fluid-functionalism-darwin-arm64.tar.gz --clobber
+          gh release upload "$TAG" apps/demo/dist/releases/ghia-fluid-functionalism-darwin-arm64.tar.gz --clobber

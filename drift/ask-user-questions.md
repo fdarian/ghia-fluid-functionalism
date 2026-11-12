@@ -1,12 +1,12 @@
 # ask-user-questions
 
-Original: `registry/default/ask-user-questions.tsx` (1,880 lines, on Base UI `RadioGroup` / `CheckboxGroup` / `Field`) and `app/docs/ask-user-questions/page.tsx` in the source (fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/ask-user-questions.tsx`, demo in `src/demos/ask-user-questions.tsx`.
+Original: `registry/default/ask-user-questions.tsx` (1,880 lines, on Base UI `RadioGroup` / `CheckboxGroup` / `Field`) and `app/docs/ask-user-questions/page.tsx` in the source (fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/ask-user-questions.tsx`, demo in `apps/demo/src/demos/ask-user-questions.tsx`.
 
 Checked and the same: card, row, chip and footer sizes and padding at the `sm:` step (`ask-user-questions.tsx:1219-1245`, `:1819-1849`; port `:1009-1027`, `:201-297`), all spring values, the height morph (`spring.slow`, `:1259-1264`; port `:80-84`, `:966-978`), controlled / uncontrolled state, answer shapes, roving tab stop, the Other and freeText states, and light and dark colours (all through `color.*`). The demo data (questions, options, copy, the email validator) is identical to the docs page.
 
 ## Keyboard focus ring does not travel
 
-- **Cause:** `not ported yet` (`src/lib/focus-ring.tsx` exists and select uses it).
+- **Cause:** `not ported yet` (`packages/fluid-functionalism/src/lib/focus-ring.tsx` exists and select uses it).
 - **Original:** one `motion.div` ring in `--focus-ring`, 2px outside the row (radius `shape.focusRing`, 10), springs between rows with `spring.fast` and fades in and out; it is never drawn on the Other row (`:932-963`, `:399-402`).
 - **Port:** each row draws its own `focusVisible` outline at offset 2 (`ask-user-questions.tsx:300`), so the ring jumps from row to row and appears and disappears with no fade.
 - **Workaround:** a per-row outline.
@@ -98,7 +98,7 @@ Checked and the same: card, row, chip and footer sizes and padding at the `sm:` 
 
 - **Cause:** `not ported yet` (small details).
 - **Original:** the chip is `font-sans`, `leading-none`, and "⌘" and "↵" are two children with `gap-0.5` (`:1593-1604`, `:1551-1552`). Back, Skip and Continue are `Button size="sm"` with trimmed icon-side padding via `className` (`:1440-1450`, `:1524-1541`).
-- **Port:** one string "⌘↵", no 2px gap, `lineHeight: 11` (`ask-user-questions.tsx:98-122`); `size="compact"`, which is the source's `sm` alias, with the Button's own icon padding (`:1046-1107`; `src/components/button.tsx:39-46`, `:203-208`).
+- **Port:** one string "⌘↵", no 2px gap, `lineHeight: 11` (`ask-user-questions.tsx:98-122`); `size="compact"`, which is the source's `sm` alias, with the Button's own icon padding (`:1046-1107`; `packages/fluid-functionalism/src/components/button.tsx:39-46`, `:203-208`).
 - **Workaround:** `marginLeft: 2` to stand in for the label gap.
 - **Fidelity:** approximated (about a pixel).
 - **Components it hits:** just this one.
@@ -107,7 +107,7 @@ Checked and the same: card, row, chip and footer sizes and padding at the `sm:` 
 
 - **Cause:** `port choice` (the demo page holds several flows; one stealing focus on load would be wrong).
 - **Original:** a freeText question always takes focus when it appears, with `preventScroll` (`:349-354`).
-- **Port:** same, but `autoFocus={false}` turns it off for the first question, and the demo sets it (`ask-user-questions.tsx:338`, `:908`; `src/demos/ask-user-questions.tsx:969`, `:1028`). No `preventScroll`.
+- **Port:** same, but `autoFocus={false}` turns it off for the first question, and the demo sets it (`ask-user-questions.tsx:338`, `:908`; `apps/demo/src/demos/ask-user-questions.tsx:969`, `:1028`). No `preventScroll`.
 - **Workaround:** n/a.
 - **Fidelity:** exact by default.
 - **Components it hits:** just this one.
@@ -116,7 +116,7 @@ Checked and the same: card, row, chip and footer sizes and padding at the `sm:` 
 
 - **Cause:** `not ported yet` (Playground Code tab and Get code, API tables, code tabs) + `port choice` (Replay button, centred card, Controlled readout; reason not stated). Itemised under Port.
 - **Original:** `page.tsx:1182-1309`: Playground, then Multiple questions, Multi-select, With other, Free text, Free text validation, Skippable, Chip on left, Stacked layout and Controlled, each in a `min-h-[560px]` preview aligned to the bottom with a corner Replay icon; the Controlled example has no readout; then four API Reference tables.
-- **Port:** the Playground and the same nine examples in the same order (`src/demos/ask-user-questions.tsx`, `Playground` and `Demo`).
+- **Port:** the Playground and the same nine examples in the same order (`apps/demo/src/demos/ask-user-questions.tsx`, `Playground` and `Demo`).
   - Playground ported with every control, default, the shuffle, the question data and the bottom-anchored 420px stage (min height 560); a control change or Replay remounts the flow from question 1.
   - `not ported yet`: the Playground's synced Code tab, the `?preset=` URL sync and the "Get code" install dialog (preset codec, docs chrome), and the API tables and code tabs.
   - `port choice` (reason not stated): the playground's Replay is the same ghost "Replay" button above the card, not a corner icon (see below).

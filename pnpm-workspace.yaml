@@ -1,8 +1,10 @@
 packages:
-  - .
+  - packages/*
+  - apps/*
 enableGlobalVirtualStore: true
 minimumReleaseAgeExclude:
-  - '@ghia/native@0.11.1'
-  - '@ghia/solid@0.11.1'
+  - "@ghia/native@0.11.1"
+  - "@ghia/solid@0.11.1"
   - ghia-base-ui@0.1.0
+  - tsdown@0.23.5
 packageImportMethod: clone-or-copy

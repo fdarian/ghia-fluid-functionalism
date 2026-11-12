@@ -1,0 +1,17 @@
+{
+	"extends": "@total-typescript/tsconfig/bundler/no-dom/app",
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"noErrorTruncation": true,
+		"noUncheckedIndexedAccess": false,
+		"jsx": "preserve",
+		"jsxImportSource": "@ghia/solid",
+		"types": ["bun"]
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"scripts/**/*.ts",
+		"scripts/**/*.tsx"
+	]
+}

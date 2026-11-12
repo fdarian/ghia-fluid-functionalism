@@ -1,8 +1,8 @@
 # input-group
 
 Original: `registry/default/input-group.tsx`, demo in `app/docs/input-group/page.tsx` of the source
-(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `src/components/input-group.tsx`,
-demo in `src/demos/input-group.tsx`.
+(fluidfunctionalism.com at 0a0377e, kept at `~/.claude/notes/ff-source/`). Ported in `packages/fluid-functionalism/src/components/input-group.tsx`,
+demo in `apps/demo/src/demos/input-group.tsx`.
 
 One entry per place the port looks or behaves differently from the source, whatever the cause. Shared gpuix gaps
 (selector `:has(.x)` and group-has) get a one-line entry here that links to the README row instead of
@@ -31,7 +31,7 @@ repeating it.
 
 ## An explicit `size` does not scope the parts inside
 
-- **Cause:** `not ported yet` (the port has no provider; the ambient size is the Size row, `sizeChoice()` in `src/lib/theme.ts`).
+- **Cause:** `not ported yet` (the port has no provider; the ambient size is the Size row, `sizeChoice()` in `packages/fluid-functionalism/src/lib/theme.ts`).
 - **Original:** the group sets a `SizeProvider` from `size`, and `useSize()` inside each field follows it (`registry/default/input-group.tsx:87`, `:130-132`).
 - **Port:** An omitted `size` follows the Size row (`input-group.tsx:69`); a given one reaches the fields through `GroupContext` (`:42-55`), and nothing is provided to other components in the group.
 - **Workaround:** pass `size` to each nested component.
@@ -42,5 +42,5 @@ repeating it.
 
 - **Cause:** `port choice` (the demo is a showcase card, not a docs page; reason not stated beyond that).
 - **Original:** `app/docs/input-group/page.tsx`: Basic (one field, Search icon), Multiple Fields (Name, Email with Mail icon), Error State (`bad@`), each in a `ComponentPreview` with code, then two props tables.
-- **Port:** the same three, in `DemoCard`s (`src/demos/input-group.tsx`), with the default and a compact group side by side and the default error field next to a compact one and a disabled one. Extras: compact, compact error, disabled. `labelHidden` is not shown in either demo. Code snippets and props tables are not ported.
+- **Port:** the same three, in `DemoCard`s (`apps/demo/src/demos/input-group.tsx`), with the default and a compact group side by side and the default error field next to a compact one and a disabled one. Extras: compact, compact error, disabled. `labelHidden` is not shown in either demo. Code snippets and props tables are not ported.
 - **Fidelity:** all source variants present; three extra.
