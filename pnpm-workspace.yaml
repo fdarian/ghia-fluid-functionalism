@@ -8,3 +8,10 @@ minimumReleaseAgeExclude:
   - ghia-base-ui@0.1.1
   - tsdown@0.23.5
 packageImportMethod: clone-or-copy
+# Temporary: local sources until ghia 0.12.1 and ghia-base-ui are published. `file:`, not `link:`, so
+# solid-js and @ghia/solid resolve once from this workspace (check-single-instance). ghia-base-ui is a `pnpm pack`
+# tarball because its `exports` point at src/ and only publishConfig.exports (applied by pack) points at dist/.
+overrides:
+  "@ghia/native": file:/Users/farreldarian/code/fdarian/ghia/packages/native
+  "@ghia/solid": file:/Users/farreldarian/code/fdarian/ghia/packages/solid
+  ghia-base-ui: file:/tmp/ghia-links/ghia-base-ui-0.1.1.tgz

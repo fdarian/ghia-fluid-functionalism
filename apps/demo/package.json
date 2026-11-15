@@ -18,15 +18,19 @@
 		"footprint": "bun scripts/footprint.tsx"
 	},
 	"dependencies": {
-		"@ghia/native": "0.11.1",
-		"@ghia/solid": "0.11.1",
+		"@ghia/native": "0.12.1",
+		"@ghia/solid": "0.12.1",
 		"ghia-base-ui": "0.1.1",
 		"ghia-fluid-functionalism": "workspace:*",
 		"solid-js": "1.9.15"
 	},
 	"devDependencies": {
+		"@babel/core": "7.29.7",
+		"@babel/preset-typescript": "7.29.7",
 		"@total-typescript/tsconfig": "1.0.4",
+		"@types/babel__core": "7.20.5",
 		"@types/bun": "1.4.4",
+		"babel-preset-solid": "1.9.15",
 		"typescript": "7.0.2"
 	}
 }

@@ -97,11 +97,11 @@
 		"ghia-base-ui": "0.1.1"
 	},
 	"peerDependencies": {
-		"@ghia/solid": "0.11.1",
+		"@ghia/solid": "0.12.1",
 		"solid-js": "1.9.15"
 	},
 	"devDependencies": {
-		"@ghia/solid": "0.11.1",
+		"@ghia/solid": "0.12.1",
 		"@total-typescript/tsconfig": "1.0.4",
 		"@types/bun": "1.4.4",
 		"ghia-base-ui": "0.1.1",
