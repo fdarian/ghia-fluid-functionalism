@@ -57,6 +57,7 @@ if (rendererScrollTo === undefined) {
 }
 Object.defineProperty(renderer, 'scrollTo', {
 	writable: true,
+	configurable: true,
 	value(id: number, left: number, top: number, behavior?: string) {
 		writes.push({ id, top });
 		rendererScrollTo.call(renderer, id, left, top, behavior);
@@ -290,6 +291,8 @@ const typeFocus = () => {
 	);
 };
 
+// `focusElement` refuses an element scrolled out of the window (it returns false), so bring the trigger in first.
+await kit.scrollIntoView('filters-type-trigger');
 await kit.focus('filters-type-trigger');
 await kit.press('Enter');
 kit.check('Enter opens the type filter', kit.exists('filters-type-list'));
@@ -409,6 +412,7 @@ let activeDomId: unknown;
 const applyBatch = renderer.applyBatch;
 Object.defineProperty(renderer, 'applyBatch', {
 	writable: true,
+	configurable: true,
 	value(batch: Uint8Array) {
 		for (const op of decodeWireBatchForTest(batch)) {
 			if (
