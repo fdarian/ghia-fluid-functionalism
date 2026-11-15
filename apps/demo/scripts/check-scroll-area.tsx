@@ -24,7 +24,7 @@ const check = await createCheck(() => (
 					aria-label="Field"
 					value={text()}
 					style={{ height: 24, width: 200 }}
-					onChange={(event) => {
+					onInput={(event) => {
 						if (event.value === undefined) throw new Error('no value');
 						setText(event.value);
 					}}

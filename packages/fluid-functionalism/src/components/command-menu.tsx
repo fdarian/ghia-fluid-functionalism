@@ -630,9 +630,9 @@ export function CommandMenuInput(props: {
 		const row = menu.rows()[index];
 		if (row !== undefined) menu.select(row);
 	};
-	const onChange = (event: DomEvent) => {
+	const onInput = (event: DomEvent) => {
 		if (event.value === undefined) {
-			throw new Error('Command menu input change without a value');
+			throw new Error('Command menu input without a value');
 		}
 		menu.setQuery(event.value);
 	};
@@ -692,7 +692,7 @@ export function CommandMenuInput(props: {
 				}}
 				onFocus={() => setFocused(true)}
 				onBlur={() => setFocused(false)}
-				onChange={onChange}
+				onInput={onInput}
 				onKeyDown={onKeyDown}
 				style={{
 					flexGrow: 1,

@@ -853,7 +853,7 @@ export function AskUserQuestions(props: {
 							question()?.otherPlaceholder ?? 'Describe in your own words'
 						}
 						theme={fieldTheme()}
-						onChange={(event: DomEvent) => setOther(event.value ?? '')}
+						onInput={(event: DomEvent) => setOther(event.value ?? '')}
 						onFocus={() => {
 							setTextFocused(true);
 							hover.setActiveIndex(otherIndex());
@@ -931,7 +931,7 @@ export function AskUserQuestions(props: {
 					placeholder={question()?.freeTextPlaceholder ?? 'Type your answer…'}
 					aria-label={question()?.title}
 					theme={fieldTheme()}
-					onChange={(event: DomEvent) => setOther(event.value ?? '')}
+					onInput={(event: DomEvent) => setOther(event.value ?? '')}
 					onFocus={() => setTextFocused(true)}
 					onBlur={() => setTextFocused(false)}
 					onKeyDown={multiline ? undefined : submitOtherOnEnter}

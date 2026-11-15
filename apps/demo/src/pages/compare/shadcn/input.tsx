@@ -54,7 +54,7 @@ export function ScInputField(props: {
 						textDim: sc.mutedForeground,
 						caret: sc.foreground,
 					}}
-					onChange={(event) => {
+					onInput={(event) => {
 						if (event.value === undefined) {
 							throw new Error('Input change without a value');
 						}

@@ -130,7 +130,7 @@ export function SearchField(props: {
 				}}
 				onFocus={() => setFocused(true)}
 				onBlur={() => setFocused(false)}
-				onChange={(event: DomEvent) => {
+				onInput={(event: DomEvent) => {
 					if (event.value === undefined) {
 						throw new Error('Search change without a value');
 					}

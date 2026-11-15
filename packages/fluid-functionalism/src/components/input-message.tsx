@@ -1127,7 +1127,7 @@ export function InputMessage(props: InputMessageProps) {
 						textDim: color.mutedForeground,
 						caret: color.foreground,
 					}}
-					onChange={(event) => {
+					onInput={(event) => {
 						if (event.value === undefined) {
 							throw new Error('InputMessage change without a value');
 						}

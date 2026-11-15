@@ -291,7 +291,7 @@ function ValueDisplay(props: {
 						textDim: color.mutedForeground,
 						caret: color.foreground,
 					}}
-					onChange={(event: DomEvent) => {
+					onInput={(event: DomEvent) => {
 						if (event.value === undefined) {
 							throw new Error('Slider edit change without a value');
 						}

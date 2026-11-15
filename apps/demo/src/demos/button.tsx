@@ -112,7 +112,7 @@ function PlayText(props: {
 				}}
 				onFocus={() => setFocused(true)}
 				onBlur={() => setFocused(false)}
-				onChange={(event) => {
+				onInput={(event) => {
 					if (event.value === undefined) {
 						throw new Error('PlayText change without a value');
 					}

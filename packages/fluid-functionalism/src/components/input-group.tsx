@@ -251,7 +251,7 @@ export function InputField(props: {
 					}}
 					onFocus={() => setFocused(true)}
 					onBlur={() => setFocused(false)}
-					onChange={(event) => {
+					onInput={(event) => {
 						if (event.value === undefined) {
 							throw new Error('InputField change without a value');
 						}
