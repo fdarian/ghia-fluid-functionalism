@@ -1,6 +1,6 @@
 {
 	"name": "ghia-fluid-functionalism",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"type": "module",
 	"description": "Fluid Functionalism's components as a Solid library on ghia, plus an npx shim that opens the demo app natively on Apple Silicon macOS.",
 	"repository": {
