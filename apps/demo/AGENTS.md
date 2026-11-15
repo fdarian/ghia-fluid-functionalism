@@ -18,7 +18,7 @@ Run every `bun` script from this directory: `bunfig.toml` here holds the Solid t
 - `pnpm screenshots [slug]` — one page, or about 25 minutes for all of them.
 - `pnpm perf [slug...] --label x` — live frame times on the real window into `perf/<label>.json` (README, "Harness and shared-lib notes").
 - `pnpm footprint [slug...] --label x` — idle CPU and memory per page in a fresh compiled child, headless; `--window` for a real window, `--tour` for what a session leaves behind; results land in `perf/`.
-- `pnpm build` — `dist/fluid-functionalism` (Bun compile) and `bundle/Fluid Functionalism.app`; needs `cargo install cargo-packager --locked` (README, "Build the app").
+- `pnpm build` — `dist/fluid-functionalism` (Bun compile) and `bundle/Fluid Functionalism.app` (ad-hoc signed, so it can be copied to /Applications); needs `cargo install cargo-packager --locked` (README, "Build the app").
 - `release:binary` — the release tarball in `dist/releases/` and its sha256 in the library's `dist/checksums.json`; part of `ci:release` after the library `build`, run it only in CI.
 
 ## Conventions

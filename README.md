@@ -103,7 +103,7 @@ pnpm build    # runs apps/demo/scripts/build.ts; outputs land in apps/demo/
 | Output | Size | What |
 |---|---|---|
 | `apps/demo/dist/fluid-functionalism` | 99 MB | The whole app as one binary (`Bun.build` compile, minified) |
-| `apps/demo/bundle/Fluid Functionalism.app` | 99 MB | That binary wrapped by `cargo packager` (`apps/demo/packager.json`), with `apps/demo/dist/AppIcon.icns` made from `apps/demo/assets/icon/icon-1024.png`, the site's FF favicon |
+| `apps/demo/bundle/Fluid Functionalism.app` | 99 MB | That binary wrapped by `cargo packager` (`apps/demo/packager.json`), with `apps/demo/dist/AppIcon.icns` made from `apps/demo/assets/icon/icon-1024.png`, the site's FF favicon; ad-hoc signed by the build, so it can be copied to /Applications |
 
 About 30 MB of the binary is the `@ghia/native` addon. Launch to first window, measured: 3.2 s the first time, about
 1.4 s after.

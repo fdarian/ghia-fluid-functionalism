@@ -1,6 +1,7 @@
 /**
  * `pnpm build`: compiles the app to one binary and wraps it in
- * `bundle/Fluid Functionalism.app`. Needs `cargo-packager` on PATH
+ * `bundle/Fluid Functionalism.app`, ad-hoc signed so it can be copied to
+ * /Applications. Needs `cargo-packager` on PATH
  * (`cargo install cargo-packager --locked`).
  */
 import { mkdirSync, rmSync } from 'node:fs';
@@ -12,6 +13,7 @@ const root = join(import.meta.dir, '..');
 const dist = join(root, 'dist');
 const iconSource = join(root, 'assets/icon/icon-1024.png');
 const icns = join(dist, 'AppIcon.icns');
+const app = join(root, 'bundle/Fluid Functionalism.app');
 
 // [pixel size, iconset file name], the set `iconutil` expects.
 const ICONSET: [number, string][] = [
@@ -83,7 +85,16 @@ function pack() {
 	run(['cargo', 'packager', '--release', '--config', 'packager.json'], { env });
 }
 
+// Bun's compiled binary carries a signature Apple Silicon rejects, so the
+// bundle is re-signed ad hoc; without it a copied .app can be killed at launch.
+function sign() {
+	run(['codesign', '--force', '--deep', '--sign', '-', app]);
+	run(['codesign', '--verify', '--deep', '--strict', app]);
+}
+
 mkdirSync(dist, { recursive: true });
 await compileApp(join(dist, 'fluid-functionalism'));
 makeIcns();
 pack();
+sign();
+console.log(`built ${app}`);
