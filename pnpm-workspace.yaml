@@ -14,4 +14,4 @@ packageImportMethod: clone-or-copy
 overrides:
   "@ghia/native": file:/Users/farreldarian/code/fdarian/ghia/packages/native
   "@ghia/solid": file:/Users/farreldarian/code/fdarian/ghia/packages/solid
-  ghia-base-ui: file:/tmp/ghia-links/ghia-base-ui-0.1.1.tgz
+  ghia-base-ui: file:/Users/farreldarian/Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz

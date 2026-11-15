@@ -165,7 +165,7 @@ settings:
 overrides:
   '@ghia/native': file:/Users/farreldarian/code/fdarian/ghia/packages/native
   '@ghia/solid': file:/Users/farreldarian/code/fdarian/ghia/packages/solid
-  ghia-base-ui: file:/tmp/ghia-links/ghia-base-ui-0.1.1.tgz
+  ghia-base-ui: file:/Users/farreldarian/Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz
 
 importers:
 
@@ -190,8 +190,8 @@ importers:
         specifier: file:/Users/farreldarian/code/fdarian/ghia/packages/solid
         version: file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1))
       ghia-base-ui:
-        specifier: file:/tmp/ghia-links/ghia-base-ui-0.1.1.tgz
-        version: file:../../../../../../tmp/ghia-links/ghia-base-ui-0.1.1.tgz(@ghia/solid@file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1)))(solid-js@1.9.15)
+        specifier: file:/Users/farreldarian/Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz
+        version: file:../../../../Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz(@ghia/solid@file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1)))(solid-js@1.9.15)
       ghia-fluid-functionalism:
         specifier: workspace:*
         version: link:../../packages/fluid-functionalism
@@ -227,8 +227,8 @@ importers:
         specifier: file:/Users/farreldarian/code/fdarian/ghia/packages/solid
         version: file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1))
       ghia-base-ui:
-        specifier: file:/tmp/ghia-links/ghia-base-ui-0.1.1.tgz
-        version: file:../../../../../../tmp/ghia-links/ghia-base-ui-0.1.1.tgz(@ghia/solid@file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1)))(solid-js@1.9.15)
+        specifier: file:/Users/farreldarian/Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz
+        version: file:../../../../Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz(@ghia/solid@file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1)))(solid-js@1.9.15)
     devDependencies:
       '@total-typescript/tsconfig':
         specifier: 1.0.4
@@ -1142,8 +1142,8 @@ packages:
     resolution: {integrity: sha512-X6fBC0pmImC70gvX2zm56go9hx0MyoGVdG0tUCkg/D+Xnh5TJsOZ7iDbOdI3PvmtrDxnu1YdDufpK2QJX1Meqw==}
     engines: {node: '>=20.20.0'}
 
-  ghia-base-ui@file:../../../../../../tmp/ghia-links/ghia-base-ui-0.1.1.tgz:
-    resolution: {integrity: sha512-Aye2uakYOETmmFynJ2UWrsZHpo9QnW5bj7nuiyKiLDhrhR7ZUHtuaQ27M3VxOTeZh+ngCGCOurL9QUYJvmVFAw==, tarball: file:../../../../../../tmp/ghia-links/ghia-base-ui-0.1.1.tgz}
+  ghia-base-ui@file:../../../../Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz:
+    resolution: {integrity: sha512-Aye2uakYOETmmFynJ2UWrsZHpo9QnW5bj7nuiyKiLDhrhR7ZUHtuaQ27M3VxOTeZh+ngCGCOurL9QUYJvmVFAw==, tarball: file:../../../../Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz}
     version: 0.1.1
     peerDependencies:
       '@ghia/solid': '*'
@@ -2330,7 +2330,7 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
-  ghia-base-ui@file:../../../../../../tmp/ghia-links/ghia-base-ui-0.1.1.tgz(@ghia/solid@file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1)))(solid-js@1.9.15):
+  ghia-base-ui@file:../../../../Library/Caches/ghia-links/ghia-base-ui-0.1.1.tgz(@ghia/solid@file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1)))(solid-js@1.9.15):
     dependencies:
       '@ghia/solid': file:../../../../code/fdarian/ghia/packages/solid(solid-js@1.9.15)(vite@8.3.8(@types/node@26.6.5)(yaml@2.9.1))
       solid-js: 1.9.15
