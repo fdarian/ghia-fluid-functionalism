@@ -148,7 +148,7 @@ export function InputField(props: {
 		if (inputElement === undefined) {
 			throw new Error('InputField input is not mounted');
 		}
-		renderer.focusElement?.(inputElement.id);
+		renderer.focusElement?.(inputElement.nativeId);
 	};
 
 	return (

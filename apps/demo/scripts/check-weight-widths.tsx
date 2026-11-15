@@ -697,7 +697,7 @@ async function runSyntheticParity() {
 	const widthOf = (variant: string, index: number) => {
 		const element = labels.get(key(variant, index));
 		if (element === undefined) throw new Error(`no label ${variant} ${index}`);
-		const box = kit.renderer.getElementBounds(element.id);
+		const box = kit.renderer.getElementBounds(element.nativeId);
 		if (box === null) throw new Error(`no painted bounds ${variant} ${index}`);
 		return box.width;
 	};

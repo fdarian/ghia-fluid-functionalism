@@ -26,7 +26,7 @@ export function ScRadioGroup(props: {
 		if (renderer.focusElement === undefined) {
 			throw new Error('This renderer cannot move focus');
 		}
-		renderer.focusElement(target.id);
+		renderer.focusElement(target.nativeId);
 		props.onValueChange(item.value);
 	};
 	const onKeyDown = (index: number) => (event: KeyEvent) => {

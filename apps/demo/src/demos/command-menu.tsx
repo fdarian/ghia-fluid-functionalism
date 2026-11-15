@@ -739,7 +739,7 @@ async function reveal(
 		throw new Error(`no section ${id}`);
 	}
 	const top = () => {
-		const bounds = scrollRenderer?.getElementBounds?.(section.id);
+		const bounds = scrollRenderer?.getElementBounds?.(section.nativeId);
 		if (bounds == null) throw new Error(`no bounds for section ${id}`);
 		return bounds.y;
 	};

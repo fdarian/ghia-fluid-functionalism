@@ -7,6 +7,7 @@
 import { writeSync } from 'node:fs';
 import type { GpuixRenderer, WindowOptions } from '@ghia/native';
 import { startFrameLoop, type WindowFontsOption } from '@ghia/native/runtime';
+import { decodeWireBatchForTest } from '@ghia/native/testing';
 import { createRenderer } from '@ghia/solid';
 
 /** Page sweeps run over this column of x; the sidebar is 256 wide. */
@@ -110,8 +111,6 @@ interface Recording {
 	moves: number;
 }
 
-const OP_PATTERN = /(?:^\[|\],)\["(\w+)"/g;
-
 function sleep(ms: number) {
 	return new Promise<void>((resolve) => setTimeout(resolve, ms));
 }
@@ -161,12 +160,11 @@ function instrument(renderer: GpuixRenderer, state: { recording?: Recording }) {
 	};
 
 	const applyBatch = renderer.applyBatch.bind(renderer);
-	renderer.applyBatch = (json) => {
+	renderer.applyBatch = (batch) => {
 		const recording = state.recording;
-		const ops: string[] = [];
-		for (const match of json.matchAll(OP_PATTERN)) ops.push(match[1]);
+		const ops = decodeWireBatchForTest(batch).map((op) => op[0]);
 		const started = performance.now();
-		const result = applyBatch(json);
+		const result = applyBatch(batch);
 		const elapsed = performance.now() - started;
 		if (recording !== undefined) sampleDraw(renderer, recording);
 		for (const op of ops) if (op === 'createElement') created++;

@@ -19,6 +19,7 @@
  */
 import { loadavg } from 'node:os';
 import { parseArgs } from 'node:util';
+import { decodeWireBatchForTest } from '@ghia/native/testing';
 import { createCheck } from './check-kit';
 
 const args = parseArgs({
@@ -181,16 +182,16 @@ function instrument() {
 	});
 	const applyBatch = renderer.applyBatch;
 	Object.assign(renderer, {
-		applyBatch(json: string) {
+		applyBatch(batch: Uint8Array) {
 			const start = performance.now();
 			try {
-				return applyBatch(json);
+				return applyBatch(batch);
 			} finally {
 				const dur = performance.now() - start;
 				acc.applyMs += dur;
 				let ops = 0;
 				let creates = 0;
-				for (const op of JSON.parse(json) as string[][]) {
+				for (const op of decodeWireBatchForTest(batch)) {
 					const name = String(op[0]);
 					acc.ops[name] = (acc.ops[name] ?? 0) + 1;
 					ops++;

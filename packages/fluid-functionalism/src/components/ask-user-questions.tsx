@@ -511,12 +511,12 @@ export function AskUserQuestions(props: {
 	const focusRow = (target: number) => {
 		const element = rowElements.get(target);
 		if (element === undefined) return;
-		renderer.focusElement?.(element.id);
+		renderer.focusElement?.(element.nativeId);
 	};
 	let otherElement: HostElement | undefined;
 	const focusOther = () => {
 		if (otherElement === undefined) return;
-		renderer.focusElement?.(otherElement.id);
+		renderer.focusElement?.(otherElement.nativeId);
 	};
 	const groupHolds = (element: object | null) => {
 		if (element === null) return false;

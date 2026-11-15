@@ -727,7 +727,7 @@ export function InputMessage(props: InputMessageProps) {
 
 	const focusTextarea = () => {
 		if (textarea === undefined) throw new Error('InputMessage is not mounted');
-		renderer.focusElement?.(textarea.id);
+		renderer.focusElement?.(textarea.nativeId);
 	};
 
 	const acceptSuggestion = (text: string) => {

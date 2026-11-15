@@ -12,6 +12,10 @@
  * page from the palette, of one ArrowDown, and of an idle window.
  */
 
+import {
+	decodeWireBatchForTest,
+	encodeWireBatchForTest,
+} from '@ghia/native/testing';
 import { formatShortcut } from 'ghia-fluid-functionalism/command-menu';
 import { color, setSizeChoice } from 'ghia-fluid-functionalism/theme';
 import { createCheck } from './check-kit';
@@ -405,8 +409,8 @@ let activeDomId: unknown;
 const applyBatch = renderer.applyBatch;
 Object.defineProperty(renderer, 'applyBatch', {
 	writable: true,
-	value(json: string) {
-		for (const op of JSON.parse(json) as unknown[][]) {
+	value(batch: Uint8Array) {
+		for (const op of decodeWireBatchForTest(batch)) {
 			if (
 				op[0] === 'setCustomProp' &&
 				op[1] === menuInputId &&
@@ -414,7 +418,7 @@ Object.defineProperty(renderer, 'applyBatch', {
 			)
 				activeDomId = op[3];
 		}
-		return applyBatch.call(renderer, json);
+		return applyBatch.call(renderer, batch);
 	},
 });
 const activeRow = (domId: unknown) => {
@@ -967,7 +971,7 @@ const probeStyle = renderer.getElement(probeId)?.style;
 if (probeStyle === undefined) throw new Error('the probe target vanished');
 const readId = kit.element('details-list').id;
 const writeStyle = (style: Record<string, unknown>) =>
-	renderer.applyBatch(JSON.stringify([['setStyle', probeId, style]]));
+	renderer.applyBatch(encodeWireBatchForTest([['setStyle', probeId, style]]));
 const median = (values: number[]) =>
 	[...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
 /** Writes `changed`, times one `getElementBounds`, restores, and draws so the next rep starts clean. */

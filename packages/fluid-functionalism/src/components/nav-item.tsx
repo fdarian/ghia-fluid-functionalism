@@ -94,7 +94,7 @@ export function NavItem(props: {
 		if (target === undefined) return;
 		event.preventDefault();
 		const next = scope.elements.get(target);
-		if (next !== undefined) renderer.focusElement?.(next.id);
+		if (next !== undefined) renderer.focusElement?.(next.nativeId);
 	};
 
 	return (

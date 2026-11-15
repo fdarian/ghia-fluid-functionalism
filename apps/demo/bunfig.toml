@@ -1,4 +1,4 @@
-preload = ["@ghia/solid/preload", "./scripts/registry-preload.ts"]
+preload = ["./scripts/solid-preload.ts", "./scripts/registry-preload.ts"]
 
 [test]
-preload = ["@ghia/solid/preload", "./scripts/registry-preload.ts"]
+preload = ["./scripts/solid-preload.ts", "./scripts/registry-preload.ts"]

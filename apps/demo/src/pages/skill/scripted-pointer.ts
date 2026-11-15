@@ -4,17 +4,17 @@ import {
 	useGpuixRequired,
 } from '@ghia/solid';
 
-type HostNode = HostElement['children'][number];
+type HostNode = HostElement['childList'][number];
 
 /** Every element under `root`, by id. */
 function descendantsOf(root: HostElement) {
 	const found = new Map<number, HostElement>();
 	const visit = (node: HostNode) => {
 		if (node.kind !== 'element') return;
-		found.set(node.id, node);
-		for (const child of node.children) visit(child);
+		found.set(node.nativeId, node);
+		for (const child of node.childList) visit(child);
 	};
-	for (const child of root.children) visit(child);
+	for (const child of root.childList) visit(child);
 	return found;
 }
 
@@ -54,7 +54,7 @@ export function createScriptedPointer(root: () => HostElement | undefined) {
 		if (typeof handler !== 'function') return;
 		const eventType = type.slice('on'.length).toLowerCase();
 		const event: HostMouseEvent = {
-			elementId: element.id,
+			elementId: element.nativeId,
 			eventType,
 			type: eventType,
 			x: at.x,
@@ -66,9 +66,13 @@ export function createScriptedPointer(root: () => HostElement | undefined) {
 			relatedTarget: null,
 			composedPath: () => [element],
 			eventPhase: 2,
+			get nativeEvent() {
+				return event;
+			},
 			bubbles: false,
 			cancelable: false,
 			timeStamp: performance.now(),
+			isTrusted: false,
 			defaultPrevented: false,
 			stopPropagation() {},
 			stopImmediatePropagation() {},
@@ -77,6 +81,11 @@ export function createScriptedPointer(root: () => HostElement | undefined) {
 			pointerType: 'mouse',
 			movementX: 0,
 			movementY: 0,
+			shiftKey: false,
+			ctrlKey: false,
+			altKey: false,
+			metaKey: false,
+			getModifierState: () => false,
 		};
 		scripted.add(event);
 		handler(event);

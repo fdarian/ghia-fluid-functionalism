@@ -581,7 +581,7 @@ function Rail(props: {
 					press.capture(event);
 					setDragging(true);
 					apply(event);
-					if (thumb !== undefined) renderer.focusElement?.(thumb.id);
+					if (thumb !== undefined) renderer.focusElement?.(thumb.nativeId);
 				}}
 				onMouseMove={(event) => {
 					if (dragging()) apply(event);
@@ -1116,7 +1116,7 @@ function ColorInput(props: {
 
 	const focusInput = () => {
 		if (input === undefined) throw new Error('ColorInput is not mounted');
-		renderer.focusElement?.(input.id);
+		renderer.focusElement?.(input.nativeId);
 	};
 
 	const commitDraft = () => {

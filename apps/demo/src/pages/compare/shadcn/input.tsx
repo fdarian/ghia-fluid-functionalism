@@ -14,7 +14,7 @@ export function ScInputField(props: {
 	let input: HostElement | undefined;
 	const focusInput = () => {
 		if (input === undefined) throw new Error('ScInputField is not mounted');
-		renderer.focusElement?.(input.id);
+		renderer.focusElement?.(input.nativeId);
 	};
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>

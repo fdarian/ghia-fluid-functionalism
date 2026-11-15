@@ -643,7 +643,7 @@ export function CommandMenuInput(props: {
 				if (inputElement === undefined) {
 					throw new Error('Command menu input is not mounted');
 				}
-				renderer.focusElement?.(inputElement.id);
+				renderer.focusElement?.(inputElement.nativeId);
 			}}
 			style={{
 				display: 'flex',

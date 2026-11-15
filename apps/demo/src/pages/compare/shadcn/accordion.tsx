@@ -94,7 +94,7 @@ export function ScAccordion(props: {
 		if (renderer.focusElement === undefined) {
 			throw new Error('This renderer cannot move focus');
 		}
-		renderer.focusElement(target.id);
+		renderer.focusElement(target.nativeId);
 	};
 	const onKeyDown = (index: number) => (event: KeyEvent) => {
 		const last = props.items.length - 1;
