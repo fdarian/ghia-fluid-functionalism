@@ -94,17 +94,17 @@
 		}
 	},
 	"dependencies": {
-		"ghia-base-ui": "0.1.1"
+		"ghia-base-ui": "0.2.0"
 	},
 	"peerDependencies": {
-		"@ghia/solid": "0.12.1",
+		"@ghia/solid": "0.13.0",
 		"solid-js": "1.9.15"
 	},
 	"devDependencies": {
-		"@ghia/solid": "0.12.1",
+		"@ghia/solid": "0.13.0",
 		"@total-typescript/tsconfig": "1.0.4",
 		"@types/bun": "1.4.4",
-		"ghia-base-ui": "0.1.1",
+		"ghia-base-ui": "0.2.0",
 		"rolldown-plugin-solid": "0.2.1",
 		"solid-js": "1.9.15",
 		"tsdown": "0.23.5",
