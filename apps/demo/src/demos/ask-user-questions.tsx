@@ -1028,7 +1028,7 @@ function ControlledExample() {
 						autoFocus={false}
 					/>
 				</div>
-				<text
+				<div
 					style={{
 						...scale.caption,
 						color: color.mutedForeground,
@@ -1036,7 +1036,7 @@ function ControlledExample() {
 					}}
 				>
 					{readout()}
-				</text>
+				</div>
 			</div>
 		</DemoCard>
 	);

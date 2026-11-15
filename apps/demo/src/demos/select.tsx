@@ -252,12 +252,12 @@ export function Demo() {
 							placeholder="Name"
 							style={{ width: 120, height: 28 }}
 						/>
-						<text
+						<div
 							id="form-plan-label"
 							style={{ ...scale.caption, color: color.mutedForeground }}
 						>
 							Plan
-						</text>
+						</div>
 						<Select
 							testId="form-plan"
 							variant="bordered"
@@ -280,9 +280,9 @@ export function Demo() {
 						>
 							Submit
 						</Button>
-						<text style={{ ...scale.caption, color: color.mutedForeground }}>
+						<div style={{ ...scale.caption, color: color.mutedForeground }}>
 							{`submitted: ${submitted()}`}
-						</text>
+						</div>
 					</DemoRow>
 				</form>
 			</DemoCard>

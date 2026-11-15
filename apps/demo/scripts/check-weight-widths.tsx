@@ -141,7 +141,7 @@ const partA = await createCheck(
 			}}
 		>
 			{(['normal', 'semibold', 'bold'] as const).map((name) => (
-				<text
+				<div
 					testId={`probe-${name}`}
 					style={{
 						whiteSpace: 'nowrap',
@@ -150,7 +150,7 @@ const partA = await createCheck(
 					}}
 				>
 					{probe()}
-				</text>
+				</div>
 			))}
 		</div>
 	),
@@ -309,17 +309,16 @@ function under(tree: Tree, id: number, testId: string) {
 const inlineGrids = new Map<number, boolean>();
 
 /**
- * A `StableLabel`: an inline-grid div of texts with the same words (hidden
- * copies and the visible one last). The tree has no styles, so the grid is
- * confirmed once per element.
+ * A `StableLabel`: an inline-grid div of copies with the same words (hidden
+ * copies and the visible one last; a copy is a div or span holding a `#text`).
+ * The tree has no styles, so the grid is confirmed once per element.
  */
 function findLabels(kit: Kit, tree: Tree, watch: string | undefined) {
 	const found: number[] = [];
 	for (const node of tree.nodes.values()) {
 		if (node.type !== 'div' || node.bounds === undefined) continue;
 		const copies = childrenOf(tree, node.id);
-		if (copies.length < 2 || copies.some((copy) => copy.type !== 'text'))
-			continue;
+		if (copies.length < 2) continue;
 		const words = textOf(copies[0]);
 		if (words === '' || copies.some((copy) => textOf(copy) !== words)) continue;
 		if (watch !== undefined && !under(tree, node.id, watch)) continue;
@@ -663,9 +662,9 @@ async function runSyntheticParity() {
 									}
 									{...variant.props}
 								/>
-								<text style={{ color: color.mutedForeground, fontSize: 13 }}>
+								<div style={{ color: color.mutedForeground, fontSize: 13 }}>
 									after
-								</text>
+								</div>
 							</div>
 						)}
 					</For>
@@ -676,7 +675,7 @@ async function runSyntheticParity() {
 					<div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
 						<For each={['normal', 'semibold'] as const}>
 							{(name) => (
-								<text
+								<div
 									testId={`copy-${name}-${index()}`}
 									style={{
 										...scale.body,
@@ -685,7 +684,7 @@ async function runSyntheticParity() {
 									}}
 								>
 									{text}
-								</text>
+								</div>
 							)}
 						</For>
 					</div>

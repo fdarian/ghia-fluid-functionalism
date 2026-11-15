@@ -127,7 +127,7 @@ function HeightGuides(props: { height: number }) {
 				}}
 			>
 				<HeightArrow height={props.height} />
-				<text
+				<div
 					style={{
 						...siteType.caption,
 						fontVariationSettings: weight.semibold,
@@ -136,7 +136,7 @@ function HeightGuides(props: { height: number }) {
 					}}
 				>
 					{`${props.height}px`}
-				</text>
+				</div>
 			</div>
 		</>
 	);
@@ -157,9 +157,9 @@ function ToolbarRow(props: { step: SizeChoice }) {
 				width: '100%',
 			}}
 		>
-			<text style={{ ...siteType.caption, color: color.mutedForeground }}>
+			<div style={{ ...siteType.caption, color: color.mutedForeground }}>
 				{props.step === 'default' ? 'Default · 36px' : 'Compact · 28px'}
-			</text>
+			</div>
 			<div style={{ position: 'relative', width: '100%' }}>
 				<div
 					style={{

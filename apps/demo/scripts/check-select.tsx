@@ -109,7 +109,7 @@ const k = await createCheck(
 					placeholder="Pick"
 				/>
 				<Button testId="after">After</Button>
-				<text>{`picked: ${picked()}`}</text>
+				<div>{`picked: ${picked()}`}</div>
 				<Dialog>
 					<DialogTrigger>
 						<Button testId="dialog-open">Open dialog</Button>

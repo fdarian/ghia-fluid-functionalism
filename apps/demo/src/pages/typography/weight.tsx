@@ -145,7 +145,7 @@ function WeightItem(props: {
 					cursor: 'pointer',
 				}}
 			>
-				<text
+				<div
 					style={{
 						...labelStyle(props.selected),
 						color:
@@ -156,10 +156,10 @@ function WeightItem(props: {
 					}}
 				>
 					{MENU_LABEL}
-				</text>
+				</div>
 			</div>
 			{[false, true].map((heavy) => (
-				<text
+				<div
 					aria-hidden
 					onLayout={(event) =>
 						(heavy ? setHeavyWidth : setRegularWidth)(event.width)
@@ -174,7 +174,7 @@ function WeightItem(props: {
 					}}
 				>
 					{MENU_LABEL}
-				</text>
+				</div>
 			))}
 			{regularWidth() === undefined ? null : (
 				<div

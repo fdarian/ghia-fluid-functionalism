@@ -38,7 +38,7 @@ export function Rule(props: { children: JSX.Element }) {
 export function H3(props: { children: string; marginTop: number }) {
 	return (
 		<div style={{ marginTop: props.marginTop, marginBottom: -8 }}>
-			<text
+			<div
 				style={{
 					...siteType.subtitle,
 					fontVariationSettings: weight.semibold,
@@ -47,7 +47,7 @@ export function H3(props: { children: string; marginTop: number }) {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

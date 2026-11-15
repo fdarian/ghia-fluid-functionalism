@@ -68,7 +68,7 @@ const row = {
 
 function Mono(props: { children: string; muted?: boolean }) {
 	return (
-		<text
+		<div
 			style={{
 				...roleStyle('caption'),
 				fontFamily: MONO,
@@ -77,7 +77,7 @@ function Mono(props: { children: string; muted?: boolean }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -114,11 +114,11 @@ export function TypeScaleSpecimen() {
 				>
 					<For each={['Style', 'Sample', 'Font size', 'Line height', 'Weight']}>
 						{(label) => (
-							<text
+							<div
 								style={{ ...siteType.caption, color: color.mutedForeground }}
 							>
 								{label}
-							</text>
+							</div>
 						)}
 					</For>
 				</div>
@@ -136,7 +136,7 @@ export function TypeScaleSpecimen() {
 									borderColor: borderFainter(),
 								}}
 							>
-								<text
+								<div
 									style={{
 										...siteType.body,
 										fontVariationSettings: weight.semibold,
@@ -144,8 +144,8 @@ export function TypeScaleSpecimen() {
 									}}
 								>
 									{spec.name}
-								</text>
-								<text
+								</div>
+								<div
 									style={{
 										...roleStyle(spec.role),
 										fontVariationSettings: axes.setting,
@@ -159,7 +159,7 @@ export function TypeScaleSpecimen() {
 									}}
 								>
 									{spec.sample}
-								</text>
+								</div>
 								<Mono>{`${roleStyle(spec.role).fontSize}px`}</Mono>
 								<Mono>{roleStyle(spec.role).lineHeight}</Mono>
 								<div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -213,7 +213,7 @@ function GapCell(props: {
 				borderBottomColor: props.rule,
 			}}
 		>
-			<text
+			<div
 				style={{
 					...siteType.body,
 					textAlign: 'left',
@@ -226,7 +226,7 @@ function GapCell(props: {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

@@ -137,7 +137,7 @@ function SlideArrow(props: {
 		const neighbour = props.neighbour;
 		if (neighbour === undefined) return previous() ? 'No previous' : 'No next';
 		return (
-			<text
+			<div
 				style={{
 					...scale.caption,
 					color: color.background,
@@ -154,7 +154,7 @@ function SlideArrow(props: {
 				>
 					{previous() ? '←' : '→'}
 				</span>
-			</text>
+			</div>
 		);
 	};
 	return (
@@ -305,7 +305,7 @@ export function Page(): JSX.Element {
 					}}
 				>
 					<div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-						<text
+						<div
 							style={{
 								...siteType.display,
 								lineHeight: `${siteType.display.fontSize}px`,
@@ -314,10 +314,10 @@ export function Page(): JSX.Element {
 							}}
 						>
 							Shadcn VS Fluid Functionalism
-						</text>
-						<text style={{ ...siteType.body, color: color.mutedForeground }}>
+						</div>
+						<div style={{ ...siteType.body, color: color.mutedForeground }}>
 							Hover the difference, side by side
-						</text>
+						</div>
 						<div
 							style={{
 								display: 'flex',

@@ -243,9 +243,9 @@ export function Demo() {
 								padding: 16,
 							}}
 						>
-							<text style={{ ...scale.body, color: color.mutedForeground }}>
+							<div style={{ ...scale.body, color: color.mutedForeground }}>
 								The overlay is drawn inside this box, not over the window.
-							</text>
+							</div>
 							<DialogTrigger>
 								<Button testId="scoped-open" variant="secondary">
 									Open scoped dialog

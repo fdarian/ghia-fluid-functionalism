@@ -86,9 +86,9 @@ export function Slide(props: {
 								justifyContent: 'center',
 							}}
 						>
-							<text style={{ ...scale.body, color: color.foreground }}>
+							<div style={{ ...scale.body, color: color.foreground }}>
 								{SLIDES[index]}
-							</text>
+							</div>
 						</motion.div>
 					)}
 				</For>
@@ -109,9 +109,9 @@ function Section(props: { caption: string; children: JSX.Element }) {
 				gap: 12,
 			}}
 		>
-			<text style={{ ...scale.caption, color: color.mutedForeground }}>
+			<div style={{ ...scale.caption, color: color.mutedForeground }}>
 				{props.caption}
-			</text>
+			</div>
 			{props.children}
 		</div>
 	);

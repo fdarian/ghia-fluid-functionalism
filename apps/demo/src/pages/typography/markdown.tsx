@@ -91,15 +91,15 @@ type Kind =
 
 function Paragraph(props: { children: JSX.Element }) {
 	return (
-		<text style={{ ...roleStyle('body'), color: color.mutedForeground }}>
+		<div style={{ ...roleStyle('body'), color: color.mutedForeground }}>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
 function Heading(props: { role: TypeRole; bold?: boolean; children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...roleStyle(props.role),
 				fontVariationSettings:
@@ -108,7 +108,7 @@ function Heading(props: { role: TypeRole; bold?: boolean; children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -199,7 +199,7 @@ function Marker(props: {
 				/>
 			}
 		>
-			<text
+			<div
 				style={{
 					...roleStyle('body'),
 					position: 'absolute',
@@ -211,7 +211,7 @@ function Marker(props: {
 				}}
 			>
 				{orderedMarker(props.depth, props.index)}
-			</text>
+			</div>
 		</Show>
 	);
 }
@@ -347,7 +347,7 @@ function TaskItem(props: { task: Task; first: boolean }) {
 			</div>
 			<div style={{ flexGrow: 1, flexBasis: 0, minWidth: 0 }}>
 				{/* A checked item strikes its own text; its sub-tasks keep their own state. */}
-				<text
+				<div
 					style={{
 						...roleStyle('body'),
 						color: color.mutedForeground,
@@ -355,7 +355,7 @@ function TaskItem(props: { task: Task; first: boolean }) {
 					}}
 				>
 					{props.task.text}
-				</text>
+				</div>
 				<Show when={props.task.children}>
 					{(children: Accessor<readonly Task[]>) => (
 						<div
@@ -425,7 +425,7 @@ function Cell(props: { header: boolean; first: boolean; children: string }) {
 				borderBottomColor: color.border,
 			}}
 		>
-			<text
+			<div
 				style={{
 					...roleStyle('body'),
 					textAlign: 'left',
@@ -438,7 +438,7 @@ function Cell(props: { header: boolean; first: boolean; children: string }) {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -516,7 +516,7 @@ function CodeBlock() {
 			>
 				<For each={CODE}>
 					{(line) => (
-						<text
+						<div
 							style={{
 								...size(),
 								fontFamily: MONO,
@@ -525,7 +525,7 @@ function CodeBlock() {
 							}}
 						>
 							{line === '' ? ' ' : line}
-						</text>
+						</div>
 					)}
 				</For>
 			</div>

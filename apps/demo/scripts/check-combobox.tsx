@@ -62,7 +62,7 @@ const k = await createCheck(
 					placeholder="Ease"
 				/>
 				<Button testId="after">After</Button>
-				<text>{`picked: ${picked() ?? 'none'}`}</text>
+				<div>{`picked: ${picked() ?? 'none'}`}</div>
 				<Dialog>
 					<DialogTrigger>
 						<Button testId="dialog-open">Open dialog</Button>

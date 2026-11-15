@@ -29,9 +29,9 @@ export const listed = 'sidebar';
 
 function Caption(props: { children: string }) {
 	return (
-		<text style={{ ...scale.caption, color: color.mutedForeground }}>
+		<div style={{ ...scale.caption, color: color.mutedForeground }}>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -81,11 +81,11 @@ export function Demo() {
 											cursor: 'pointer',
 										}}
 									>
-										<text
+										<div
 											style={{ ...scale.body, color: color.mutedForeground }}
 										>
 											+ Add fill
-										</text>
+										</div>
 									</div>
 								}
 							>
@@ -130,9 +130,9 @@ export function Demo() {
 							value={controlled()}
 							onValueChange={setControlled}
 						/>
-						<text style={{ ...scale.body, color: color.mutedForeground }}>
+						<div style={{ ...scale.body, color: color.mutedForeground }}>
 							{`Current: ${controlled()}`}
-						</text>
+						</div>
 					</div>
 				</DemoCard>
 			</Show>

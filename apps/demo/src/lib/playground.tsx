@@ -95,9 +95,9 @@ export function PlayField(props: {
 				pointerEvents: props.disabled === true ? 'none' : 'auto',
 			}}
 		>
-			<text style={{ ...scale.body, color: color.mutedForeground }}>
+			<div style={{ ...scale.body, color: color.mutedForeground }}>
 				{props.label}
-			</text>
+			</div>
 			{props.children}
 		</div>
 	);
@@ -151,7 +151,7 @@ export function PlaySection(props: { label: string }) {
 				paddingBottom: 4,
 			}}
 		>
-			<text
+			<div
 				style={{
 					...scale.body,
 					fontVariationSettings: weight.semibold,
@@ -159,7 +159,7 @@ export function PlaySection(props: { label: string }) {
 				}}
 			>
 				{props.label}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -214,7 +214,7 @@ export function PlaygroundPanel(props: {
 					paddingBottom: 8,
 				}}
 			>
-				<text
+				<div
 					style={{
 						...scale.title,
 						lineHeight: `${scale.title.fontSize}px`,
@@ -223,7 +223,7 @@ export function PlaygroundPanel(props: {
 					}}
 				>
 					{props.title ?? 'Playground variant'}
-				</text>
+				</div>
 				<Button
 					testId="playground-shuffle"
 					variant="ghost"

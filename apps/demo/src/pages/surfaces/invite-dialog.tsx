@@ -14,7 +14,7 @@ import { ROLES, StaticRoleItem, SurfaceMenu } from './role-menu';
 
 function FieldLabel(props: { children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.body,
 				fontVariationSettings: weight.normal,
@@ -22,7 +22,7 @@ function FieldLabel(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -58,7 +58,7 @@ function Header() {
 						backgroundColor: color.foreground,
 					}}
 				>
-					<text
+					<div
 						style={{
 							...siteType.caption,
 							fontVariationSettings: weight.semibold,
@@ -66,9 +66,9 @@ function Header() {
 						}}
 					>
 						M
-					</text>
+					</div>
 				</div>
-				<text
+				<div
 					style={{
 						...siteType.title,
 						fontVariationSettings: weight.semibold,
@@ -76,7 +76,7 @@ function Header() {
 					}}
 				>
 					Invite to your workspace
-				</text>
+				</div>
 			</div>
 			<div
 				role="button"
@@ -122,9 +122,9 @@ function EmailField() {
 					hover: { backgroundColor: color.hover },
 				}}
 			>
-				<text style={{ ...siteType.body, color: color.mutedForeground }}>
+				<div style={{ ...siteType.body, color: color.mutedForeground }}>
 					email@gmail.com, email2@gmail.com...
-				</text>
+				</div>
 			</div>
 		</div>
 	);
@@ -153,7 +153,7 @@ function RoleTrigger(props: { testId?: string }) {
 				cursor: 'pointer',
 			}}
 		>
-			<text style={{ ...siteType.body, color: color.foreground }}>Member</text>
+			<div style={{ ...siteType.body, color: color.foreground }}>Member</div>
 			<Icon
 				name="chevron-down"
 				rotate="180deg"
@@ -191,7 +191,7 @@ function Footer() {
 					...colorFade,
 				}}
 			>
-				<text
+				<div
 					style={{
 						...siteType.body,
 						fontVariationSettings: weight.normal,
@@ -199,7 +199,7 @@ function Footer() {
 					}}
 				>
 					Cancel
-				</text>
+				</div>
 			</div>
 			<div
 				role="button"
@@ -215,7 +215,7 @@ function Footer() {
 					opacity: 0.5,
 				}}
 			>
-				<text
+				<div
 					style={{
 						...siteType.body,
 						fontVariationSettings: weight.semibold,
@@ -223,7 +223,7 @@ function Footer() {
 					}}
 				>
 					Send invites
-				</text>
+				</div>
 			</div>
 		</div>
 	);

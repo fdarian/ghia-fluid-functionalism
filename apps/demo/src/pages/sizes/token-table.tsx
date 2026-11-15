@@ -84,7 +84,7 @@ function Cell(props: { first?: boolean; rule: string; children: JSX.Element }) {
 
 function HeadText(props: { children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.body,
 				textAlign: 'left',
@@ -93,7 +93,7 @@ function HeadText(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -111,7 +111,7 @@ function TokenChip(props: { children: string }) {
 				backgroundColor: scheme() === 'light' ? '#EBEBED' : '#2C2C2C',
 			}}
 		>
-			<text
+			<div
 				style={{
 					fontFamily: MONO,
 					...siteType.caption,
@@ -120,7 +120,7 @@ function TokenChip(props: { children: string }) {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -156,7 +156,7 @@ export function TokenTable() {
 									<TokenChip>{row.token}</TokenChip>
 								</Cell>
 								<Cell rule={color.borderFaint}>
-									<text
+									<div
 										style={{
 											...siteType.body,
 											textAlign: 'left',
@@ -164,12 +164,12 @@ export function TokenTable() {
 										}}
 									>
 										{row.applies}
-									</text>
+									</div>
 								</Cell>
 								<For each={['default', 'compact'] as const}>
 									{(step) => (
 										<Cell rule={color.borderFaint}>
-											<text
+											<div
 												style={{
 													...siteType.body,
 													textAlign: 'left',
@@ -178,7 +178,7 @@ export function TokenTable() {
 												}}
 											>
 												{row.value(step)}
-											</text>
+											</div>
 										</Cell>
 									)}
 								</For>

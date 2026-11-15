@@ -140,7 +140,7 @@ function FooterLabel(props: { name: string; linked: boolean }) {
 				paddingBottom: 12,
 			}}
 		>
-			<text
+			<div
 				style={{
 					...siteType.body,
 					fontVariationSettings: weight.normal,
@@ -154,7 +154,7 @@ function FooterLabel(props: { name: string; linked: boolean }) {
 				}}
 			>
 				{props.name}
-			</text>
+			</div>
 		</div>
 	);
 }

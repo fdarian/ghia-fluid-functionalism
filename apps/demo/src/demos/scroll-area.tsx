@@ -67,7 +67,7 @@ function ReleaseRows() {
 			<For each={RELEASES}>
 				{(release: string) => (
 					<div style={{ padding: 8, paddingLeft: 12, paddingRight: 12 }}>
-						<text
+						<div
 							style={{
 								...scale.body,
 								color: color.foreground,
@@ -75,7 +75,7 @@ function ReleaseRows() {
 							}}
 						>
 							{release}
-						</text>
+						</div>
 					</div>
 				)}
 			</For>
@@ -95,9 +95,9 @@ function Panel(props: { caption: string; children: JSX.Element }) {
 			}}
 		>
 			{props.children}
-			<text style={{ ...scale.caption, color: color.mutedForeground }}>
+			<div style={{ ...scale.caption, color: color.mutedForeground }}>
 				{props.caption}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -166,9 +166,9 @@ export function Demo() {
 											justifyContent: 'center',
 										}}
 									>
-										<text style={{ ...scale.body, color: color.foreground }}>
+										<div style={{ ...scale.body, color: color.foreground }}>
 											{month}
-										</text>
+										</div>
 									</div>
 								)}
 							</For>
@@ -253,17 +253,17 @@ export function Demo() {
 							gap: 8,
 						}}
 					>
-						<text style={{ ...scale.body, color: color.mutedForeground }}>
+						<div style={{ ...scale.body, color: color.mutedForeground }}>
 							Outer area. Scroll the inner one to its end: the outer follows.
-						</text>
+						</div>
 						<ScrollArea testId="inner" width={256} height={96} style={box()}>
 							<ReleaseRows />
 						</ScrollArea>
 						<For each={RELEASES.slice(0, 6)}>
 							{(release: string) => (
-								<text style={{ ...scale.body, color: color.foreground }}>
+								<div style={{ ...scale.body, color: color.foreground }}>
 									{release}
-								</text>
+								</div>
 							)}
 						</For>
 					</div>

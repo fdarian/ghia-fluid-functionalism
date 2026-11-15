@@ -36,9 +36,9 @@ const STATUSES: { status: BannerStatus; label: string }[] = [
 function Caption(props: { children: string }) {
 	return (
 		<div style={{ paddingLeft: 4, paddingBottom: 2 }}>
-			<text style={{ ...scale.caption, color: color.mutedForeground }}>
+			<div style={{ ...scale.caption, color: color.mutedForeground }}>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

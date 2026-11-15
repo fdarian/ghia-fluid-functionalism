@@ -294,7 +294,7 @@ function Avatar(props: { initials: string }) {
 					ASSIGNEE_COLOR[props.initials] ?? FALLBACK_ASSIGNEE_COLOR,
 			}}
 		>
-			<text
+			<div
 				style={{
 					fontSize: 10,
 					lineHeight: '14px',
@@ -303,7 +303,7 @@ function Avatar(props: { initials: string }) {
 				}}
 			>
 				{props.initials}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -327,11 +327,11 @@ function BodyCell(props: { width?: number; children: JSX.Element }) {
 	);
 }
 
-/** `TableCell` sets its children in a `<text>`; a badge needs that line box too (22px tall, the source's inline badge in a `td`), or the row grows to 42px. */
+/** `TableCell` sets its children in a text div; a badge needs that line box too (22px tall, the source's inline badge in a `td`), or the row grows to 42px. */
 function BadgeCell(props: { width: number; children: JSX.Element }) {
 	return (
 		<BodyCell width={props.width}>
-			<text style={siteType.body}>{props.children}</text>
+			<div style={siteType.body}>{props.children}</div>
 		</BodyCell>
 	);
 }
@@ -362,7 +362,7 @@ function IssueTable(props: { rows: Issue[]; testId: string }) {
 								</Badge>
 							</BadgeCell>
 							<BodyCell width={90}>
-								<text
+								<div
 									style={{
 										...siteType.caption,
 										fontFamily: MONO,
@@ -370,12 +370,12 @@ function IssueTable(props: { rows: Issue[]; testId: string }) {
 									}}
 								>
 									{issue.key}
-								</text>
+								</div>
 							</BodyCell>
 							<BodyCell>
-								<text style={{ ...siteType.body, color: color.foreground }}>
+								<div style={{ ...siteType.body, color: color.foreground }}>
 									{issue.title}
-								</text>
+								</div>
 							</BodyCell>
 							<BadgeCell width={110}>
 								<Badge size="compact" color={PRIORITY[issue.priority].color}>
@@ -442,7 +442,7 @@ function Board(props: { rows: Issue[] }) {
 								>
 									{column.label}
 								</Badge>
-								<text
+								<div
 									style={{
 										...siteType.caption,
 										color: color.mutedForeground,
@@ -450,7 +450,7 @@ function Board(props: { rows: Issue[] }) {
 									}}
 								>
 									{String(items().length)}
-								</text>
+								</div>
 							</div>
 							<For each={items()}>{(issue) => <BoardCard issue={issue} />}</For>
 						</div>
@@ -474,9 +474,9 @@ function BoardCard(props: { issue: Issue }) {
 				boxShadow: shadow(2),
 			}}
 		>
-			<text style={{ ...siteType.body, color: color.foreground }}>
+			<div style={{ ...siteType.body, color: color.foreground }}>
 				{props.issue.title}
-			</text>
+			</div>
 			<div
 				style={{
 					display: 'flex',
@@ -485,7 +485,7 @@ function BoardCard(props: { issue: Issue }) {
 					justifyContent: 'space-between',
 				}}
 			>
-				<text
+				<div
 					style={{
 						fontSize: 11,
 						lineHeight: '14px',
@@ -494,7 +494,7 @@ function BoardCard(props: { issue: Issue }) {
 					}}
 				>
 					{props.issue.key}
-				</text>
+				</div>
 				<div
 					style={{
 						display: 'flex',
@@ -623,7 +623,7 @@ function TriagePanel(props: {
 						strokeWidth={2}
 						color={color.foreground}
 					/>
-					<text
+					<div
 						style={{
 							...siteType.subtitle,
 							fontVariationSettings: weight.semibold,
@@ -631,7 +631,7 @@ function TriagePanel(props: {
 						}}
 					>
 						AI triage
-					</text>
+					</div>
 				</div>
 				<Button
 					testId="beacon-triage-dismiss"
@@ -696,9 +696,9 @@ function TriagePanel(props: {
 						strokeWidth={2}
 						color={badgeColors.emerald}
 					/>
-					<text style={{ ...siteType.body, color: color.foreground }}>
+					<div style={{ ...siteType.body, color: color.foreground }}>
 						Applied 3 changes · re-ranked the Active view.
-					</text>
+					</div>
 				</div>
 			</Show>
 		</div>

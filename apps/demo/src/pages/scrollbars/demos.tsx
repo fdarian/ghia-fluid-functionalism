@@ -71,7 +71,7 @@ function ReleaseRows() {
 							paddingBottom: 8,
 						}}
 					>
-						<text
+						<div
 							style={{
 								...siteType.body,
 								color: color.foreground,
@@ -79,7 +79,7 @@ function ReleaseRows() {
 							}}
 						>
 							{release}
-						</text>
+						</div>
 					</div>
 				)}
 			</For>
@@ -89,7 +89,7 @@ function ReleaseRows() {
 
 function PanelLabel(props: { children: JSX.Element }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.caption,
 				color: color.mutedForeground,
@@ -97,7 +97,7 @@ function PanelLabel(props: { children: JSX.Element }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -231,9 +231,9 @@ export function HorizontalDemo() {
 									justifyContent: 'center',
 								}}
 							>
-								<text style={{ ...siteType.body, color: color.foreground }}>
+								<div style={{ ...siteType.body, color: color.foreground }}>
 									{month}
-								</text>
+								</div>
 							</div>
 						)}
 					</For>

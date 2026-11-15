@@ -242,7 +242,7 @@ function IdentityRow(props: { avatar: JSX.Element; label: string }) {
 			}}
 		>
 			{props.avatar}
-			<text
+			<div
 				style={{
 					...siteType.body,
 					fontVariationSettings: weight.semibold,
@@ -251,7 +251,7 @@ function IdentityRow(props: { avatar: JSX.Element; label: string }) {
 				}}
 			>
 				{props.label}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -292,7 +292,7 @@ function SidebarPreview() {
 									backgroundColor: color.foreground,
 								}}
 							>
-								<text
+								<div
 									style={{
 										fontSize: 10,
 										lineHeight: '12px',
@@ -301,7 +301,7 @@ function SidebarPreview() {
 									}}
 								>
 									A
-								</text>
+								</div>
 							</div>
 						}
 					/>
@@ -595,10 +595,10 @@ function SliderPreview() {
 						justifyContent: 'space-between',
 					}}
 				>
-					<text style={muted}>{SLIDER_OPACITY.label}</text>
-					<text style={{ ...muted, fontVariantNumeric: 'tabular-nums' }}>
+					<div style={muted}>{SLIDER_OPACITY.label}</div>
+					<div style={{ ...muted, fontVariantNumeric: 'tabular-nums' }}>
 						{String(basic())}
-					</text>
+					</div>
 				</div>
 				<Slider value={basic()} onChange={setBasic} showValue={false} />
 			</div>

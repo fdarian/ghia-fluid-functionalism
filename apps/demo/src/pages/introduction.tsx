@@ -59,7 +59,7 @@ const ICON_PROVIDER_EXAMPLE = [
 
 function SectionTitle(props: { children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.title,
 				lineHeight: '16px',
@@ -69,13 +69,13 @@ function SectionTitle(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
 function Prose(props: { children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.body,
 				color: color.mutedForeground,
@@ -83,7 +83,7 @@ function Prose(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -148,7 +148,7 @@ function Step(props: {
 						backgroundColor: color.muted,
 					}}
 				>
-					<text
+					<div
 						style={{
 							fontSize: 11,
 							lineHeight: '14px',
@@ -157,7 +157,7 @@ function Step(props: {
 						}}
 					>
 						{String(props.number)}
-					</text>
+					</div>
 				</div>
 				<Prose>{props.children}</Prose>
 			</div>
@@ -190,7 +190,7 @@ function CodeBlock(props: { lines: readonly string[] }) {
 			>
 				<For each={props.lines}>
 					{(line) => (
-						<text
+						<div
 							style={{
 								fontFamily: MONO,
 								fontSize: siteType.caption.fontSize,
@@ -201,7 +201,7 @@ function CodeBlock(props: { lines: readonly string[] }) {
 							}}
 						>
 							{line === '' ? ' ' : line}
-						</text>
+						</div>
 					)}
 				</For>
 			</div>

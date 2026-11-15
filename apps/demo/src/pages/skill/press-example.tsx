@@ -101,7 +101,7 @@ function GenericButton(props: { index: number; press: PressProps }) {
 				...fade(['scale', 'background-color'], 150, EASE_OUT),
 			}}
 		>
-			<text
+			<div
 				style={{
 					...siteType[size.text],
 					fontVariationSettings: weight.normal,
@@ -110,7 +110,7 @@ function GenericButton(props: { index: number; press: PressProps }) {
 				}}
 			>
 				{size.label}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -175,7 +175,7 @@ function SkillButton(props: { index: number; press: PressProps }) {
 					transition={{ duration: down() ? 0.08 : 0.18 }}
 					style={{ position: 'absolute', zIndex: -1, pointerEvents: 'none' }}
 				/>
-				<text
+				<div
 					style={{
 						...siteType[size.text],
 						fontVariationSettings: weight.normal,
@@ -184,7 +184,7 @@ function SkillButton(props: { index: number; press: PressProps }) {
 					}}
 				>
 					{size.label}
-				</text>
+				</div>
 			</div>
 		</div>
 	);

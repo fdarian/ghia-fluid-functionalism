@@ -61,9 +61,9 @@ export function Demo() {
 							onCopy={() => setCopyCount(copyCount() + 1)}
 						/>
 						<div style={{ paddingLeft: 4 }}>
-							<text style={{ ...scale.caption, color: color.mutedForeground }}>
+							<div style={{ ...scale.caption, color: color.mutedForeground }}>
 								{`Copied ${copyCount()} ${copyCount() === 1 ? 'time' : 'times'}`}
-							</text>
+							</div>
 						</div>
 					</div>
 				</Field>

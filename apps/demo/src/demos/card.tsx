@@ -190,7 +190,7 @@ function RestoreLink(props: { onClick: () => void }) {
 			onMouseLeave={() => setHovered(false)}
 			style={{ cursor: 'pointer', keyboardFocusDim: false }}
 		>
-			<text
+			<div
 				style={{
 					...scale.body,
 					color: hovered() ? color.foreground : color.mutedForeground,
@@ -199,7 +199,7 @@ function RestoreLink(props: { onClick: () => void }) {
 				}}
 			>
 				Restore card
-			</text>
+			</div>
 		</div>
 	);
 }

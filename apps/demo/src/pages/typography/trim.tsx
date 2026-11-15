@@ -72,7 +72,7 @@ function TrimChip(props: { trimmed: boolean }) {
 					/>
 				</>
 			)}
-			<text
+			<div
 				style={{
 					...scale.body,
 					color: color.foreground,
@@ -81,7 +81,7 @@ function TrimChip(props: { trimmed: boolean }) {
 				}}
 			>
 				{CHIP_LABEL}
-			</text>
+			</div>
 			{[cap, base].map((y) => (
 				<div
 					style={{

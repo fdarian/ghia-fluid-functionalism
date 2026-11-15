@@ -29,7 +29,7 @@ export function ReleaseIndexCard(props: { releases: readonly Release[] }) {
 			{/* The same header as "Make them yours": 8px above and below a 28px row, the title centred in it. */}
 			<div style={{ paddingTop: 8, paddingBottom: 8 }}>
 				<div style={{ height: 28, display: 'flex', alignItems: 'center' }}>
-					<text
+					<div
 						style={{
 							...siteType.title,
 							fontVariationSettings: weight.semibold,
@@ -37,7 +37,7 @@ export function ReleaseIndexCard(props: { releases: readonly Release[] }) {
 						}}
 					>
 						Releases
-					</text>
+					</div>
 				</div>
 			</div>
 			{/* The 32px rows start 10px under the header, which puts the first month's text as far under the title as "Theme" sits; -8px each side lets the fill reach past the text's column. */}

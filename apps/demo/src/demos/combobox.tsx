@@ -185,9 +185,9 @@ export function Demo() {
 							placeholder="Jump to view…"
 							clearable
 						/>
-						<text style={{ ...scale.caption, color: color.mutedForeground }}>
+						<div style={{ ...scale.caption, color: color.mutedForeground }}>
 							{`Value: ${view() ?? 'none'}`}
-						</text>
+						</div>
 						<Button
 							testId="views-reset"
 							variant="tertiary"
@@ -256,12 +256,12 @@ export function Demo() {
 						gap: 10,
 					}}
 				>
-					<text
+					<div
 						id="form-stack-label"
 						style={{ ...scale.caption, color: color.mutedForeground }}
 					>
 						Stack
-					</text>
+					</div>
 					<Combobox
 						testId="form-stack"
 						items={FRAMEWORKS}
@@ -280,9 +280,9 @@ export function Demo() {
 					>
 						Submit
 					</Button>
-					<text style={{ ...scale.caption, color: color.mutedForeground }}>
+					<div style={{ ...scale.caption, color: color.mutedForeground }}>
 						{`submitted: ${submitted()}`}
-					</text>
+					</div>
 				</form>
 			</DemoCard>
 		</>

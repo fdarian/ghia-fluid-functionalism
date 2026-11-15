@@ -192,7 +192,7 @@ function AddBlockMenu() {
 
 function Heading(props: { children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				paddingTop: 8,
 				fontSize: 18,
@@ -202,7 +202,7 @@ function Heading(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -269,7 +269,7 @@ function AIBlock() {
 								color={color.mutedForeground}
 							/>
 						</div>
-						<text
+						<div
 							style={{
 								...siteType.subtitle,
 								color: color.foreground,
@@ -278,7 +278,7 @@ function AIBlock() {
 							}}
 						>
 							{block}
-						</text>
+						</div>
 					</SurfaceCard>
 				)}
 			</For>
@@ -325,9 +325,9 @@ function AIBlock() {
 							strokeWidth={1.5}
 							color={color.mutedForeground}
 						/>
-						<text style={{ ...siteType.caption, color: color.mutedForeground }}>
+						<div style={{ ...siteType.caption, color: color.mutedForeground }}>
 							Quill AI
-						</text>
+						</div>
 					</div>
 				}
 			/>
@@ -340,7 +340,7 @@ function AIBlock() {
 function DocumentBody() {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-			<text
+			<div
 				style={{
 					fontSize: 15,
 					lineHeight: '24px',
@@ -350,11 +350,11 @@ function DocumentBody() {
 				The single source of truth for what we’re building this quarter, why,
 				and who owns each bet. Edit freely — every block here is a Fluid
 				Functionalism component.
-			</text>
+			</div>
 
 			<SurfaceCard padding={16} gap={12}>
-				<text style={{ fontSize: 18, lineHeight: '18px' }}>💡</text>
-				<text
+				<div style={{ fontSize: 18, lineHeight: '18px' }}>💡</div>
+				<div
 					style={{
 						...siteType.subtitle,
 						color: color.foreground,
@@ -364,7 +364,7 @@ function DocumentBody() {
 				>
 					Decisions are final once they land in the Initiatives table. Use
 					comments for anything still in debate.
-				</text>
+				</div>
 			</SurfaceCard>
 
 			<Heading>Goals</Heading>
@@ -396,7 +396,7 @@ function DocumentBody() {
 									backgroundColor: color.mutedForeground,
 								}}
 							/>
-							<text
+							<div
 								style={{
 									...siteType.subtitle,
 									color: color.foreground,
@@ -405,7 +405,7 @@ function DocumentBody() {
 								}}
 							>
 								{goal}
-							</text>
+							</div>
 						</div>
 					)}
 				</For>
@@ -475,10 +475,10 @@ export function Page() {
 						paddingBottom: 48,
 					}}
 				>
-					<text style={{ fontSize: 40, lineHeight: '48px', marginBottom: 8 }}>
+					<div style={{ fontSize: 40, lineHeight: '48px', marginBottom: 8 }}>
 						🗓️
-					</text>
-					<text
+					</div>
+					<div
 						style={{
 							fontSize: 34,
 							lineHeight: '42px',
@@ -487,7 +487,7 @@ export function Page() {
 						}}
 					>
 						Q3 Planning
-					</text>
+					</div>
 					<div
 						style={{
 							marginTop: 8,
@@ -510,7 +510,7 @@ export function Page() {
 								justifyContent: 'center',
 							}}
 						>
-							<text
+							<div
 								style={{
 									fontSize: 9,
 									lineHeight: '12px',
@@ -518,11 +518,11 @@ export function Page() {
 								}}
 							>
 								DK
-							</text>
+							</div>
 						</div>
-						<text style={{ ...siteType.caption, color: color.mutedForeground }}>
+						<div style={{ ...siteType.caption, color: color.mutedForeground }}>
 							Dana Kim · edited just now
-						</text>
+						</div>
 					</div>
 
 					<TabsSubtle
@@ -574,14 +574,14 @@ export function Page() {
 							>
 								<For each={ACTIVITY}>
 									{(entry) => (
-										<text
+										<div
 											style={{
 												...siteType.body,
 												color: color.mutedForeground,
 											}}
 										>
 											{entry}
-										</text>
+										</div>
 									)}
 								</For>
 							</div>

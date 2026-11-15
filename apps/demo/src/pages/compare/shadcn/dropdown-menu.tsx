@@ -89,7 +89,7 @@ export function ScDropdownMenu(props: {
 								strokeWidth={2}
 								color={sc.popoverForeground}
 							/>
-							<text
+							<div
 								style={{
 									fontSize: 13,
 									lineHeight: '19.5px',
@@ -99,7 +99,7 @@ export function ScDropdownMenu(props: {
 								}}
 							>
 								{item.label}
-							</text>
+							</div>
 						</div>
 					);
 				}}

@@ -51,9 +51,9 @@ export function Demo() {
 						Open navigation
 					</Button>
 				</div>
-				<text style={{ ...scale.body, color: color.mutedForeground }}>
+				<div style={{ ...scale.body, color: color.mutedForeground }}>
 					{`Current page: ${active()}`}
-				</text>
+				</div>
 			</div>
 			<MobileDrawer
 				open={open()}
@@ -61,7 +61,7 @@ export function Demo() {
 				testId="drawer-popup"
 			>
 				<div style={{ paddingBottom: 12, paddingLeft: 8 }}>
-					<text
+					<div
 						style={{
 							...scale.title,
 							color: color.foreground,
@@ -69,7 +69,7 @@ export function Demo() {
 						}}
 					>
 						Navigation
-					</text>
+					</div>
 				</div>
 				<SidebarMenu>
 					<For each={ROWS}>

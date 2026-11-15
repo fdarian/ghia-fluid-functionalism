@@ -75,7 +75,7 @@ const rowStyle = {
 
 function Count(props: { n: number }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.caption,
 				color: color.mutedForeground,
@@ -83,7 +83,7 @@ function Count(props: { n: number }) {
 			}}
 		>
 			{props.n}
-		</text>
+		</div>
 	);
 }
 
@@ -126,7 +126,7 @@ function GenericList(props: {
 							focusVisible: focusRing(0),
 						}}
 					>
-						<text
+						<div
 							style={{
 								...siteType.body,
 								// The generic version, bold on purpose to show the reflow.
@@ -136,7 +136,7 @@ function GenericList(props: {
 							}}
 						>
 							{row.label}
-						</text>
+						</div>
 						<Count n={row.count} />
 						{/* Static check: pops in and out with the selection. */}
 						<div style={{ marginLeft: 'auto', width: 16, height: 16 }}>

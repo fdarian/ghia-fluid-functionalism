@@ -113,10 +113,10 @@ export function Specimen(props: {
 					maxWidth: '100%',
 				}}
 			>
-				<text style={{ ...siteType.caption, flexShrink: 0 }}>
+				<div style={{ ...siteType.caption, flexShrink: 0 }}>
 					{props.mark ?? (props.good ? '✅' : '❌')}
-				</text>
-				<text
+				</div>
+				<div
 					style={{
 						...siteType.caption,
 						color: color.mutedForeground,
@@ -125,7 +125,7 @@ export function Specimen(props: {
 					}}
 				>
 					{props.caption}
-				</text>
+				</div>
 			</div>
 		</div>
 	);

@@ -244,7 +244,7 @@ function Step(props: {
 			}}
 		>
 			<div style={{ height: 24, paddingTop: 2 }}>
-				<text
+				<div
 					style={{
 						...siteType.body,
 						fontVariationSettings: weight.semibold,
@@ -253,10 +253,10 @@ function Step(props: {
 					}}
 				>
 					{props.title}
-				</text>
+				</div>
 			</div>
 			<div style={{ marginTop: 2 }}>
-				<text
+				<div
 					style={{
 						...siteType.body,
 						lineHeight: '18px',
@@ -264,7 +264,7 @@ function Step(props: {
 					}}
 				>
 					{props.body}
-				</text>
+				</div>
 			</div>
 		</div>
 	);

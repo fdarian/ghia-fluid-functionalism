@@ -108,13 +108,13 @@ function CountRow(props: {
 					paddingRight: ROW_PAD,
 				}}
 			>
-				<text style={{ ...textStyle(), color: color.foreground }}>
+				<div style={{ ...textStyle(), color: color.foreground }}>
 					{countLabel(props.count)}
-				</text>
+				</div>
 			</div>
 			<For each={COUNTS}>
 				{(n, index) => (
-					<text
+					<div
 						aria-hidden
 						onLayout={(event) =>
 							setWidths((all) =>
@@ -131,7 +131,7 @@ function CountRow(props: {
 						}}
 					>
 						{countLabel(n)}
-					</text>
+					</div>
 				)}
 			</For>
 		</div>

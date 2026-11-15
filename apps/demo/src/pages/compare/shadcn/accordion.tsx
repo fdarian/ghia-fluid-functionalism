@@ -58,7 +58,7 @@ function Panel(props: { open: boolean; children: string }) {
 						paddingBottom: 12,
 					}}
 				>
-					<text
+					<div
 						style={{
 							fontSize: 13,
 							lineHeight: '18.57px',
@@ -67,7 +67,7 @@ function Panel(props: { open: boolean; children: string }) {
 						}}
 					>
 						{props.children}
-					</text>
+					</div>
 				</div>
 			</Show>
 		</motion.div>
@@ -161,7 +161,7 @@ export function ScAccordion(props: {
 									focusVisible: scRing(),
 								}}
 							>
-								<text
+								<div
 									style={{
 										fontSize: 13,
 										lineHeight: '19.5px',
@@ -171,7 +171,7 @@ export function ScAccordion(props: {
 									}}
 								>
 									{item.title}
-								</text>
+								</div>
 								<div
 									testId={
 										props.testId === undefined

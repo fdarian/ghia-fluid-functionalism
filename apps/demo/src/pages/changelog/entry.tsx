@@ -115,7 +115,7 @@ function NameLink(props: { name: string; slug: string }) {
 				focusVisible: focusRing(0),
 			}}
 		>
-			<text
+			<div
 				style={{
 					...siteType.body,
 					fontVariationSettings: weight.normal,
@@ -123,7 +123,7 @@ function NameLink(props: { name: string; slug: string }) {
 				}}
 			>
 				{props.name}
-			</text>
+			</div>
 			<div
 				style={{
 					translate: hovered() ? '2px 0' : '0 0',
@@ -186,7 +186,7 @@ function RefChip(props: { gitRef: ChangeRef }) {
 				focusVisible: focusRing(0),
 			}}
 		>
-			<text
+			<div
 				style={{
 					fontFamily: MONO,
 					fontSize: siteType.caption.fontSize,
@@ -197,7 +197,7 @@ function RefChip(props: { gitRef: ChangeRef }) {
 				}}
 			>
 				{label()}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -249,7 +249,7 @@ export function Entry(props: {
 						<Show
 							when={entry().href}
 							fallback={
-								<text
+								<div
 									style={{
 										...siteType.body,
 										fontVariationSettings: weight.normal,
@@ -257,7 +257,7 @@ export function Entry(props: {
 									}}
 								>
 									{entry().name}
-								</text>
+								</div>
 							}
 						>
 							{(href: Accessor<string>) => (

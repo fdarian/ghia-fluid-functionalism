@@ -47,7 +47,7 @@ function MicroText(props: {
 	semibold?: boolean;
 }) {
 	return (
-		<text
+		<div
 			style={{
 				...scale.micro,
 				fontFamily: props.mono === true ? MONO : undefined,
@@ -57,7 +57,7 @@ function MicroText(props: {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -253,7 +253,7 @@ export function SubstrateDemo() {
 									backgroundColor: surface(scenario.substrate),
 								}}
 							>
-								<text
+								<div
 									style={{
 										...siteType.caption,
 										fontVariationSettings: weight.semibold,
@@ -261,7 +261,7 @@ export function SubstrateDemo() {
 									}}
 								>
 									{scenario.label}
-								</text>
+								</div>
 								<SurfaceProvider value={scenario.substrate}>
 									<SurfaceMenu
 										options={SUBSTRATE_ITEMS}
@@ -301,9 +301,9 @@ export function SubstrateDemo() {
 
 function PanelLabel(props: { children: string }) {
 	return (
-		<text style={{ ...siteType.caption, color: color.mutedForeground }}>
+		<div style={{ ...siteType.caption, color: color.mutedForeground }}>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -380,7 +380,7 @@ function LayerBox(props: {
 				};
 	const label = (
 		<div style={{ position: 'absolute', top: 8, left: 10 }}>
-			<text
+			<div
 				style={{
 					...siteType.caption,
 					color: color.mutedForeground,
@@ -389,7 +389,7 @@ function LayerBox(props: {
 				}}
 			>
 				{`surface-${props.level}`}
-			</text>
+			</div>
 		</div>
 	);
 	return (

@@ -318,7 +318,7 @@ function ScriptCursorArrow(props: { cursor: ScriptCursor }) {
 
 function Caption(props: { side: Side; active: boolean; children: string }) {
 	return (
-		<text
+		<div
 			testId={`caption-${props.side}`}
 			style={{
 				...siteType.caption,
@@ -329,7 +329,7 @@ function Caption(props: { side: Side; active: boolean; children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 

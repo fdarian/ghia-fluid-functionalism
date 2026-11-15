@@ -98,7 +98,7 @@ function Example(props: {
 			}}
 		>
 			<div style={{ marginBottom: -8 }}>
-				<text
+				<div
 					style={{
 						...siteType.subtitle,
 						lineHeight: `${siteType.subtitle.fontSize}px`,
@@ -107,7 +107,7 @@ function Example(props: {
 					}}
 				>
 					{props.label}
-				</text>
+				</div>
 			</div>
 			<Prose>{props.caption}</Prose>
 			<ComponentPreview testId={`skill-${props.slug}`} hideHeader>

@@ -25,7 +25,7 @@ export function ScLabel(props: {
 }) {
 	return (
 		<div onClick={props.onClick}>
-			<text
+			<div
 				style={{
 					fontSize: props.size ?? 14,
 					lineHeight: `${props.size ?? 14}px`,
@@ -35,7 +35,7 @@ export function ScLabel(props: {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

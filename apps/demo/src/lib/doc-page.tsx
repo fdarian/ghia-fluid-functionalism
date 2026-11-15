@@ -50,7 +50,7 @@ const rotateCcw = defineIcon(
 /** A `<p>` (`text-site-body text-muted-foreground`), which the source's base layer sets to `text-wrap: pretty`. `plain` is for the text of an `<li>` or a `<div>`, which that rule does not reach. */
 export function Prose(props: { children: JSX.Element; plain?: boolean }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.body,
 				color: color.mutedForeground,
@@ -58,7 +58,7 @@ export function Prose(props: { children: JSX.Element; plain?: boolean }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -144,7 +144,7 @@ export function Link(props: {
 
 export function SectionTitle(props: { children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.title,
 				lineHeight: '16px',
@@ -154,7 +154,7 @@ export function SectionTitle(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -190,7 +190,7 @@ export function DocSection(props: { title: string; children: JSX.Element }) {
 export function SubHeading(props: { children: string; marginTop?: number }) {
 	return (
 		<div style={{ marginTop: props.marginTop ?? 32 }}>
-			<text
+			<div
 				style={{
 					...siteType.subtitle,
 					fontVariationSettings: weight.semibold,
@@ -199,7 +199,7 @@ export function SubHeading(props: { children: string; marginTop?: number }) {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -419,7 +419,7 @@ function CodeView(props: { code: string; minHeight: number }) {
 			>
 				<For each={props.code.split('\n')}>
 					{(line) => (
-						<text
+						<div
 							style={{
 								fontFamily: MONO,
 								...siteType.body,
@@ -429,7 +429,7 @@ function CodeView(props: { code: string; minHeight: number }) {
 							}}
 						>
 							{line === '' ? ' ' : line}
-						</text>
+						</div>
 					)}
 				</For>
 			</div>

@@ -30,9 +30,9 @@ function Section(props: { caption: string; children: JSX.Element }) {
 				gap: 8,
 			}}
 		>
-			<text style={{ ...scale.caption, color: color.mutedForeground }}>
+			<div style={{ ...scale.caption, color: color.mutedForeground }}>
 				{props.caption}
-			</text>
+			</div>
 			{props.children}
 		</div>
 	);

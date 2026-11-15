@@ -63,7 +63,7 @@ function rowUnder(y: number) {
 
 function Caption(props: { mark: string; children: JSX.Element }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.caption,
 				color: color.mutedForeground,
@@ -71,7 +71,7 @@ function Caption(props: { mark: string; children: JSX.Element }) {
 			}}
 		>
 			{props.mark} {props.children}
-		</text>
+		</div>
 	);
 }
 

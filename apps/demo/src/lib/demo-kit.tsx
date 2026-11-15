@@ -41,9 +41,9 @@ export function DemoCard(props: { title: string; children: JSX.Element }) {
 					borderColor: color.border,
 				}}
 			>
-				<text style={{ ...scale.body, color: color.mutedForeground }}>
+				<div style={{ ...scale.body, color: color.mutedForeground }}>
 					{props.title}
-				</text>
+				</div>
 			</div>
 		</div>
 	);
@@ -62,9 +62,9 @@ export function DemoRow(props: { label: string; children: JSX.Element }) {
 			}}
 		>
 			<div style={{ width: 96, flexShrink: 0 }}>
-				<text style={{ ...scale.caption, color: color.mutedForeground }}>
+				<div style={{ ...scale.caption, color: color.mutedForeground }}>
 					{props.label}
-				</text>
+				</div>
 			</div>
 			<div
 				style={{

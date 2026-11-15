@@ -161,7 +161,7 @@ export function Callout(props: {
 				gap: 2,
 			}}
 		>
-			<text
+			<div
 				style={{
 					...siteType.caption,
 					fontVariationSettings: weight.semibold,
@@ -169,7 +169,7 @@ export function Callout(props: {
 				}}
 			>
 				{props.title}
-			</text>
+			</div>
 			<div
 				style={{
 					display: 'flex',
@@ -179,7 +179,7 @@ export function Callout(props: {
 				}}
 			>
 				<Swatch hex={props.hex} />
-				<text
+				<div
 					style={{
 						fontFamily: MONO,
 						...scale.micro,
@@ -187,7 +187,7 @@ export function Callout(props: {
 					}}
 				>
 					{props.hex}
-				</text>
+				</div>
 			</div>
 		</div>
 	);

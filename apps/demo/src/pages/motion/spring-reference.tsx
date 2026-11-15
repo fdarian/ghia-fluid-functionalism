@@ -119,7 +119,7 @@ function ComponentChip(props: Chip) {
 	const renderer = useGpuixRequired();
 	const [hovered, setHovered] = createSignal(false);
 	const label = () => (
-		<text
+		<div
 			style={{
 				...siteType.body,
 				color: hovered() ? color.foreground : color.mutedForeground,
@@ -129,15 +129,15 @@ function ComponentChip(props: Chip) {
 			}}
 		>
 			{props.label}
-		</text>
+		</div>
 	);
 	return (
 		<Show
 			when={props.slug}
 			fallback={
-				<text style={{ ...siteType.body, color: color.mutedForeground }}>
+				<div style={{ ...siteType.body, color: color.mutedForeground }}>
 					{props.label}
-				</text>
+				</div>
 			}
 		>
 			{(slug: Accessor<string>) => (
@@ -222,7 +222,7 @@ export function SpringReferenceSection() {
 						}}
 					>
 						<div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-							<text
+							<div
 								style={{
 									...siteType.body,
 									fontVariationSettings: weight.semibold,
@@ -230,19 +230,19 @@ export function SpringReferenceSection() {
 								}}
 							>
 								{tier.key}
-							</text>
-							<text
+							</div>
+							<div
 								style={{ ...siteType.caption, color: color.mutedForeground }}
 							>
 								→ <span style={{ fontFamily: MONO }}>{tier.enterToken}</span>{' '}
 								{tier.enterMeta}
-							</text>
-							<text
+							</div>
+							<div
 								style={{ ...siteType.caption, color: color.mutedForeground }}
 							>
 								← <span style={{ fontFamily: MONO }}>{tier.exitToken}</span>{' '}
 								{tier.exitMeta}
-							</text>
+							</div>
 						</div>
 
 						{/* Track constrained to tier width */}

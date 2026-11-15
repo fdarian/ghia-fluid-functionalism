@@ -66,7 +66,7 @@ function GenericTabs(props: {
 							focusVisible: focusRing(0),
 						}}
 					>
-						<text
+						<div
 							style={{
 								...siteType.body,
 								// The generic version, bold on purpose to show the reflow.
@@ -79,7 +79,7 @@ function GenericTabs(props: {
 							}}
 						>
 							{label}
-						</text>
+						</div>
 					</div>
 				)}
 			</For>

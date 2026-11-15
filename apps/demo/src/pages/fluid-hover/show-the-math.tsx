@@ -186,7 +186,7 @@ function MathList(props: { showMath: () => boolean }) {
 									transform: 'translate(calc(-100% - 8px), -50%)',
 								}}
 							>
-								<text
+								<div
 									style={{
 										fontFamily: MONO,
 										fontSize: scale.micro.fontSize,
@@ -197,7 +197,7 @@ function MathList(props: { showMath: () => boolean }) {
 									}}
 								>
 									{`${Math.round(Math.abs(cursorNow() - winnerNow()))}px`}
-								</text>
+								</div>
 							</div>
 						</div>
 					</Show>

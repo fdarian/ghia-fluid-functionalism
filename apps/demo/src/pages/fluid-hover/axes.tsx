@@ -37,7 +37,7 @@ function AxisBlock(props: {
 					gap: 8,
 				}}
 			>
-				<text
+				<div
 					style={{
 						fontFamily: MONO,
 						fontSize: siteType.caption.fontSize,
@@ -47,10 +47,10 @@ function AxisBlock(props: {
 					}}
 				>
 					{`axis="${props.axis}"`}
-				</text>
-				<text style={{ ...siteType.caption, color: color.mutedForeground }}>
+				</div>
+				<div style={{ ...siteType.caption, color: color.mutedForeground }}>
 					{props.hint}
-				</text>
+				</div>
 			</div>
 			{props.children}
 		</div>

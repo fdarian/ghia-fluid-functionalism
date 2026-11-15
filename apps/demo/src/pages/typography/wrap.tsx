@@ -20,7 +20,7 @@ const specimenFrame = {
 
 function Heading(props: { wrap: 'wrap' | 'balance'; children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...scale.title,
 				...sample,
@@ -30,13 +30,13 @@ function Heading(props: { wrap: 'wrap' | 'balance'; children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
 function Paragraph(props: { wrap: 'wrap' | 'pretty'; children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...scale.body,
 				...sample,
@@ -45,7 +45,7 @@ function Paragraph(props: { wrap: 'wrap' | 'pretty'; children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 

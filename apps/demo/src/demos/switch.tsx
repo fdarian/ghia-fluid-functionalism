@@ -56,9 +56,9 @@ export function Demo() {
 								checked={keyboard()}
 								onToggle={() => setKeyboard(!keyboard())}
 							/>
-							<text style={{ ...scale.caption, color: color.mutedForeground }}>
+							<div style={{ ...scale.caption, color: color.mutedForeground }}>
 								{`Keys ${keyboard() ? 'on' : 'off'}`}
-							</text>
+							</div>
 						</div>
 					</DemoRow>
 					<DemoRow label="Compact">

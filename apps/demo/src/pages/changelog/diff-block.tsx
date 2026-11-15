@@ -67,7 +67,7 @@ export function DiffBlock(props: { diff: string }) {
 							}}
 						>
 							<div style={{ width: 16, flexShrink: 0 }}>
-								<text
+								<div
 									style={{
 										fontFamily: MONO,
 										fontSize: siteType.caption.fontSize,
@@ -87,9 +87,9 @@ export function DiffBlock(props: { diff: string }) {
 										: line.mark === 'remove'
 											? '-'
 											: ' '}
-								</text>
+								</div>
 							</div>
-							<text
+							<div
 								style={{
 									fontFamily: MONO,
 									fontSize: siteType.caption.fontSize,
@@ -100,7 +100,7 @@ export function DiffBlock(props: { diff: string }) {
 								}}
 							>
 								{line.text === '' ? ' ' : line.text}
-							</text>
+							</div>
 						</div>
 					)}
 				</For>

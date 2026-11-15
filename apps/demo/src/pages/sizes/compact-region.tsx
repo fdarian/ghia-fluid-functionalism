@@ -117,7 +117,7 @@ export function CompactRegionDemo() {
 				>
 					<For each={['The menu inherits', "the region's step"]}>
 						{(line) => (
-							<text
+							<div
 								style={{
 									...siteType.caption,
 									fontVariationSettings: weight.semibold,
@@ -126,7 +126,7 @@ export function CompactRegionDemo() {
 								}}
 							>
 								{line}
-							</text>
+							</div>
 						)}
 					</For>
 				</div>

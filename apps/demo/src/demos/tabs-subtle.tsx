@@ -20,9 +20,9 @@ const BASIC_TABS = ['Teamspaces', 'Recents', 'Favorites', 'Shared'];
 function Section(props: { caption: string; children: JSX.Element }) {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-			<text style={{ ...scale.caption, color: color.mutedForeground }}>
+			<div style={{ ...scale.caption, color: color.mutedForeground }}>
 				{props.caption}
-			</text>
+			</div>
 			{props.children}
 		</div>
 	);
@@ -31,9 +31,9 @@ function Section(props: { caption: string; children: JSX.Element }) {
 function Content(props: { children: string }) {
 	return (
 		<div style={{ paddingLeft: 12, paddingTop: 4 }}>
-			<text style={{ ...scale.body, color: color.mutedForeground }}>
+			<div style={{ ...scale.body, color: color.mutedForeground }}>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

@@ -89,7 +89,7 @@ function Section(props: { title: string; gap: number; children: JSX.Element }) {
 			}}
 		>
 			<OnScreenContext.Provider value={culling.onScreen}>
-				<text
+				<div
 					style={{
 						fontSize: 15,
 						lineHeight: '22px',
@@ -98,7 +98,7 @@ function Section(props: { title: string; gap: number; children: JSX.Element }) {
 					}}
 				>
 					{props.title}
-				</text>
+				</div>
 				<div
 					style={{
 						display: 'flex',
@@ -156,9 +156,9 @@ export function Page(): JSX.Element {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
 			{/* The page heading is `App`'s, a column gap above; the source sets it 4px above the subtitle. */}
 			<div style={{ marginTop: -20 }}>
-				<text style={{ ...siteType.body, color: color.mutedForeground }}>
+				<div style={{ ...siteType.body, color: color.mutedForeground }}>
 					Slider variants styled as a music production control surface.
-				</text>
+				</div>
 			</div>
 
 			<Section title="Channel Strip" gap={4}>

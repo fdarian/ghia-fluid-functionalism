@@ -400,7 +400,7 @@ export function ListsDemo() {
 								opacity: ends()[callout.key] === undefined ? 0 : 1,
 							}}
 						>
-							<text
+							<div
 								ref={(element) => register(callout.key, element)}
 								style={{
 									...siteType.caption,
@@ -410,8 +410,8 @@ export function ListsDemo() {
 								}}
 							>
 								{callout.title}
-							</text>
-							<text
+							</div>
+							<div
 								style={{
 									...scale.micro,
 									color: color.mutedForeground,
@@ -423,7 +423,7 @@ export function ListsDemo() {
 								<span ref={(element) => register(callout.key, element)}>
 									{callout.line}
 								</span>
-							</text>
+							</div>
 						</div>
 					)}
 				</For>

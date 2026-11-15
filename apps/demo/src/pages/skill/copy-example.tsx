@@ -71,7 +71,7 @@ function GenericCopy(props: { copied: boolean; onCopy: () => void }) {
 			}}
 		>
 			<div style={{ flexGrow: 1, flexShrink: 1, minWidth: 0 }}>
-				<text
+				<div
 					style={{
 						...siteType.caption,
 						fontFamily: MONO,
@@ -82,7 +82,7 @@ function GenericCopy(props: { copied: boolean; onCopy: () => void }) {
 					}}
 				>
 					{COMMAND}
-				</text>
+				</div>
 			</div>
 			<div
 				{...buttonProps({ onClick: props.onCopy }, renderer)}
@@ -110,7 +110,7 @@ function GenericCopy(props: { copied: boolean; onCopy: () => void }) {
 					strokeWidth={1.5}
 					color={hovered() ? color.foreground : color.mutedForeground}
 				/>
-				<text
+				<div
 					style={{
 						...siteType.caption,
 						fontVariationSettings: weight.normal,
@@ -119,7 +119,7 @@ function GenericCopy(props: { copied: boolean; onCopy: () => void }) {
 					}}
 				>
 					{props.copied ? 'Copied!' : 'Copy'}
-				</text>
+				</div>
 			</div>
 		</div>
 	);

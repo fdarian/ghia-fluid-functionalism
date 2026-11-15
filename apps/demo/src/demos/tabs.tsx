@@ -12,9 +12,9 @@ import { DemoCard } from '#src/lib/demo-kit.tsx';
 function Section(props: { caption: string; children: JSX.Element }) {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-			<text style={{ ...scale.caption, color: color.mutedForeground }}>
+			<div style={{ ...scale.caption, color: color.mutedForeground }}>
 				{props.caption}
-			</text>
+			</div>
 			{props.children}
 		</div>
 	);
@@ -23,9 +23,9 @@ function Section(props: { caption: string; children: JSX.Element }) {
 function Content(props: { children: string }) {
 	return (
 		<div style={{ paddingTop: 12 }}>
-			<text style={{ ...scale.body, color: color.mutedForeground }}>
+			<div style={{ ...scale.body, color: color.mutedForeground }}>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -108,10 +108,10 @@ export function Demo() {
 							<Content>Favorites content.</Content>
 						</TabPanel>
 					</Tabs>
-					<text style={{ ...scale.caption, color: color.mutedForeground }}>
+					<div style={{ ...scale.caption, color: color.mutedForeground }}>
 						Active:{' '}
 						<span style={{ color: color.foreground }}>{controlled()}</span>
-					</text>
+					</div>
 				</Section>
 				<Section caption="Compact">
 					<Tabs defaultValue="library" size="compact">

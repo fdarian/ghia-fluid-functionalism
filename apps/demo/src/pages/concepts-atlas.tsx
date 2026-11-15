@@ -272,7 +272,7 @@ export function Page() {
 								justifyContent: 'center',
 							}}
 						>
-							<text
+							<div
 								style={{
 									fontSize: 11,
 									lineHeight: '14px',
@@ -281,7 +281,7 @@ export function Page() {
 								}}
 							>
 								Atlas can make mistakes. This is a concept screen.
-							</text>
+							</div>
 						</div>
 					</div>
 				</div>

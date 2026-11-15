@@ -205,10 +205,10 @@ function SliderPreview() {
 						justifyContent: 'space-between',
 					}}
 				>
-					<text style={readout()}>{SLIDER_OPACITY.label}</text>
-					<text style={{ ...readout(), fontVariantNumeric: 'tabular-nums' }}>
+					<div style={readout()}>{SLIDER_OPACITY.label}</div>
+					<div style={{ ...readout(), fontVariantNumeric: 'tabular-nums' }}>
 						{String(basic())}
-					</text>
+					</div>
 				</div>
 				<Slider
 					testId="fl-slider-opacity"

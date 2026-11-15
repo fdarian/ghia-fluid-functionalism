@@ -40,13 +40,13 @@ const check = await createCheck(() => (
 					}}
 					style={{ height: 24, width: 200 }}
 				>
-					<text>Handles arrows itself</text>
+					<div>Handles arrows itself</div>
 				</div>
 				<For each={Array.from({ length: 30 }, (_, index) => index)}>
 					{(index) => (
-						<text testId={`row-${index}`} style={{ height: 20 }}>
+						<div testId={`row-${index}`} style={{ height: 20 }}>
 							{`Row ${index}`}
-						</text>
+						</div>
 					)}
 				</For>
 			</div>
@@ -187,14 +187,14 @@ async function chainsAtEnd(run: WheelRun) {
 				<div style={{ display: 'flex', flexDirection: 'column', padding: 8 }}>
 					<For each={Array.from({ length: run.content.rows }, (_, i) => i)}>
 						{() => (
-							<text
+							<div
 								style={{
 									fontSize: run.content.fontSize,
 									lineHeight: run.content.lineHeight,
 								}}
 							>
 								Row
-							</text>
+							</div>
 						)}
 					</For>
 				</div>
@@ -311,7 +311,7 @@ async function latching() {
 			<ScrollArea testId="inner" width={300} height={163}>
 				<div style={{ display: 'flex', flexDirection: 'column', padding: 8 }}>
 					<For each={Array.from({ length: 28 }, (_, i) => i)}>
-						{() => <text style={{ height: 20 }}>Row</text>}
+						{() => <div style={{ height: 20 }}>Row</div>}
 					</For>
 				</div>
 			</ScrollArea>

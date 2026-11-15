@@ -61,7 +61,7 @@ function rowStyle() {
 
 function RowLabel(props: { children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.body,
 				fontVariationSettings: weight.normal,
@@ -70,7 +70,7 @@ function RowLabel(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 

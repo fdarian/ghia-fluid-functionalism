@@ -205,7 +205,7 @@ function Side(props: {
 			>
 				Toggle modal
 			</Button>
-			<text
+			<div
 				style={{
 					...siteType.caption,
 					color: color.mutedForeground,
@@ -213,7 +213,7 @@ function Side(props: {
 				}}
 			>
 				{props.mark} {props.caption}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -255,7 +255,7 @@ export function ModalExitDemo() {
 						toggleLabel="Toggle the modal with the faster exit speed"
 					/>
 				</div>
-				<text
+				<div
 					style={{
 						...siteType.caption,
 						color: color.mutedForeground,
@@ -265,7 +265,7 @@ export function ModalExitDemo() {
 					Toggle one, then the other — both open on{' '}
 					<span style={{ fontFamily: MONO }}>spring.slow</span>; only the close
 					differs.
-				</text>
+				</div>
 			</div>
 		</ComponentPreview>
 	);

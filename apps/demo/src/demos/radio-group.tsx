@@ -45,9 +45,9 @@ function ByValue(props: { testId: string }) {
 					)}
 				</For>
 			</RadioGroup>
-			<text style={{ ...scale.caption, color: color.mutedForeground }}>
+			<div style={{ ...scale.caption, color: color.mutedForeground }}>
 				{`Plan: ${plan() ?? 'none'}`}
-			</text>
+			</div>
 		</>
 	);
 }

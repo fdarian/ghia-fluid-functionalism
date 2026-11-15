@@ -24,7 +24,7 @@ export function ScTable(props: {
 				paddingBottom: 8,
 			}}
 		>
-			<text
+			<div
 				style={{
 					fontSize: 14,
 					lineHeight: '20px',
@@ -34,7 +34,7 @@ export function ScTable(props: {
 				}}
 			>
 				{text}
-			</text>
+			</div>
 		</div>
 	);
 

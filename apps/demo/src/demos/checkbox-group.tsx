@@ -54,9 +54,9 @@ function Group(props: {
 				</For>
 			</CheckboxGroup>
 			<Show when={props.readout === true}>
-				<text style={{ ...scale.caption, color: color.mutedForeground }}>
+				<div style={{ ...scale.caption, color: color.mutedForeground }}>
 					{`Checked: ${[...checked()].sort().join(',')}`}
-				</text>
+				</div>
 			</Show>
 		</>
 	);

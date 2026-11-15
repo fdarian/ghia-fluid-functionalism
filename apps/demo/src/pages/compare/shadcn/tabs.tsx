@@ -103,7 +103,7 @@ export function ScTabs(props: {
 								focusVisible: scRing(),
 							}}
 						>
-							<text
+							<div
 								style={{
 									fontSize: 14,
 									lineHeight: '20px',
@@ -116,7 +116,7 @@ export function ScTabs(props: {
 								}}
 							>
 								{item.label}
-							</text>
+							</div>
 						</div>
 					);
 				}}

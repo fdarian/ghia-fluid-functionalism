@@ -81,7 +81,7 @@ export function SpringTokensDemo() {
 									gap: 8,
 								}}
 							>
-								<text
+								<div
 									style={{
 										...siteType.body,
 										fontVariationSettings: weight.semibold,
@@ -89,8 +89,8 @@ export function SpringTokensDemo() {
 									}}
 								>
 									{tier.key}
-								</text>
-								<text
+								</div>
+								<div
 									style={{
 										fontFamily: MONO,
 										...scale.micro,
@@ -98,8 +98,8 @@ export function SpringTokensDemo() {
 									}}
 								>
 									{tier.meta}
-								</text>
-								<text
+								</div>
+								<div
 									style={{
 										...siteType.caption,
 										marginLeft: 'auto',
@@ -107,7 +107,7 @@ export function SpringTokensDemo() {
 									}}
 								>
 									{tier.usage}
-								</text>
+								</div>
 							</div>
 							<div
 								{...buttonProps({ onClick: toggle }, renderer)}
@@ -145,9 +145,9 @@ export function SpringTokensDemo() {
 					)}
 				</For>
 				<div style={{ alignSelf: 'center' }}>
-					<text style={{ ...siteType.caption, color: color.mutedForeground }}>
+					<div style={{ ...siteType.caption, color: color.mutedForeground }}>
 						Click a track (or replay) to fire all three springs.
-					</text>
+					</div>
 				</div>
 			</div>
 		</ComponentPreview>

@@ -122,7 +122,7 @@ function QueuedStackCard() {
 							boxShadow: shadow(3),
 						}}
 					>
-						<text
+						<div
 							style={{
 								...scale.body,
 								color:
@@ -130,7 +130,7 @@ function QueuedStackCard() {
 							}}
 						>
 							{composer() === '' ? PLACEHOLDER : composer()}
-						</text>
+						</div>
 					</div>
 					<QueuedStack
 						testId="stack"

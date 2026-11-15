@@ -274,7 +274,7 @@ const cases: Case[] = [
 		group: 'text',
 		layout: 'column',
 		counts: [0, 100, 400],
-		item: (i) => <text style={body()}>{`Entry name ${i}`}</text>,
+		item: (i) => <div style={body()}>{`Entry name ${i}`}</div>,
 	},
 	{
 		name: 'text short, in flex row (centre)',
@@ -290,7 +290,7 @@ const cases: Case[] = [
 					justifyContent: 'space-between',
 				}}
 			>
-				<text style={body()}>{`Entry name ${i}`}</text>
+				<div style={body()}>{`Entry name ${i}`}</div>
 			</div>
 		),
 	},
@@ -301,7 +301,7 @@ const cases: Case[] = [
 		counts: [0, 50, 200],
 		item: () => (
 			<div style={{ width: 600 }}>
-				<text style={body()}>{PARAGRAPH}</text>
+				<div style={body()}>{PARAGRAPH}</div>
 			</div>
 		),
 	},
@@ -312,7 +312,7 @@ const cases: Case[] = [
 		counts: [0, 50, 200],
 		item: () => (
 			<div style={{ width: 600 }}>
-				<text style={body()}>
+				<div style={body()}>
 					Swap
 					<span
 						style={{
@@ -364,7 +364,7 @@ const cases: Case[] = [
 						{' compact '}
 					</span>
 					moves to the provider.
-				</text>
+				</div>
 			</div>
 		),
 	},
@@ -375,7 +375,7 @@ const cases: Case[] = [
 		counts: [0, 50, 200],
 		item: () => (
 			<div style={{ width: 600 }}>
-				<text style={body()}>
+				<div style={body()}>
 					Swap
 					<span>{' Tabs '}</span>
 					for
@@ -385,7 +385,7 @@ const cases: Case[] = [
 					prop, then
 					<span>{' compact '}</span>
 					moves to the provider.
-				</text>
+				</div>
 			</div>
 		),
 	},
@@ -397,7 +397,7 @@ const cases: Case[] = [
 				layout: 'column',
 				counts: depth >= 6 ? [0, 8, 32] : [0, 50, 200],
 				item: (i) =>
-					nest(depth, () => <text style={body()}>{`Entry ${i}`}</text>, kind),
+					nest(depth, () => <div style={body()}>{`Entry ${i}`}</div>, kind),
 			}),
 		),
 	),
@@ -483,13 +483,13 @@ const cases: Case[] = [
 		layout: 'column',
 		counts: [0, 100, 400],
 		item: (i) => (
-			<text
+			<div
 				style={{
 					...body(),
 					fontVariationSettings: weight.semibold,
 					fontVariantNumeric: 'tabular-nums',
 				}}
-			>{`Entry name ${i}`}</text>
+			>{`Entry name ${i}`}</div>
 		),
 	},
 	...(
@@ -585,7 +585,7 @@ const cases: Case[] = [
 			item: (i) => {
 				let build: () => JSX.Element =
 					variant.leaf === 'text'
-						? () => <text style={body()}>{`Entry ${i}`}</text>
+						? () => <div style={body()}>{`Entry ${i}`}</div>
 						: () => box();
 				for (let level = 0; level < 10; level++) {
 					const inner = build;
@@ -602,7 +602,7 @@ const cases: Case[] = [
 		counts: [0, 8, 32],
 		item: (i) => {
 			let build: () => JSX.Element = () => (
-				<text style={body()}>{`Entry ${i}`}</text>
+				<div style={body()}>{`Entry ${i}`}</div>
 			);
 			for (let level = 0; level < 12; level++) {
 				const inner = build;
@@ -633,7 +633,7 @@ const cases: Case[] = [
 						justifyContent: 'space-between',
 					}}
 				>
-					<text style={body()}>{`Entry name ${i}`}</text>
+					<div style={body()}>{`Entry name ${i}`}</div>
 				</div>
 			),
 			wrap: (children) => nest(ancestors, () => children, 'col'),

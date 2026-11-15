@@ -65,7 +65,7 @@ const GUIDE_REACH = 2000;
 
 function ReadoutText(props: { children: JSX.Element; heavy?: boolean }) {
 	return (
-		<text
+		<div
 			style={{
 				fontFamily: MONO,
 				fontSize: 11,
@@ -77,7 +77,7 @@ function ReadoutText(props: { children: JSX.Element; heavy?: boolean }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -96,7 +96,7 @@ function PaddingStrip(props: { width: number; side: 'left' | 'right' }) {
 				backgroundColor: PADDING_FILL,
 			}}
 		>
-			<text
+			<div
 				style={{
 					fontFamily: MONO,
 					fontSize: 9,
@@ -106,7 +106,7 @@ function PaddingStrip(props: { width: number; side: 'left' | 'right' }) {
 				}}
 			>
 				{`${props.width}`}
-			</text>
+			</div>
 		</div>
 	);
 }

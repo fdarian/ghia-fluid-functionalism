@@ -72,9 +72,9 @@ function RoleText(props: { role: RoleOption; checked: boolean; lit: boolean }) {
 				snapWeight
 				color={props.lit ? color.foreground : color.mutedForeground}
 			/>
-			<text style={{ ...siteType.caption, color: color.mutedForeground }}>
+			<div style={{ ...siteType.caption, color: color.mutedForeground }}>
 				{props.role.description}
-			</text>
+			</div>
 		</div>
 	);
 }

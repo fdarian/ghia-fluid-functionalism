@@ -40,7 +40,7 @@ function caption(text: string) {
 	if (node === undefined || node.parentId === null)
 		throw new Error(`no text ${text}`);
 	const found = renderer.getElement(node.parentId);
-	if (found === undefined) throw new Error(`no <text> for ${text}`);
+	if (found === undefined) throw new Error(`no element for ${text}`);
 	return `${found.style.fontSize}/${found.style.lineHeight}`;
 }
 let failed = false;

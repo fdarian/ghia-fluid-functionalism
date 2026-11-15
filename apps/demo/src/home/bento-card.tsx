@@ -159,7 +159,7 @@ export function BentoCard(props: {
 						gap: 8,
 					}}
 				>
-					<text
+					<div
 						style={{
 							...siteType.body,
 							fontVariationSettings: weight.normal,
@@ -169,7 +169,7 @@ export function BentoCard(props: {
 						}}
 					>
 						{props.name}
-					</text>
+					</div>
 					<Show when={props.isNew}>
 						<Badge variant="dot" color="blue" size="compact">
 							New

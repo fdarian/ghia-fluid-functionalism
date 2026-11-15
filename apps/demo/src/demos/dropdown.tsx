@@ -607,9 +607,9 @@ function Submenus() {
 					</DropdownContent>
 				</DropdownMenu>
 				<Show when={picked() !== ''}>
-					<text style={{ ...scale.caption, color: color.mutedForeground }}>
+					<div style={{ ...scale.caption, color: color.mutedForeground }}>
 						{picked()}
-					</text>
+					</div>
 				</Show>
 			</div>
 		</DemoCard>
@@ -653,9 +653,9 @@ function Keyboard() {
 						</For>
 					</DropdownContent>
 				</DropdownMenu>
-				<text style={{ ...scale.caption, color: color.mutedForeground }}>
+				<div style={{ ...scale.caption, color: color.mutedForeground }}>
 					{`picked: ${picked()} changes: ${changes()}`}
-				</text>
+				</div>
 			</div>
 		</DemoCard>
 	);

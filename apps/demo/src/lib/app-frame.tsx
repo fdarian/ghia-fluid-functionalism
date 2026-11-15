@@ -50,7 +50,7 @@ export function AppFrame(props: { title: string; children: JSX.Element }) {
 						justifyContent: 'center',
 					}}
 				>
-					<text
+					<div
 						style={{
 							...scale.body,
 							fontWeight: 500,
@@ -58,7 +58,7 @@ export function AppFrame(props: { title: string; children: JSX.Element }) {
 						}}
 					>
 						{props.title}
-					</text>
+					</div>
 				</div>
 			</div>
 			<div

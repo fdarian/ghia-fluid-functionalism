@@ -131,7 +131,7 @@ function Stat(props: { value: string; label: string; hint: string }) {
 				gap: 2,
 			}}
 		>
-			<text
+			<div
 				style={{
 					fontFamily: MONO,
 					...siteType.body,
@@ -141,8 +141,8 @@ function Stat(props: { value: string; label: string; hint: string }) {
 				}}
 			>
 				{props.value}
-			</text>
-			<text
+			</div>
+			<div
 				style={{
 					...siteType.caption,
 					color: color.mutedForeground,
@@ -150,8 +150,8 @@ function Stat(props: { value: string; label: string; hint: string }) {
 				}}
 			>
 				{props.label}
-			</text>
-			<text
+			</div>
+			<div
 				style={{
 					...scale.micro,
 					color: color.mutedForeground,
@@ -159,7 +159,7 @@ function Stat(props: { value: string; label: string; hint: string }) {
 				}}
 			>
 				{props.hint}
-			</text>
+			</div>
 		</div>
 	);
 }

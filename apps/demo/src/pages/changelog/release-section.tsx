@@ -103,7 +103,7 @@ function MonthHeading(props: { release: Release }) {
 				justifyContent: 'space-between',
 			}}
 		>
-			<text
+			<div
 				style={{
 					...siteType.title,
 					fontVariationSettings: weight.semibold,
@@ -111,10 +111,10 @@ function MonthHeading(props: { release: Release }) {
 				}}
 			>
 				{monthLabel(props.release.month)}
-			</text>
+			</div>
 			<Show when={props.release.released}>
 				{(released: Accessor<string>) => (
-					<text
+					<div
 						style={{
 							...siteType.caption,
 							fontVariantNumeric: 'tabular-nums',
@@ -122,7 +122,7 @@ function MonthHeading(props: { release: Release }) {
 						}}
 					>
 						{`Released ${releasedLabel(released())}`}
-					</text>
+					</div>
 				)}
 			</Show>
 		</div>
@@ -161,7 +161,7 @@ function KindGroup(props: { group: ChangeGroup; month: string }): JSX.Element {
 						paddingTop: 40,
 					}}
 				>
-					<text
+					<div
 						style={{
 							...siteType.subtitle,
 							fontVariationSettings: weight.semibold,
@@ -169,8 +169,8 @@ function KindGroup(props: { group: ChangeGroup; month: string }): JSX.Element {
 						}}
 					>
 						{KIND_LABEL[props.group.kind]}
-					</text>
-					<text
+					</div>
+					<div
 						style={{
 							...siteType.caption,
 							fontVariationSettings: weight.normal,
@@ -179,7 +179,7 @@ function KindGroup(props: { group: ChangeGroup; month: string }): JSX.Element {
 						}}
 					>
 						{String(props.group.entries.length)}
-					</text>
+					</div>
 				</div>
 				<div
 					style={{
@@ -248,7 +248,7 @@ export function ReleaseSection(props: {
 			>
 				<MonthHeading release={props.release} />
 				<div style={{ marginTop: 8 }}>
-					<text
+					<div
 						style={{
 							...siteType.subtitle,
 							fontVariationSettings: weight.semibold,
@@ -256,7 +256,7 @@ export function ReleaseSection(props: {
 						}}
 					>
 						{props.release.title}
-					</text>
+					</div>
 				</div>
 				<Show when={props.release.intro}>
 					{(intro: Accessor<Inline[]>) => (

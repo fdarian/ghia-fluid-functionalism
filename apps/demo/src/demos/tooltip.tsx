@@ -50,9 +50,9 @@ function FollowArea(props: {
 						...(props.axis === 'y' ? { rotate: '90deg' } : {}),
 					}}
 				>
-					<text style={{ ...scale.caption, color: color.mutedForeground }}>
+					<div style={{ ...scale.caption, color: color.mutedForeground }}>
 						Move along me
-					</text>
+					</div>
 				</div>
 			</div>
 		</Tooltip>
@@ -84,9 +84,9 @@ export function Demo() {
 									Hover me
 								</Button>
 							</Tooltip>
-							<text style={{ ...scale.caption, color: color.mutedForeground }}>
+							<div style={{ ...scale.caption, color: color.mutedForeground }}>
 								{`Clicked ${saves()} times, opened ${opened()}`}
-							</text>
+							</div>
 						</DemoRow>
 						<DemoRow label="Rich content">
 							<Tooltip
@@ -95,7 +95,7 @@ export function Demo() {
 									<div
 										style={{ display: 'flex', flexDirection: 'column', gap: 4 }}
 									>
-										<text
+										<div
 											style={{
 												...scale.caption,
 												color: color.background,
@@ -103,12 +103,12 @@ export function Demo() {
 											}}
 										>
 											Keyboard shortcut
-										</text>
-										<text
+										</div>
+										<div
 											style={{ ...scale.caption, color: color.mutedForeground }}
 										>
 											⌘ + S
-										</text>
+										</div>
 									</div>
 								}
 							>

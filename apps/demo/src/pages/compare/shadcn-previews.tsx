@@ -165,10 +165,10 @@ function SliderRow(props: {
 					justifyContent: 'space-between',
 				}}
 			>
-				<text style={text()}>{props.label}</text>
-				<text style={{ ...text(), fontVariantNumeric: 'tabular-nums' }}>
+				<div style={text()}>{props.label}</div>
+				<div style={{ ...text(), fontVariantNumeric: 'tabular-nums' }}>
 					{props.readout}
-				</text>
+				</div>
 			</div>
 			<ScSlider
 				testId={props.testId}

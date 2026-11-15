@@ -82,7 +82,7 @@ export const WINDOW_TITLE = 'Fluid Functionalism on Ghia';
 
 function Heading(props: { children: string }) {
 	return (
-		<text
+		<div
 			style={{
 				...siteType.display,
 				fontVariationSettings: weight.bold,
@@ -91,7 +91,7 @@ function Heading(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -131,7 +131,7 @@ function NavGroup(props: {
 								paddingRight: 8,
 							}}
 						>
-							<text
+							<div
 								style={{
 									...scale.caption,
 									color: color.foreground,
@@ -139,7 +139,7 @@ function NavGroup(props: {
 								}}
 							>
 								{label()}
-							</text>
+							</div>
 							<div
 								style={{
 									height: 20,
@@ -151,7 +151,7 @@ function NavGroup(props: {
 									justifyContent: 'center',
 								}}
 							>
-								<text
+								<div
 									style={{
 										...siteType.caption,
 										color: color.mutedForeground,
@@ -159,7 +159,7 @@ function NavGroup(props: {
 									}}
 								>
 									{props.count}
-								</text>
+								</div>
 							</div>
 						</div>
 						<div
@@ -277,9 +277,9 @@ function Hero() {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
 			<Heading>Fluid Functionalism</Heading>
-			<text style={{ ...siteType.body, color: color.mutedForeground }}>
+			<div style={{ ...siteType.body, color: color.mutedForeground }}>
 				Refined UI components with satisfying hover.
-			</text>
+			</div>
 			<div
 				style={{
 					display: 'flex',
@@ -343,10 +343,10 @@ function HeroArrows() {
 			/>
 			<Tooltip
 				content={
-					<text style={{ ...siteType.caption, color: color.background }}>
+					<div style={{ ...siteType.caption, color: color.background }}>
 						{'Introduction  '}
 						<span style={{ fontFamily: MONO, opacity: 0.5 }}>{'\u2192'}</span>
-					</text>
+					</div>
 				}
 			>
 				<Button
@@ -419,7 +419,7 @@ export function CustomizeCard() {
 					paddingBottom: 8,
 				}}
 			>
-				<text
+				<div
 					style={{
 						...siteType.title,
 						fontVariationSettings: weight.semibold,
@@ -427,7 +427,7 @@ export function CustomizeCard() {
 					}}
 				>
 					Make them yours
-				</text>
+				</div>
 			</div>
 			<div
 				style={{
@@ -447,9 +447,9 @@ export function CustomizeCard() {
 						height: 28,
 					}}
 				>
-					<text style={{ ...siteType.body, color: color.mutedForeground }}>
+					<div style={{ ...siteType.body, color: color.mutedForeground }}>
 						Theme
-					</text>
+					</div>
 					<Select
 						testId="theme"
 						items={THEMES}
@@ -466,9 +466,9 @@ export function CustomizeCard() {
 						height: 28,
 					}}
 				>
-					<text style={{ ...siteType.body, color: color.mutedForeground }}>
+					<div style={{ ...siteType.body, color: color.mutedForeground }}>
 						Radius
-					</text>
+					</div>
 					<Select
 						testId="radius"
 						items={SHAPES}
@@ -485,9 +485,9 @@ export function CustomizeCard() {
 						height: 28,
 					}}
 				>
-					<text style={{ ...siteType.body, color: color.mutedForeground }}>
+					<div style={{ ...siteType.body, color: color.mutedForeground }}>
 						Size
-					</text>
+					</div>
 					<Select
 						testId="size"
 						items={SIZES}
@@ -504,9 +504,9 @@ export function CustomizeCard() {
 						height: 28,
 					}}
 				>
-					<text style={{ ...siteType.body, color: color.mutedForeground }}>
+					<div style={{ ...siteType.body, color: color.mutedForeground }}>
 						Icons
-					</text>
+					</div>
 					<Select
 						testId="icons"
 						items={ICON_LIBRARIES}

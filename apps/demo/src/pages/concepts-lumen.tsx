@@ -138,9 +138,9 @@ function SwatchImage(props: { src: string }) {
 
 function Caption(props: { children: string }) {
 	return (
-		<text style={{ ...siteType.caption, color: color.mutedForeground }}>
+		<div style={{ ...siteType.caption, color: color.mutedForeground }}>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -168,9 +168,9 @@ function Cite(props: { n: number }) {
 
 function Paragraph(props: { children: JSX.Element }) {
 	return (
-		<text style={{ ...siteType.subtitle, color: color.foreground }}>
+		<div style={{ ...siteType.subtitle, color: color.foreground }}>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -245,7 +245,7 @@ function SourcesPanel() {
 								minWidth: 0,
 							}}
 						>
-							<text
+							<div
 								style={{
 									...siteType.body,
 									fontVariationSettings: weight.normal,
@@ -256,8 +256,8 @@ function SourcesPanel() {
 								}}
 							>
 								{source.title}
-							</text>
-							<text
+							</div>
+							<div
 								style={{
 									...siteType.caption,
 									color: color.mutedForeground,
@@ -267,7 +267,7 @@ function SourcesPanel() {
 								}}
 							>
 								{source.site}
-							</text>
+							</div>
 						</div>
 					</div>
 				)}
@@ -313,7 +313,7 @@ function TurnView(props: { turn: Turn }) {
 	const idPrefix = () => `lumen-${props.turn.id}`;
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-			<text
+			<div
 				style={{
 					fontSize: 24,
 					lineHeight: '30px',
@@ -322,7 +322,7 @@ function TurnView(props: { turn: Turn }) {
 				}}
 			>
 				{props.turn.question}
-			</text>
+			</div>
 
 			<ThinkingSteps defaultOpen={props.turn.thinking} width="100%">
 				<ThinkingStepsHeader>

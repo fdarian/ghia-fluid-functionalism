@@ -423,9 +423,9 @@ function Playground() {
 						/>
 					</PlayField>
 					<div style={{ paddingLeft: 4, paddingRight: 4 }}>
-						<text style={{ ...scale.caption, color: color.mutedForeground }}>
+						<div style={{ ...scale.caption, color: color.mutedForeground }}>
 							Fires while the preview has focus.
-						</text>
+						</div>
 					</div>
 					<PlayDivider />
 					<PlaySection label="Rows" />
@@ -622,9 +622,9 @@ function DialogSection() {
 				>
 					Open, no shortcut
 				</Button>
-				<text style={{ ...scale.caption, color: color.mutedForeground }}>
+				<div style={{ ...scale.caption, color: color.mutedForeground }}>
 					{`Ran: ${ran()}`}
-				</text>
+				</div>
 			</div>
 			<CommandMenuDialog open={open()} onOpenChange={setOpen}>
 				<CommandMenu
