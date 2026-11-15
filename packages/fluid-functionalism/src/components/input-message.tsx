@@ -465,7 +465,7 @@ function QueuedRow(props: {
 						color={color.mutedForeground}
 					/>
 					<Show when={props.item.text !== ''}>
-						<text
+						<div
 							style={{
 								...step().rowText,
 								color: color.mutedForeground,
@@ -473,7 +473,7 @@ function QueuedRow(props: {
 							}}
 						>
 							{String(files())}
-						</text>
+						</div>
 					</Show>
 				</div>
 			</Show>
@@ -505,7 +505,7 @@ function QueuedRow(props: {
 					userSelect: 'none',
 				}}
 			>
-				<text
+				<div
 					style={{
 						...step().rowText,
 						fontVariationSettings: weight.normal,
@@ -517,7 +517,7 @@ function QueuedRow(props: {
 					}}
 				>
 					{label()}
-				</text>
+				</div>
 			</div>
 			<Tooltip content="Remove" side="top">
 				<div
@@ -604,7 +604,7 @@ function SuggestionRow(props: {
 				...colorFade,
 			}}
 		>
-			<text
+			<div
 				style={{
 					...step().field,
 					flexGrow: 1,
@@ -618,7 +618,7 @@ function SuggestionRow(props: {
 				}}
 			>
 				{props.text}
-			</text>
+			</div>
 			<div style={{ width: 13, height: 13, flexShrink: 0 }}>
 				<Show
 					when={!props.active && props.keyHint}
@@ -1172,7 +1172,7 @@ export function InputMessage(props: InputMessageProps) {
 							pointerEvents: 'none',
 						}}
 					>
-						<text
+						<div
 							testId={props.testId && `${props.testId}-ghost`}
 							style={{
 								...step().field,
@@ -1185,7 +1185,7 @@ export function InputMessage(props: InputMessageProps) {
 							}}
 						>
 							{props.placeholderSuggestion}
-						</text>
+						</div>
 						<div
 							testId={props.testId && `${props.testId}-ghost-keycap`}
 							style={{
@@ -1203,14 +1203,14 @@ export function InputMessage(props: InputMessageProps) {
 								transform: 'translateY(-1px)',
 							}}
 						>
-							<text
+							<div
 								style={{
 									...step().keycap.text,
 									color: color.mutedForeground,
 								}}
 							>
 								Tab
-							</text>
+							</div>
 						</div>
 					</div>
 				</Show>

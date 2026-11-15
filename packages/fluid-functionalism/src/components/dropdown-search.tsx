@@ -57,9 +57,9 @@ export function DropdownEmpty(props: { children: string }) {
 				justifyContent: 'center',
 			}}
 		>
-			<text style={{ ...scale.body, color: color.mutedForeground }}>
+			<div style={{ ...scale.body, color: color.mutedForeground }}>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

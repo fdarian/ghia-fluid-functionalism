@@ -470,7 +470,7 @@ export function BannerTitle(props: { testId?: string; children: JSX.Element }) {
 			testId={props.testId}
 			style={{ gridColumn: 2, gridRow: 1, minWidth: 0 }}
 		>
-			<text
+			<div
 				style={{
 					...text(),
 					color: color.foreground,
@@ -479,7 +479,7 @@ export function BannerTitle(props: { testId?: string; children: JSX.Element }) {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -494,9 +494,9 @@ export function BannerDescription(props: { children: JSX.Element }) {
 		scope.compact() ? sizes.compact.subtitle : sizes.default.subtitle;
 	return (
 		<div style={{ gridColumn: 2, gridRow: 2, marginTop: 2, minWidth: 0 }}>
-			<text style={{ ...text(), color: color.foreground, textWrap: 'pretty' }}>
+			<div style={{ ...text(), color: color.foreground, textWrap: 'pretty' }}>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

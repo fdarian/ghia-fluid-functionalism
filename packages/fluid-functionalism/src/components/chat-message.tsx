@@ -151,9 +151,9 @@ export function ChatMessage(props: {
 					{typeof props.children !== 'string' ? (
 						props.children
 					) : props.morphId === undefined ? (
-						<text style={{ ...subtitle, color: color.foreground }}>
+						<div style={{ ...subtitle, color: color.foreground }}>
 							{props.children}
-						</text>
+						</div>
 					) : (
 						// A `layout` box is not stretched by the bubble's scale, so the words keep their size while the bubble grows around them.
 						<motion.div
@@ -164,9 +164,9 @@ export function ChatMessage(props: {
 							layoutId={`${props.morphId}-text`}
 							transition={tween.moderate}
 						>
-							<text style={{ ...subtitle, color: color.foreground }}>
+							<div style={{ ...subtitle, color: color.foreground }}>
 								{props.children}
-							</text>
+							</div>
 						</motion.div>
 					)}
 				</div>
@@ -188,7 +188,7 @@ export function ChatMessage(props: {
 					}}
 				>
 					<Show when={showTime()}>
-						<text
+						<div
 							style={{
 								...scale.caption,
 								color: color.mutedForeground,
@@ -196,7 +196,7 @@ export function ChatMessage(props: {
 							}}
 						>
 							{props.time}
-						</text>
+						</div>
 					</Show>
 					<Show when={props.actions !== undefined}>
 						<div

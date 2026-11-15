@@ -193,7 +193,7 @@ function Cell(props: CellOptions & { header: boolean }) {
 				paddingBottom: metrics().padY,
 			}}
 		>
-			<text
+			<div
 				style={{
 					...metrics().text,
 					color: textColor(),
@@ -204,7 +204,7 @@ function Cell(props: CellOptions & { header: boolean }) {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

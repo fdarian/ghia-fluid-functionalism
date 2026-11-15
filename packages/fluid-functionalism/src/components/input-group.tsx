@@ -170,7 +170,7 @@ export function InputField(props: {
 					onClick={focusInput}
 					style={{ paddingLeft: step().labelInset, paddingBottom: 4 }}
 				>
-					<text
+					<div
 						style={{
 							...step().text,
 							fontVariationSettings: weight.normal,
@@ -181,7 +181,7 @@ export function InputField(props: {
 						}}
 					>
 						{props.label}
-					</text>
+					</div>
 				</div>
 			</Show>
 			<div
@@ -272,7 +272,7 @@ export function InputField(props: {
 			<Show when={props.error}>
 				{(message: Accessor<string>) => (
 					<div style={{ paddingLeft: step().labelInset, paddingTop: 4 }}>
-						<text
+						<div
 							style={{
 								...step().caption,
 								fontVariationSettings: weight.normal,
@@ -280,7 +280,7 @@ export function InputField(props: {
 							}}
 						>
 							{message()}
-						</text>
+						</div>
 					</div>
 				)}
 			</Show>

@@ -321,9 +321,9 @@ export function Combobox(props: {
 									justifyContent: 'center',
 								}}
 							>
-								<text style={{ ...scale.body, color: color.mutedForeground }}>
+								<div style={{ ...scale.body, color: color.mutedForeground }}>
 									{props.emptyText ?? 'No results found.'}
-								</text>
+								</div>
 							</div>
 						}
 					>
@@ -414,7 +414,7 @@ export function Combobox(props: {
 														/>
 													)}
 												</Show>
-												<text
+												<div
 													style={{
 														flexGrow: 1,
 														minWidth: 0,
@@ -430,7 +430,7 @@ export function Combobox(props: {
 													}}
 												>
 													{row.label}
-												</text>
+												</div>
 												<div style={{ width: 16, height: 16, flexShrink: 0 }}>
 													<CheckMark
 														checked={value() === row.value}

@@ -44,9 +44,9 @@ export function DropdownLabel(props: { children: string }) {
 				paddingRight: 8,
 			}}
 		>
-			<text style={{ ...scale.caption, color: color.mutedForeground }}>
+			<div style={{ ...scale.caption, color: color.mutedForeground }}>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }

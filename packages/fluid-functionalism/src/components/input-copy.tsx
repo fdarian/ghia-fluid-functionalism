@@ -233,7 +233,7 @@ export function InputCopy(props: {
 							{icon(shown)}
 							{/* A hidden "Copied" in flow reserves the widest label, so the swap never resizes the row. */}
 							<div style={{ position: 'relative' }}>
-								<text
+								<div
 									style={{
 										fontSize: step().text,
 										lineHeight: `${step().line}px`,
@@ -241,9 +241,9 @@ export function InputCopy(props: {
 									}}
 								>
 									Copied
-								</text>
+								</div>
 								<div style={{ position: 'absolute', top: 0, left: 0 }}>
-									<text
+									<div
 										style={{
 											fontSize: step().text,
 											lineHeight: `${step().line}px`,
@@ -253,7 +253,7 @@ export function InputCopy(props: {
 										}}
 									>
 										{label(shown)}
-									</text>
+									</div>
 								</div>
 							</div>
 						</>
@@ -275,7 +275,7 @@ export function InputCopy(props: {
 				paddingLeft: align() === 'left' ? 4 : 0,
 			}}
 		>
-			<text
+			<div
 				style={{
 					minWidth: 0,
 					fontFamily: MONO,
@@ -297,7 +297,7 @@ export function InputCopy(props: {
 				>
 					{props.value}
 				</span>
-			</text>
+			</div>
 		</div>
 	);
 
@@ -369,7 +369,7 @@ export function InputCopy(props: {
 							paddingBottom: 2,
 						}}
 					>
-						<text
+						<div
 							style={{
 								fontSize: step().text,
 								lineHeight: `${step().line}px`,
@@ -378,7 +378,7 @@ export function InputCopy(props: {
 							}}
 						>
 							{text()}
-						</text>
+						</div>
 					</div>
 				)}
 			</Show>

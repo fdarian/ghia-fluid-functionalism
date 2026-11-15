@@ -128,7 +128,7 @@ export function Shimmer(props: {
 		<div style={{ display: 'flex', flexDirection: 'row' }}>
 			<For each={letters()}>
 				{(letter, index) => (
-					<text
+					<div
 						style={{
 							...props.style,
 							whiteSpace: 'nowrap',
@@ -140,7 +140,7 @@ export function Shimmer(props: {
 						}}
 					>
 						{letter}
-					</text>
+					</div>
 				)}
 			</For>
 		</div>

@@ -248,7 +248,7 @@ export function Button(props: {
 			<Show
 				when={iconOnly() && props.icon !== undefined}
 				fallback={
-					<text
+					<div
 						style={{
 							...size().text,
 							color: labelColor(),
@@ -259,7 +259,7 @@ export function Button(props: {
 						}}
 					>
 						{props.children}
-					</text>
+					</div>
 				}
 			>
 				<Icon

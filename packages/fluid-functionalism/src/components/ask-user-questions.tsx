@@ -116,11 +116,11 @@ function ShortcutChip(props: { children: string }) {
 				backgroundColor: withAlpha(color.background, 0.15),
 			}}
 		>
-			<text
+			<div
 				style={{ ...scale.micro, lineHeight: '11px', color: color.background }}
 			>
 				{props.children}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -245,7 +245,7 @@ function Row(props: RowProps) {
 						: {}),
 				}}
 			>
-				<text
+				<div
 					style={{
 						...scale.micro,
 						fontVariationSettings: props.chipFilled
@@ -262,7 +262,7 @@ function Row(props: RowProps) {
 					}}
 				>
 					{String(props.chipContent)}
-				</text>
+				</div>
 			</div>
 			<Show when={props.chipPosition === 'right'}>{arrowOverlay()}</Show>
 		</div>
@@ -781,14 +781,14 @@ export function AskUserQuestions(props: {
 											color={color.foreground}
 										/>
 										<Show when={option.description}>
-											<text
+											<div
 												style={{
 													...scale.caption,
 													color: color.mutedForeground,
 												}}
 											>
 												{option.description}
-											</text>
+											</div>
 										</Show>
 									</>
 								}
@@ -954,7 +954,7 @@ export function AskUserQuestions(props: {
 			fallback={
 				<div style={cardStyle()}>
 					<div style={{ padding: 20 }}>
-						<text
+						<div
 							style={{
 								...scale.body,
 								color: color.mutedForeground,
@@ -962,7 +962,7 @@ export function AskUserQuestions(props: {
 							}}
 						>
 							No questions.
-						</text>
+						</div>
 					</div>
 				</div>
 			}
@@ -985,9 +985,9 @@ export function AskUserQuestions(props: {
 						paddingBottom: 8,
 					}}
 				>
-					<text style={{ ...scale.caption, color: color.mutedForeground }}>
+					<div style={{ ...scale.caption, color: color.mutedForeground }}>
 						{`Question ${safeIndex() + 1} of ${total()}`}
-					</text>
+					</div>
 				</div>
 				{/* The Q/A region: its height animates to the content's, so the footer rides along. */}
 				<motion.div
@@ -1014,7 +1014,7 @@ export function AskUserQuestions(props: {
 								<div
 									style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
 								>
-									<text
+									<div
 										style={{
 											...scale.title,
 											fontVariationSettings: weight.semibold,
@@ -1023,7 +1023,7 @@ export function AskUserQuestions(props: {
 										}}
 									>
 										{question()?.title}
-									</text>
+									</div>
 									<Show when={isFreeText()} fallback={rows()}>
 										{freeTextField()}
 									</Show>
@@ -1085,7 +1085,7 @@ export function AskUserQuestions(props: {
 										transition={{ ...tween.fast, opacity: { duration: 0.12 } }}
 										style={{ paddingLeft: 12, flexShrink: 1, minWidth: 0 }}
 									>
-										<text
+										<div
 											style={{
 												...scale.caption,
 												color: color.destructive,
@@ -1093,7 +1093,7 @@ export function AskUserQuestions(props: {
 											}}
 										>
 											{freeTextError()}
-										</text>
+										</div>
 									</motion.div>
 								</Show>
 							</div>
@@ -1162,7 +1162,7 @@ function InlineOptionText(props: {
 	heavy: boolean;
 }) {
 	return (
-		<text style={{ ...scale.body, minWidth: 0, flexShrink: 1 }}>
+		<div style={{ ...scale.body, minWidth: 0, flexShrink: 1 }}>
 			<StableLabel
 				text={props.title}
 				heavy={props.heavy}
@@ -1172,7 +1172,7 @@ function InlineOptionText(props: {
 			<span testId={props.testId} style={{ color: color.mutedForeground }}>
 				{props.description}
 			</span>
-		</text>
+		</div>
 	);
 }
 

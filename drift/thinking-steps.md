@@ -48,7 +48,7 @@ repeating it.
 
 - **Cause:** `not ported yet`. An `<img>` with a `%` width or `maxWidth` gets its height from its intrinsic ratio, and `onLoad` reports `naturalWidth` / `naturalHeight` (`ghia:docs/fork/layout.md:294`, `ghia:docs/fork/paint-and-transforms.md:56`). To port: `width: "100%"` with `maxWidth: 200` and `objectFit: "cover"`. The height then comes from the file's ratio once decoded; before decode the box is empty (`ghia:docs/reference.md:5999-6001`), so the step's height jumps on load, which the `aspectRatio` prop avoids. Check that the jump is acceptable, or size from `onLoad`'s `naturalWidth` / `naturalHeight`.
 - **Original:** `<img class="w-full max-w-[200px] object-cover">` takes the file's aspect ratio and shrinks in a narrow column (`thinking-steps.tsx:586-593`).
-- **Port:** a fixed 200px-wide box, height `200 / aspectRatio` with `aspectRatio` an extra prop defaulting to 2 (`thinking-steps.tsx:539-568`). The demo image is 1200x600, so the demos match. A different ratio letterboxes (`objectFit` is the default `contain`, the source is `cover`), and the box does not shrink below 200.
+- **Port:** a fixed 200px-wide box, height `200 / aspectRatio` with `aspectRatio` an extra prop defaulting to 2 (`thinking-steps.tsx:537-566`). The demo image is 1200x600, so the demos match. A different ratio letterboxes (`objectFit` is the default `contain`, the source is `cover`), and the box does not shrink below 200.
 - **Workaround:** the `aspectRatio` prop, so the step's measured height is stable before the image decodes.
 - **Fidelity:** approximated.
 - **Components it hits:** card (image), file-thumbnail.
@@ -57,7 +57,7 @@ repeating it.
 
 - **Cause:** `port choice` (the comment says it keeps a pale screenshot's edge visible; why an overlay div and not the image's own outline is not stated).
 - **Original:** `outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10` on the `<img>` (`thinking-steps.tsx:590`).
-- **Port:** an absolutely positioned overlay div with a 1px inset outline in `color.border`, `rgba(23,23,23,.12)` light and `rgba(245,245,245,.12)` dark (`thinking-steps.tsx:570-585`; `packages/fluid-functionalism/src/lib/theme.ts:94`, `:142`).
+- **Port:** an absolutely positioned overlay div with a 1px inset outline in `color.border`, `rgba(23,23,23,.12)` light and `rgba(245,245,245,.12)` dark (`thinking-steps.tsx:568-583`; `packages/fluid-functionalism/src/lib/theme.ts:94`, `:142`).
 - **Workaround:** the overlay.
 - **Fidelity:** approximated (alpha .12 against .10, base colours slightly off black and white).
 - **Components it hits:** just this one.

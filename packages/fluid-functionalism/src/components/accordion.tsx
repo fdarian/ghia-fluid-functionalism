@@ -687,9 +687,9 @@ export function AccordionContent(props: { children: JSX.Element }) {
 						paddingBottom: metrics().contentBottom,
 					}}
 				>
-					<text style={{ ...metrics().text, color: color.mutedForeground }}>
+					<div style={{ ...metrics().text, color: color.mutedForeground }}>
 						{props.children}
-					</text>
+					</div>
 				</div>
 			</motion.div>
 		</motion.div>

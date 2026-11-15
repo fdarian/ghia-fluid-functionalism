@@ -412,17 +412,17 @@ export function ThinkingStep(props: {
 								<Show
 									when={status() === 'active'}
 									fallback={
-										<text style={{ ...labelStyle, color: color.foreground }}>
+										<div style={{ ...labelStyle, color: color.foreground }}>
 											{props.label}
-										</text>
+										</div>
 									}
 								>
 									<Shimmer style={labelStyle}>{`${props.label}…`}</Shimmer>
 								</Show>
 								<Show when={props.description}>
-									<text style={{ ...scale.body, color: color.mutedForeground }}>
+									<div style={{ ...scale.body, color: color.mutedForeground }}>
 										{props.description}
-									</text>
+									</div>
 								</Show>
 								{props.children}
 							</div>
@@ -476,11 +476,9 @@ export function ThinkingStepDetails(props: {
 					>
 						<For each={props.details}>
 							{(item) => (
-								<text
-									style={{ ...scale.caption, color: color.mutedForeground }}
-								>
+								<div style={{ ...scale.caption, color: color.mutedForeground }}>
 									{item}
-								</text>
+								</div>
 							)}
 						</For>
 						{props.children}
@@ -585,9 +583,9 @@ export function ThinkingStepImage(props: {
 			</div>
 			<Show when={props.caption}>
 				<div style={{ marginTop: 4 }}>
-					<text style={{ ...scale.caption, color: color.mutedForeground }}>
+					<div style={{ ...scale.caption, color: color.mutedForeground }}>
 						{props.caption}
-					</text>
+					</div>
 				</div>
 			</Show>
 		</motion.div>

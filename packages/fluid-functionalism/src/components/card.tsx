@@ -625,7 +625,7 @@ export function CardTitle(props: { children: string }) {
 		scope.orientation() === 'inline' ? { textBox: capTrim } : {};
 	return (
 		<div style={{ position: 'relative', minWidth: 0 }}>
-			<text
+			<div
 				style={{
 					...text(),
 					fontVariationSettings: weight.semibold,
@@ -635,9 +635,9 @@ export function CardTitle(props: { children: string }) {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 			<div style={{ position: 'absolute', top: 0, left: 0 }}>
-				<text
+				<div
 					style={{
 						...text(),
 						color: color.foreground,
@@ -650,7 +650,7 @@ export function CardTitle(props: { children: string }) {
 					}}
 				>
 					{props.children}
-				</text>
+				</div>
 			</div>
 		</div>
 	);
@@ -660,7 +660,7 @@ export function CardDescription(props: { children: string }) {
 	const scope = useContext(CardContext);
 	const text = () => subtitle[scope.compact() ? 'compact' : 'default'];
 	return (
-		<text
+		<div
 			style={{
 				...text(),
 				color: color.mutedForeground,
@@ -668,7 +668,7 @@ export function CardDescription(props: { children: string }) {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -909,7 +909,7 @@ export function CardFeature(props: {
 					minWidth: 0,
 				}}
 			>
-				<text
+				<div
 					style={{
 						...(scope.compact() ? scale.bodyCompact : scale.body),
 						color: color.foreground,
@@ -918,16 +918,16 @@ export function CardFeature(props: {
 					}}
 				>
 					{props.title}
-				</text>
+				</div>
 				<Show when={props.description}>
-					<text
+					<div
 						style={{
 							...(scope.compact() ? scale.micro : scale.caption),
 							color: color.mutedForeground,
 						}}
 					>
 						{props.description}
-					</text>
+					</div>
 				</Show>
 			</div>
 		</div>
@@ -1010,7 +1010,7 @@ export function CardButton(props: {
 	const content = () => (
 		<>
 			<Show when={position() === 'start'}>{glyph()}</Show>
-			<text
+			<div
 				style={{
 					...(scope.compact() ? scale.micro : scale.caption),
 					color: labelColor(),
@@ -1024,7 +1024,7 @@ export function CardButton(props: {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 			<Show when={position() === 'end'}>{glyph()}</Show>
 			<Show when={props.external}>
 				<Icon

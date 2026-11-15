@@ -911,7 +911,7 @@ function FormatDropdown(props: {
 					focusVisible: focusOutline(),
 				}}
 			>
-				<text
+				<div
 					style={{
 						...scale.body,
 						fontVariationSettings: weight.normal,
@@ -921,7 +921,7 @@ function FormatDropdown(props: {
 					}}
 				>
 					{FORMAT_LABELS[props.value]}
-				</text>
+				</div>
 				<div
 					testId={props.testId && `${props.testId}-chevron`}
 					style={{
@@ -1222,9 +1222,9 @@ function ColorInput(props: {
 			<Show when={props.prefix}>
 				{(prefix: Accessor<string>) => (
 					<div style={{ marginRight: 4 }}>
-						<text style={{ ...scale.caption, color: color.mutedForeground }}>
+						<div style={{ ...scale.caption, color: color.mutedForeground }}>
 							{prefix()}
-						</text>
+						</div>
 					</div>
 				)}
 			</Show>
@@ -1778,7 +1778,7 @@ export function ColorPickerPopover(
 
 	const label = (text: string) => (
 		<div style={{ paddingLeft: 4, paddingRight: 4 }}>
-			<text
+			<div
 				style={{
 					...scale.body,
 					fontVariationSettings: weight.normal,
@@ -1786,7 +1786,7 @@ export function ColorPickerPopover(
 				}}
 			>
 				{text}
-			</text>
+			</div>
 		</div>
 	);
 
@@ -1845,7 +1845,7 @@ export function ColorPickerPopover(
 				</Show>
 				<ColorTile color={swatchColor()} size={20} />
 				<Show when={props.triggerShowValue !== false}>
-					<text
+					<div
 						style={{
 							...scale.body,
 							fontVariationSettings: weight.normal,
@@ -1854,7 +1854,7 @@ export function ColorPickerPopover(
 						}}
 					>
 						{valueLabel()}
-					</text>
+					</div>
 				</Show>
 				<Show
 					when={

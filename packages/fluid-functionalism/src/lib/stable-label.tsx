@@ -83,9 +83,9 @@ export function StableLabel(props: {
 					: {}),
 			}}
 		>
-			<text style={{ ...cellStyle(false), opacity: 0 }}>{props.text}</text>
-			<text style={{ ...cellStyle(true), opacity: 0 }}>{props.text}</text>
-			<text
+			<div style={{ ...cellStyle(false), opacity: 0 }}>{props.text}</div>
+			<div style={{ ...cellStyle(true), opacity: 0 }}>{props.text}</div>
+			<div
 				testId={props.testId}
 				style={{
 					...cellStyle(props.heavy),
@@ -94,7 +94,7 @@ export function StableLabel(props: {
 				}}
 			>
 				{props.text}
-			</text>
+			</div>
 		</div>
 	);
 }

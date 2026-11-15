@@ -497,7 +497,7 @@ export function SidebarMenuButton(props: {
 							justifyContent: 'center',
 						}}
 					>
-						<text
+						<div
 							style={{
 								...(props.badgeType ?? scale.micro),
 								fontVariationSettings: props.active
@@ -509,7 +509,7 @@ export function SidebarMenuButton(props: {
 							}}
 						>
 							{text()}
-						</text>
+						</div>
 					</div>
 				)}
 			</Show>
@@ -684,13 +684,13 @@ export function SidebarGroupLabel(props: { children: string; count?: number }) {
 				paddingRight: 8,
 			}}
 		>
-			<text
+			<div
 				style={{ ...scale.caption, color: color.mutedForeground, flexGrow: 1 }}
 			>
 				{props.children}
-			</text>
+			</div>
 			<Show when={props.count}>
-				<text
+				<div
 					style={{
 						...scale.caption,
 						color: color.mutedForeground,
@@ -698,7 +698,7 @@ export function SidebarGroupLabel(props: { children: string; count?: number }) {
 					}}
 				>
 					{props.count}
-				</text>
+				</div>
 			</Show>
 		</div>
 	);
@@ -779,9 +779,9 @@ export function SidebarSearchField(props: {
 					...fade(['opacity'], 80),
 				}}
 			>
-				<text style={{ ...scale.micro, color: color.mutedForeground }}>
+				<div style={{ ...scale.micro, color: color.mutedForeground }}>
 					{props.shortcut}
-				</text>
+				</div>
 			</div>
 		</div>
 	);

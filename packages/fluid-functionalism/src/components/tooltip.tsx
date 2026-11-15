@@ -209,7 +209,7 @@ export function Tooltip(props: {
 								when={typeof props.content === 'string'}
 								fallback={props.content}
 							>
-								<text
+								<div
 									style={{
 										...scale.caption,
 										color: color.background,
@@ -217,7 +217,7 @@ export function Tooltip(props: {
 									}}
 								>
 									{props.content as string}
-								</text>
+								</div>
 							</Show>
 						</motion.div>
 					</motion.div>

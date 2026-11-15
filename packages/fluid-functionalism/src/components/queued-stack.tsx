@@ -281,7 +281,7 @@ export function QueuedStack(props: {
 												exit={{ opacity: 0, scale: 0.6 }}
 												transition={tween.fast}
 											>
-												<text
+												<div
 													style={{
 														...scale.microCompact,
 														lineHeight: '10px',
@@ -291,7 +291,7 @@ export function QueuedStack(props: {
 													}}
 												>
 													{String(count())}
-												</text>
+												</div>
 											</motion.div>
 										</Show>
 									</AnimatePresence>
@@ -456,7 +456,7 @@ function QueueCard(props: {
 									backgroundColor: color.hover,
 								}}
 							>
-								<text
+								<div
 									style={{
 										...scale.micro,
 										color: color.foreground,
@@ -464,7 +464,7 @@ function QueueCard(props: {
 									}}
 								>
 									{`+${files().length - 3}`}
-								</text>
+								</div>
 							</div>
 						</Show>
 					</div>
@@ -474,7 +474,7 @@ function QueueCard(props: {
 					layoutId={props.morphId() && `${props.morphId()}-text`}
 					style={{ flexGrow: 1, minWidth: 0 }}
 				>
-					<text
+					<div
 						style={{
 							fontSize: 14,
 							lineHeight: '20px',
@@ -484,7 +484,7 @@ function QueueCard(props: {
 						}}
 					>
 						{label()}
-					</text>
+					</div>
 				</motion.div>
 			</div>
 			{/* Out of layout until the card is hovered, so the text has the full width meanwhile. */}

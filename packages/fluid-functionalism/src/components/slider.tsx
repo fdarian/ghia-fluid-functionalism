@@ -108,7 +108,7 @@ function ValueBubble(props: {
 						paddingBottom: 4,
 					}}
 				>
-					<text
+					<div
 						style={{
 							...scale.caption,
 							color: color.background,
@@ -117,7 +117,7 @@ function ValueBubble(props: {
 						}}
 					>
 						{props.text()}
-					</text>
+					</div>
 				</motion.div>
 			</anchored>
 		</Show>
@@ -241,7 +241,7 @@ function ValueDisplay(props: {
 		<Show
 			when={props.editingIndex() === index}
 			fallback={
-				<text
+				<div
 					style={{
 						...textStyle(props.interacting()),
 						...valueFade,
@@ -249,7 +249,7 @@ function ValueDisplay(props: {
 					}}
 				>
 					{valueSpan(index)}
-				</text>
+				</div>
 			}
 		>
 			<div
@@ -261,7 +261,7 @@ function ValueDisplay(props: {
 				}}
 			>
 				<Show when={props.label !== undefined}>
-					<text
+					<div
 						testId={
 							props.testId === undefined
 								? undefined
@@ -270,7 +270,7 @@ function ValueDisplay(props: {
 						style={{ ...textStyle(false), color: color.mutedForeground }}
 					>
 						{`${props.label}:`}
-					</text>
+					</div>
 				</Show>
 				<input
 					testId={
@@ -325,14 +325,14 @@ function ValueDisplay(props: {
 	return (
 		<div style={{ position: 'relative', flexShrink: 0 }}>
 			{/* Tabular digits keep the number from changing width, but the weight shift normal -> semibold still does, so this reserves the widest value at semibold. */}
-			<text style={{ ...textStyle(true), opacity: 0 }}>
+			<div style={{ ...textStyle(true), opacity: 0 }}>
 				{prefix()}
 				{props.formatValue(props.max)}
 				<Show when={props.isRange}>
 					<span style={dashStyle}>—</span>
 					{props.formatValue(props.max)}
 				</Show>
-			</text>
+			</div>
 			<div
 				style={{
 					position: 'absolute',
@@ -350,7 +350,7 @@ function ValueDisplay(props: {
 						<>
 							{value(0)}
 							<Show when={props.isRange}>
-								<text
+								<div
 									style={{
 										...textStyle(false),
 										color: color.mutedForeground,
@@ -358,13 +358,13 @@ function ValueDisplay(props: {
 									}}
 								>
 									—
-								</text>
+								</div>
 								{value(1)}
 							</Show>
 						</>
 					}
 				>
-					<text
+					<div
 						style={{
 							...textStyle(props.interacting()),
 							...valueFade,
@@ -387,7 +387,7 @@ function ValueDisplay(props: {
 							<span style={dashStyle}>—</span>
 							{valueSpan(1)}
 						</Show>
-					</text>
+					</div>
 				</Show>
 			</div>
 		</div>
@@ -1175,7 +1175,7 @@ function ComfortableSlider(props: ComfortableProps) {
 									backgroundColor: color.surface2,
 								}}
 							>
-								<text style={{ ...textStyle, opacity: 0 }}>{props.label}</text>
+								<div style={{ ...textStyle, opacity: 0 }}>{props.label}</div>
 							</div>
 						</Show>
 						<div style={{ flexGrow: 1 }} />
@@ -1186,9 +1186,9 @@ function ComfortableSlider(props: ComfortableProps) {
 								backgroundColor: color.surface2,
 							}}
 						>
-							<text style={{ ...valueStyle, opacity: 0 }}>
+							<div style={{ ...valueStyle, opacity: 0 }}>
 								{formatValue(max())}
-							</text>
+							</div>
 						</div>
 					</div>
 				</Show>
@@ -1252,17 +1252,17 @@ function ComfortableSlider(props: ComfortableProps) {
 					}}
 				>
 					<Show when={props.label !== undefined}>
-						<text style={{ ...textStyle, color: textColor(), ...textFade }}>
+						<div style={{ ...textStyle, color: textColor(), ...textFade }}>
 							{props.label}
-						</text>
+						</div>
 					</Show>
 					<div style={{ flexGrow: 1 }} />
 					{/* Stands in for the source's `minWidth: <max length>ch` on the value: the widest value, set in tabular digits, so the label never moves as the number changes. */}
 					<div style={{ position: 'relative', flexShrink: 0 }}>
-						<text style={{ ...valueStyle, opacity: 0 }}>
+						<div style={{ ...valueStyle, opacity: 0 }}>
 							{formatValue(max())}
-						</text>
-						<text
+						</div>
+						<div
 							style={{
 								...valueStyle,
 								position: 'absolute',
@@ -1273,7 +1273,7 @@ function ComfortableSlider(props: ComfortableProps) {
 							}}
 						>
 							{formatValue(props.value)}
-						</text>
+						</div>
 					</div>
 				</div>
 				<Show when={variant() === 'scrubber'}>

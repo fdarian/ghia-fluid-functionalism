@@ -720,8 +720,8 @@ function TabLabel(props: { text: string; selected: boolean; lit: boolean }) {
 	});
 	return (
 		<div style={{ position: 'relative', flexShrink: 0 }}>
-			<text style={{ ...textStyle(true), opacity: 0 }}>{props.text}</text>
-			<text
+			<div style={{ ...textStyle(true), opacity: 0 }}>{props.text}</div>
+			<div
 				style={{
 					...textStyle(props.selected),
 					position: 'absolute',
@@ -732,7 +732,7 @@ function TabLabel(props: { text: string; selected: boolean; lit: boolean }) {
 				}}
 			>
 				{props.text}
-			</text>
+			</div>
 		</div>
 	);
 }
@@ -920,7 +920,7 @@ export function CommandMenuShortcut(props: {
 							backgroundColor: color.hover,
 						}}
 					>
-						<text
+						<div
 							style={{
 								...layout().capText,
 								color: color.mutedForeground,
@@ -928,7 +928,7 @@ export function CommandMenuShortcut(props: {
 							}}
 						>
 							{cap}
-						</text>
+						</div>
 					</div>
 				)}
 			</For>
@@ -1009,14 +1009,14 @@ export function CommandMenuList(props: {
 											paddingRight: layout().headingPadX,
 										}}
 									>
-										<text
+										<div
 											style={{
 												...layout().caption,
 												color: color.mutedForeground,
 											}}
 										>
 											{heading()}
-										</text>
+										</div>
 									</div>
 								)}
 							</Show>
@@ -1064,9 +1064,9 @@ export function CommandMenuEmpty(props: { children: string }) {
 					paddingRight: 12,
 				}}
 			>
-				<text style={{ ...layout().text, color: color.mutedForeground }}>
+				<div style={{ ...layout().text, color: color.mutedForeground }}>
 					{props.children}
-				</text>
+				</div>
 			</div>
 		</Show>
 	);
@@ -1166,7 +1166,7 @@ export function CommandMenuItem(props: {
 							overflow: 'hidden',
 						}}
 					>
-						<text
+						<div
 							style={{
 								...layout().text,
 								flexShrink: 0,
@@ -1177,10 +1177,10 @@ export function CommandMenuItem(props: {
 							}}
 						>
 							{item().label}
-						</text>
+						</div>
 						<Show when={item().description}>
 							{(description: Accessor<string>) => (
-								<text
+								<div
 									style={{
 										...layout().text,
 										minWidth: 0,
@@ -1192,7 +1192,7 @@ export function CommandMenuItem(props: {
 									}}
 								>
 									{description()}
-								</text>
+								</div>
 							)}
 						</Show>
 					</div>
@@ -1234,7 +1234,7 @@ export function CommandMenuItemText(props: {
 	const active = () =>
 		index !== undefined && menu.hover.activeIndex() === index;
 	return (
-		<text
+		<div
 			style={{
 				...layout().text,
 				minWidth: 0,
@@ -1250,7 +1250,7 @@ export function CommandMenuItemText(props: {
 			}}
 		>
 			{props.children}
-		</text>
+		</div>
 	);
 }
 
@@ -1306,7 +1306,7 @@ export function CommandMenuFooter(props: {
 							gap: 6,
 						}}
 					>
-						<text
+						<div
 							style={{
 								...layout().caption,
 								color: color.mutedForeground,
@@ -1314,7 +1314,7 @@ export function CommandMenuFooter(props: {
 							}}
 						>
 							{hint.label}
-						</text>
+						</div>
 						<CommandMenuShortcut keys={hint.keys} />
 					</div>
 				)}
@@ -1331,7 +1331,7 @@ export function CommandMenuFooter(props: {
 							gap: 6,
 						}}
 					>
-						<text
+						<div
 							style={{
 								...layout().caption,
 								minWidth: 0,
@@ -1342,7 +1342,7 @@ export function CommandMenuFooter(props: {
 							}}
 						>
 							{label()}
-						</text>
+						</div>
 						<CommandMenuShortcut keys="enter" />
 					</div>
 				)}

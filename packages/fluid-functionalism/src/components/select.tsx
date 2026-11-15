@@ -260,9 +260,9 @@ export function Select<Value extends string>(props: {
 							paddingRight: 8,
 						}}
 					>
-						<text style={{ ...scale.caption, color: color.mutedForeground }}>
+						<div style={{ ...scale.caption, color: color.mutedForeground }}>
 							{slot.label}
-						</text>
+						</div>
 					</div>
 				);
 			case 'separator':
@@ -353,7 +353,7 @@ export function Select<Value extends string>(props: {
 								/>
 							)}
 						</Show>
-						<text
+						<div
 							style={{
 								...triggerSpec().text,
 								minWidth: 0,
@@ -369,7 +369,7 @@ export function Select<Value extends string>(props: {
 							}}
 						>
 							{selected()?.label ?? props.placeholder ?? 'Select…'}
-						</text>
+						</div>
 					</div>
 					<Icon
 						name="chevron-down"
@@ -464,9 +464,9 @@ export function Select<Value extends string>(props: {
 						}
 						style={{ paddingLeft: 12, paddingTop: 4 }}
 					>
-						<text style={{ ...scale.caption, color: color.destructive }}>
+						<div style={{ ...scale.caption, color: color.destructive }}>
 							{message()}
-						</text>
+						</div>
 					</div>
 				)}
 			</Show>
@@ -539,7 +539,7 @@ function Row<Value extends string>(props: {
 					/>
 				)}
 			</Show>
-			<text
+			<div
 				style={{
 					...props.spec.text,
 					flexGrow: 1,
@@ -553,7 +553,7 @@ function Row<Value extends string>(props: {
 				}}
 			>
 				{props.row.label}
-			</text>
+			</div>
 			<div
 				style={{
 					width: props.spec.icon,

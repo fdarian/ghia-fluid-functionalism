@@ -192,7 +192,7 @@ export function Switch(props: {
 					}}
 				/>
 			</div>
-			<text
+			<div
 				id={labelId}
 				style={{
 					...m().text,
@@ -204,7 +204,7 @@ export function Switch(props: {
 				}}
 			>
 				{props.label}
-			</text>
+			</div>
 		</div>
 	);
 }

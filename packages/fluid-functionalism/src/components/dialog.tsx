@@ -299,7 +299,7 @@ export function DialogTitle(props: { compact?: boolean; children: string }) {
 	const title = createDialogTitle(useDialogRootContext());
 	return (
 		<GpuixDialogTitle {...title}>
-			<text
+			<div
 				style={{
 					...(isCompact(props.compact)
 						? { fontSize: 15, lineHeight: '20px' }
@@ -309,7 +309,7 @@ export function DialogTitle(props: { compact?: boolean; children: string }) {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</GpuixDialogTitle>
 	);
 }
@@ -321,14 +321,14 @@ export function DialogDescription(props: {
 	const description = createDialogDescription(useDialogRootContext());
 	return (
 		<GpuixDialogDescription {...description}>
-			<text
+			<div
 				style={{
 					...(isCompact(props.compact) ? scale.bodyCompact : scale.body),
 					color: color.mutedForeground,
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</GpuixDialogDescription>
 	);
 }

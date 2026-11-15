@@ -87,7 +87,7 @@ export function Badge(props: {
 					}}
 				/>
 			</Show>
-			<text
+			<div
 				style={{
 					...size().text,
 					color: color.foreground,
@@ -97,7 +97,7 @@ export function Badge(props: {
 				}}
 			>
 				{props.children}
-			</text>
+			</div>
 		</>
 	);
 
